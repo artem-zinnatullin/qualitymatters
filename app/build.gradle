@@ -17,6 +17,14 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    // Lint will fail the build if project has warnings
+    lintOptions {
+        warningsAsErrors true
+        abortOnError true
+
+        disable 'GoogleAppIndexingWarning' // App does not have deep linking
+    }
 }
 
 dependencies {
