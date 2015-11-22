@@ -7,6 +7,9 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:1.5.0'
 
+        // APT compile-time annotation processing
+        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
@@ -29,12 +32,18 @@ ext {
     buildToolsVersion = '23.0.2'
 
     supportLibsVersion = '23.1.1'
+    daggerVersion = '2.0.2'
 }
 
 ext.libraries = [
-        supportAppCompat: 'com.android.support:appcompat-v7:' + supportLibsVersion,
-        supportDesign   : 'com.android.support:design:' + supportLibsVersion,
+        dagger            : 'com.google.dagger:dagger:' + daggerVersion,
+        daggerCompiler    : 'com.google.dagger:dagger-compiler:' + daggerVersion,
+        javaxInject       : 'javax.inject:javax.inject:1',
+        javaxAnnotationApi: 'javax.annotation:javax.annotation-api:1.2',
+
+        supportAppCompat  : 'com.android.support:appcompat-v7:' + supportLibsVersion,
+        supportDesign     : 'com.android.support:design:' + supportLibsVersion,
 
         // Test dependencies
-        junit           : 'junit:junit:4.12'
+        junit             : 'junit:junit:4.12'
 ]
