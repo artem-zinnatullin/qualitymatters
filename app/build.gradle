@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'findbugs'
+apply plugin: 'pmd'
 
 android {
     // See build.gradle in the root of the project
@@ -47,4 +48,11 @@ task findbugs(type: FindBugs, dependsOn: assemble) {
     classpath = files() // If somebody have an idea how to make this work with support libraries -> open a PR please.
 
     excludeFilter = file("${project.projectDir}/static_analyzers/findbugs-filter.xml")
+}
+
+task pmd(type: Pmd, dependsOn: assemble) {
+    ignoreFailures = false // Fail early
+    ruleSets = ['java-basic', 'java-braces', 'java-strings', 'java-design', 'java-unusedcode']
+
+    source = fileTree('src/main/java')
 }
