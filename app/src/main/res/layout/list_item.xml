@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="@dimen/list_item_min_height"
+    app:cardCornerRadius="@dimen/card_view_corner_radius">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/list_item_card_background">
+
+        <ImageView
+            android:id="@+id/list_item_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/list_item_image_height"
+            android:contentDescription="@string/list_item_image_content_description"
+            tools:background="#00aa00" />
+
+        <TextView
+            android:id="@+id/list_item_title_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/list_item_image_view"
+            android:background="@color/list_item_title_background"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            android:textColor="@color/list_item_title_text_color"
+            android:textSize="@dimen/list_item_title_text_size"
+            tools:text="1. Fail fast, fail early" />
+
+        <TextView
+            android:id="@+id/list_item_short_description_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/list_item_title_text_view"
+            android:ellipsize="marquee"
+            android:maxLines="3"
+            android:paddingBottom="@dimen/activity_vertical_margin"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingRight="@dimen/activity_horizontal_margin"
+            android:paddingTop="@dimen/activity_vertical_margin"
+            tools:text="Why? Because if you can catch problems before shipping the product — you should do that. This principle is also applies to production — fail, instead of keeping the app in unknown state." />
+
+    </RelativeLayout>
+
+</android.support.v7.widget.CardView>

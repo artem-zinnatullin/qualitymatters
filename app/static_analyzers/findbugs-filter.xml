@@ -15,4 +15,10 @@
         <Class name="~.*Test"/>
         <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" type="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
     </Match>
+
+    <!-- Ignore UPM in lambdas from Retrolambda, FindBugs does not correctly understand them -->
+    <Match>
+        <Bug code="UPM" />
+        <Class name="~.*\$\$Lambda\$.*"/>
+    </Match>
 </FindBugsFilter>

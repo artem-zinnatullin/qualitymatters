@@ -6,6 +6,7 @@ import com.artemzin.androiddevelopmentculture.api.ADCApi;
 import com.artemzin.androiddevelopmentculture.api.ApiModule;
 import com.artemzin.androiddevelopmentculture.api.ChangeableBaseUrl;
 import com.artemzin.androiddevelopmentculture.network.NetworkModule;
+import com.artemzin.androiddevelopmentculture.ui.fragments.ItemsFragment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Singleton;
@@ -30,4 +31,7 @@ public interface ApplicationComponent {
 
     @NonNull
     ChangeableBaseUrl changeableBaseUrl();
+
+    @NonNull
+    ItemsFragment.ItemsFragmentComponent plus(@NonNull ItemsFragment.ItemsFragmentModule itemsFragmentModule);
 }

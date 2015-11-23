@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
@@ -16,6 +17,11 @@ android {
         versionName '1.0'
     }
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     buildTypes {
         release {
             minifyEnabled false
@@ -24,7 +30,7 @@ android {
     }
 
     sourceSets {
-        // Common code for JVM tests live in src/jvmTestsCommon
+        // Common code for JVM tests lives in src/jvmTestsCommon
         test.java.srcDir 'src/jvmTestsCommon/java'
 
         // Unit tests live in src/unitTest.
@@ -34,10 +40,9 @@ android {
         test.java.srcDir 'src/integrationTests/java'
     }
 
-    // Lint will fail the build if project has warnings
     lintOptions {
         warningsAsErrors true
-        abortOnError true
+        abortOnError true // Fail early
 
         disable 'GoogleAppIndexingWarning' // App does not have deep linking
         disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK
@@ -47,6 +52,7 @@ android {
         exclude 'META-INF/NOTICE'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
     testOptions.unitTests.all {
@@ -77,12 +83,17 @@ dependencies {
 
     compile libraries.supportAppCompat
     compile libraries.supportDesign
+    compile libraries.supportRecyclerView
+    compile libraries.supportCardView
+
+    compile libraries.butterKnife
 
     testCompile libraries.junit
     testCompile libraries.robolectric
     testCompile libraries.assertJ
     testCompile libraries.equalsVerifier
     testCompile libraries.okHttpMockWebServer
+    testCompile libraries.mockitoCore
 }
 
 task findbugs(type: FindBugs, dependsOn: assemble) {
@@ -92,8 +103,9 @@ task findbugs(type: FindBugs, dependsOn: assemble) {
 
     classes = files("${project.projectDir}/build/intermediates/classes")
     source = fileTree('src/main/java')
+
+    // If somebody has an idea how to make this work with support libraries -> open a PR please.
     classpath = files()
-    // If somebody have an idea how to make this work with support libraries -> open a PR please.
 
     excludeFilter = file("${project.projectDir}/static_analyzers/findbugs-filter.xml")
 }
