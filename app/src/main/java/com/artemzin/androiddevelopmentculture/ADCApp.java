@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import android.support.annotation.NonNull;
 
+import com.artemzin.androiddevelopmentculture.api.ApiModule;
+
 public class ADCApp extends Application {
 
     @SuppressWarnings("NullableProblems") // Initialized in onCreate. But be careful if you have ContentProviders.
@@ -22,6 +24,7 @@ public class ADCApp extends Application {
 
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
+                .apiModule(new ApiModule("https://raw.githubusercontent.com/artem-zinnatullin/AndroidDevelopmentCulture/master/"))
                 .build();
     }
 

@@ -2,6 +2,8 @@ package com.artemzin.androiddevelopmentculture;
 
 import android.support.annotation.NonNull;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import javax.inject.Singleton;
 
 import dagger.Module;
@@ -21,5 +23,10 @@ public class ApplicationModule {
     @Provides @NonNull @Singleton
     public ADCApp provideAdcApp() {
         return adcApp;
+    }
+
+    @Provides @NonNull @Singleton
+    public ObjectMapper provideObjectMapper() {
+        return new ObjectMapper();
     }
 }

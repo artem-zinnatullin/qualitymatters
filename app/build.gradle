@@ -23,26 +23,66 @@ android {
         }
     }
 
+    sourceSets {
+        // Common code for JVM tests live in src/jvmTestsCommon
+        test.java.srcDir 'src/jvmTestsCommon/java'
+
+        // Unit tests live in src/unitTest.
+        test.java.srcDir 'src/unitTests/java'
+
+        // Integration tests live in src/integrationTest.
+        test.java.srcDir 'src/integrationTests/java'
+    }
+
     // Lint will fail the build if project has warnings
     lintOptions {
         warningsAsErrors true
         abortOnError true
 
         disable 'GoogleAppIndexingWarning' // App does not have deep linking
+        disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK
+    }
+
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+    }
+
+    testOptions.unitTests.all {
+        testLogging {
+            events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
+            exceptionFormat 'full'
+        }
     }
 }
 
-// See build.gradle in the root of the project
+// Libraries declared in build.gradle in the root of the project
 dependencies {
     compile libraries.dagger
     apt libraries.daggerCompiler
     compile libraries.javaxInject
     compile libraries.javaxAnnotationApi
 
+    compile libraries.rxJava
+
+    compile libraries.okHttp
+    compile libraries.okHttpLoggingInterceptor
+    compile libraries.retrofit
+    compile libraries.retrofitJacksonConverter
+    compile libraries.retrofitRxJavaAdapter
+    compile libraries.jacksonDataBind
+
+    compile libraries.autoValue
+
     compile libraries.supportAppCompat
     compile libraries.supportDesign
 
     testCompile libraries.junit
+    testCompile libraries.robolectric
+    testCompile libraries.assertJ
+    testCompile libraries.equalsVerifier
+    testCompile libraries.okHttpMockWebServer
 }
 
 task findbugs(type: FindBugs, dependsOn: assemble) {
@@ -52,7 +92,8 @@ task findbugs(type: FindBugs, dependsOn: assemble) {
 
     classes = files("${project.projectDir}/build/intermediates/classes")
     source = fileTree('src/main/java')
-    classpath = files() // If somebody have an idea how to make this work with support libraries -> open a PR please.
+    classpath = files()
+    // If somebody have an idea how to make this work with support libraries -> open a PR please.
 
     excludeFilter = file("${project.projectDir}/static_analyzers/findbugs-filter.xml")
 }
