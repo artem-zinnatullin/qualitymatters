@@ -11,7 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.artemzin.qualitymatters.ADCApp;
+import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
@@ -78,7 +78,7 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ADCApp.get(getContext()).applicationComponent().plus(new ItemsFragmentModule()).inject(this);
+        QualityMattersApp.get(getContext()).applicationComponent().plus(new ItemsFragmentModule()).inject(this);
     }
 
     @Nullable

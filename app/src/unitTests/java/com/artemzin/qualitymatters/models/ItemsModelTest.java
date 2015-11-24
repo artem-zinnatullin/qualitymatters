@@ -2,7 +2,7 @@ package com.artemzin.qualitymatters.models;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.api.ADCApi;
+import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
 
 import org.junit.Before;
@@ -22,7 +22,7 @@ public class ItemsModelTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
-    private ADCApi adcApi;
+    private QualityMattersRestApi qualityMattersRestApi;
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
@@ -30,25 +30,25 @@ public class ItemsModelTest {
 
     @Before
     public void beforeEachTest() {
-        adcApi = mock(ADCApi.class);
-        itemsModel = new ItemsModel(adcApi);
+        qualityMattersRestApi = mock(QualityMattersRestApi.class);
+        itemsModel = new ItemsModel(qualityMattersRestApi);
     }
 
     @Test
-    public void getItems_shouldReturnItemsFromADCApi() {
+    public void getItems_shouldReturnItemsFromQualityMattersRestApi() {
         List<Item> items = asList(
                 Item.builder().id("1").title("Item 1").shortDescription("s1").build(),
                 Item.builder().id("2").title("Item 2").shortDescription("s2").build()
         );
-        when(adcApi.items()).thenReturn(Single.just(items));
+        when(qualityMattersRestApi.items()).thenReturn(Single.just(items));
 
         assertThat(itemsModel.getItems().toBlocking().value()).containsExactlyElementsOf(items);
     }
 
     @Test
-    public void getItems_shouldReturnErrorFromADCApi() {
+    public void getItems_shouldReturnErrorFromQualityMattersRestApi() {
         Exception error = new RuntimeException();
-        when(adcApi.items()).thenReturn(Single.error(error));
+        when(qualityMattersRestApi.items()).thenReturn(Single.error(error));
 
         try {
             itemsModel.getItems().toBlocking().value();

@@ -30,7 +30,7 @@ public class ApiModule {
     }
 
     @Provides @NonNull @Singleton
-    public ADCApi provideAdcApi(@NonNull OkHttpClient okHttpClient, @NonNull ObjectMapper objectMapper, @NonNull ChangeableBaseUrl changeableBaseUrl) {
+    public QualityMattersRestApi provideQualityMattersApi(@NonNull OkHttpClient okHttpClient, @NonNull ObjectMapper objectMapper, @NonNull ChangeableBaseUrl changeableBaseUrl) {
         final Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(changeableBaseUrl)
                 .client(okHttpClient)
@@ -42,6 +42,6 @@ public class ApiModule {
             builder.validateEagerly();
         }
 
-        return builder.build().create(ADCApi.class);
+        return builder.build().create(QualityMattersRestApi.class);
     }
 }

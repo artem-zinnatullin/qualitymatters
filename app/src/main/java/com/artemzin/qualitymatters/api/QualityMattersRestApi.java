@@ -7,7 +7,7 @@ import java.util.List;
 import retrofit.http.GET;
 import rx.Single;
 
-public interface ADCApi {
+public interface QualityMattersRestApi {
 
     @GET("/items")
     Single<List<Item>> items();
