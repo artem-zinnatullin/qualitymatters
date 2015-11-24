@@ -14,6 +14,7 @@ public abstract class Item {
 
     private static final String JSON_PROPERTY_ID = "id";
     private static final String JSON_PROPERTY_TITLE = "title";
+    private static final String JSON_PROPERTY_SHORT_DESCRIPTION = "short_description";
 
     @NonNull
     public static Builder builder() {
@@ -28,6 +29,10 @@ public abstract class Item {
     @JsonProperty(JSON_PROPERTY_TITLE)
     public abstract String title();
 
+    @NonNull
+    @JsonProperty(JSON_PROPERTY_SHORT_DESCRIPTION)
+    public abstract String shortDescription();
+
     @AutoValue.Builder
     public static abstract class Builder {
 
@@ -38,6 +43,10 @@ public abstract class Item {
         @NonNull
         @JsonProperty(JSON_PROPERTY_TITLE)
         public abstract Builder title(@NonNull String title);
+
+        @NonNull
+        @JsonProperty(JSON_PROPERTY_SHORT_DESCRIPTION)
+        public abstract Builder shortDescription(@NonNull String shortDescription);
 
         @NonNull
         public abstract Item build();

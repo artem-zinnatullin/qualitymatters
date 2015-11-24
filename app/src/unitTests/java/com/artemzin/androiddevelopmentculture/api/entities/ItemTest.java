@@ -23,18 +23,24 @@ public class ItemTest {
     public void fromJson() throws IOException {
         ObjectMapper objectMapper = ADCRobolectricTestRunner.adcApp().applicationComponent().objectMapper();
 
-        Item item = objectMapper.readValue("{ \"id\": \"test_id\", \"title\": \"Test title\"}", Item.class);
+        Item item = objectMapper.readValue("{ " +
+                        "\"id\": \"test_id\", " +
+                        "\"title\": \"Test title\", " +
+                        "\"short_description\": \"Test short description\"" +
+                        "}",
+                Item.class);
 
         assertThat(item.id()).isEqualTo("test_id");
         assertThat(item.title()).isEqualTo("Test title");
+        assertThat(item.shortDescription()).isEqualTo("Test short description");
     }
 
     @Test
     public void hashCode_equals_shouldWorkCorrectly() {
         EqualsVerifier
                 .forExamples(
-                        Item.builder().id("id1").title("Title1").build(),
-                        Item.builder().id("id2").title("Title2").build())
+                        Item.builder().id("id1").title("Title1").shortDescription("s1").build(),
+                        Item.builder().id("id2").title("Title2").shortDescription("s2").build())
                 .suppress(Warning.NULL_FIELDS) // AutoValue checks nullability, EqualsVerifier does not expect that by default.
                 .verify();
     }

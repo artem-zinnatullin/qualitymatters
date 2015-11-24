@@ -10,9 +10,18 @@ buildscript {
         // APT compile-time annotation processing
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
+        // Backport of some Java 8 language features such as Lambdas and method references.
+        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
+
+        // Workaround for Lint + Retrolambda.
+        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
     }
+
+    // Part of workaround for Lint + Retrolambda.
+    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
 }
 
 allprojects {
@@ -62,6 +71,10 @@ ext.libraries = [
 
         supportAppCompat        : 'com.android.support:appcompat-v7:' + supportLibsVersion,
         supportDesign           : 'com.android.support:design:' + supportLibsVersion,
+        supportRecyclerView     : 'com.android.support:recyclerview-v7:' + supportLibsVersion,
+        supportCardView         : 'com.android.support:cardview-v7:' + supportLibsVersion,
+
+        butterKnife             : 'com.jakewharton:butterknife:7.0.1',
 
         // Test dependencies
         junit                   : 'junit:junit:4.12',
@@ -69,4 +82,5 @@ ext.libraries = [
         assertJ                 : 'org.assertj:assertj-core:1.7.1',
         equalsVerifier          : 'nl.jqno.equalsverifier:equalsverifier:1.7.5',
         okHttpMockWebServer     : 'com.squareup.okhttp:mockwebserver:' + okHttpVersion,
+        mockitoCore             : 'org.mockito:mockito-core:1.10.19',
 ]
