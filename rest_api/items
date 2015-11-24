@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "title": "1. Fail fast, fail early",
+        "short_description": "Why? Because if you can catch problems before shipping the product — you should do that. This principle is also applies to production — fail, instead of keeping the app in unknown state."
+    },
+    {
+        "id": "2",
+        "title": "2. Code quality",
+        "short_description": "Your code should be SOLID, or near to SOLID. It's totally up to you how you'll achieve that. It's not only about MVP/MVVM/MVC/etc, but also about each piece of code in each part of your app. Prefer writing pure functions and immutable objects."
+    },
+    {
+        "id": "3",
+        "title": "3. Static Code/Resources Analysis",
+        "short_description": "Static code analysis allows you find issues in your code before you ship it to production. Also, it greatly helps on code review."
+    },
+    {
+        "id": "4",
+        "title": "4. Unit tests",
+        "short_description": "Yes. Tests. Unit tests usually check that some function/object does its work correctly. The more tests and the greater code coverage you have in the project — the better and more stable product you ship to the users."
+    },
+    {
+        "id": "5",
+        "title": "5. Code Coverage",
+        "short_description": "As soon as you start writing Unit tests you'll need to know if your code covered well enough."
+    },
+    {
+        "id": "6",
+        "title": "6. Functional (UI) tests",
+        "short_description": "Yes. More tests. Functional tests check the functionality of your app from the user's point of view. Functional test launches your app and verifies that certain feature works correctly, ie loaded data displayed in the UI and so on."
+    },
+    {
+        "id": "7",
+        "title": "7. Integration tests",
+        "short_description": "Yes. Even more tests. Integration tests are not Functional tests. Usually, Integration tests check how different components of your app work together: HTTP layer, REST API layer, Execution layer (RxJava, etc) and so on."
+    },
+    {
+        "id": "8",
+        "title": "8. Developer Settings Menu",
+        "short_description": "Ability to change and inspect the app on the fly without need in changing the code will save tons of your and QA team's time."
+    }
+]
