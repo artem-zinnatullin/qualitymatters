@@ -2,7 +2,7 @@ package com.artemzin.qualitymatters.models;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.api.ADCApi;
+import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
 
 import java.util.List;
@@ -20,15 +20,15 @@ import rx.Single;
 public class ItemsModel {
 
     @NonNull
-    private final ADCApi adcApi;
+    private final QualityMattersRestApi qualityMattersRestApi;
 
     @Inject
-    public ItemsModel(@NonNull ADCApi adcApi) {
-        this.adcApi = adcApi;
+    public ItemsModel(@NonNull QualityMattersRestApi qualityMattersRestApi) {
+        this.qualityMattersRestApi = qualityMattersRestApi;
     }
 
     @NonNull
     public Single<List<Item>> getItems() {
-        return adcApi.items();
+        return qualityMattersRestApi.items();
     }
 }

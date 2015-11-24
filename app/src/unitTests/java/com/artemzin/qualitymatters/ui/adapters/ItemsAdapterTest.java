@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.artemzin.qualitymatters.ADCRobolectricTestRunner;
+import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
 
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-@RunWith(ADCRobolectricTestRunner.class)
+@RunWith(QualityMattersRobolectricTestRunner.class)
 public class ItemsAdapterTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.

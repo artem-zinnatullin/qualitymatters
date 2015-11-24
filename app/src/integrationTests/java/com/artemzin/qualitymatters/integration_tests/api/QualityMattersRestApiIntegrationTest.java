@@ -2,8 +2,8 @@ package com.artemzin.qualitymatters.integration_tests.api;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.ADCRobolectricTestRunner;
-import com.artemzin.qualitymatters.api.ADCApi;
+import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
@@ -30,8 +30,8 @@ import static org.assertj.core.api.Assertions.fail;
  * <li>Execution layer (ie RxJava)</li>
  * </ul>
  */
-@RunWith(ADCRobolectricTestRunner.class)
-public class ADCApiIntegrationTest {
+@RunWith(QualityMattersRobolectricTestRunner.class)
+public class QualityMattersRestApiIntegrationTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
@@ -39,7 +39,7 @@ public class ADCApiIntegrationTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
-    private ADCApi adcApi;
+    private QualityMattersRestApi qualityMattersRestApi;
 
     @Before
     public void beforeEachTest() throws IOException {
@@ -47,9 +47,9 @@ public class ADCApiIntegrationTest {
         mockWebServer.start();
 
         // Change base url to the mocked
-        ADCRobolectricTestRunner.adcApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
+        QualityMattersRobolectricTestRunner.qualityMattersApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
 
-        adcApi = ADCRobolectricTestRunner.adcApp().applicationComponent().adcApi();
+        qualityMattersRestApi = QualityMattersRobolectricTestRunner.qualityMattersApp().applicationComponent().qualityMattersApi();
     }
 
     @After
@@ -66,7 +66,7 @@ public class ADCApiIntegrationTest {
                 + "]"));
 
         // Get items from the API
-        List<Item> items = adcApi.items().toBlocking().value();
+        List<Item> items = qualityMattersRestApi.items().toBlocking().value();
 
         assertThat(items).hasSize(3);
 
@@ -93,7 +93,7 @@ public class ADCApiIntegrationTest {
             mockWebServer.enqueue(new MockResponse().setStatus("HTTP/1.1 " + errorCode + " Not today"));
 
             try {
-                adcApi.items().toBlocking().value();
+                qualityMattersRestApi.items().toBlocking().value();
                 fail("HttpException should be thrown for error code: " + errorCode);
             } catch (RuntimeException expected) {
                 HttpException httpException = (HttpException) expected.getCause();

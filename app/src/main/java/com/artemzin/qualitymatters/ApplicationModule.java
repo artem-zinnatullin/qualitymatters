@@ -19,15 +19,15 @@ public class ApplicationModule {
     public static final String MAIN_THREAD_HANDLER = "main_thread_handler";
 
     @NonNull
-    private final ADCApp adcApp;
+    private final QualityMattersApp qualityMattersApp;
 
-    public ApplicationModule(@NonNull ADCApp adcApp) {
-        this.adcApp = adcApp;
+    public ApplicationModule(@NonNull QualityMattersApp qualityMattersApp) {
+        this.qualityMattersApp = qualityMattersApp;
     }
 
     @Provides @NonNull @Singleton
-    public ADCApp provideAdcApp() {
-        return adcApp;
+    public QualityMattersApp provideQualityMattersApp() {
+        return qualityMattersApp;
     }
 
     @Provides @NonNull @Singleton

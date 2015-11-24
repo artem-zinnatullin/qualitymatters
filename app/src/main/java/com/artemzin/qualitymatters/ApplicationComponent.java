@@ -2,7 +2,7 @@ package com.artemzin.qualitymatters;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.api.ADCApi;
+import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.ApiModule;
 import com.artemzin.qualitymatters.api.ChangeableBaseUrl;
 import com.artemzin.qualitymatters.network.NetworkModule;
@@ -25,9 +25,9 @@ public interface ApplicationComponent {
     @NonNull
     ObjectMapper objectMapper();
 
-    // Provide ADCApi from the real app to the tests without need in injection to the test.
+    // Provide QualityMattersRestApi from the real app to the tests without need in injection to the test.
     @NonNull
-    ADCApi adcApi();
+    QualityMattersRestApi qualityMattersApi();
 
     @NonNull
     ChangeableBaseUrl changeableBaseUrl();
