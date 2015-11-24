@@ -21,5 +21,7 @@ notifications:
 
 cache:
   directories:
+    # Yes, cache Android SDK. Yes it's not recommended by Travis CI, but, 5 minutes for installing Android SDK each build? No thanks.
+    - /usr/local/android-sdk/
     - $HOME/.m2
     - $HOME/.gradle
