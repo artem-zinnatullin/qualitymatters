@@ -16,7 +16,7 @@ public class ChangeableBaseUrl implements BaseUrl {
     @NonNull
     private final AtomicReference<HttpUrl> baseUrl;
 
-    ChangeableBaseUrl(@NonNull String baseUrl) {
+    public ChangeableBaseUrl(@NonNull String baseUrl) {
         this.baseUrl = new AtomicReference<>(HttpUrl.parse(baseUrl));
     }
 
