@@ -28,6 +28,7 @@ import javax.inject.Named;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
@@ -132,6 +133,11 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
             contentUiRecyclerView.setVisibility(VISIBLE);
             itemsAdapter.setData(items);
         });
+    }
+
+    @OnClick(R.id.items_loading_error_try_again_button)
+    void onTryAgainButtonClick() {
+        itemsPresenter.reloadData();
     }
 
     @Override

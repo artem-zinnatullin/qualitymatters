@@ -24,7 +24,7 @@ public class QualityMattersApp extends Application {
 
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                .apiModule(new ApiModule("https://raw.githubusercontent.com/artem-zinnatullin/AndroidDevelopmentCulture/master/"))
+                .apiModule(new ApiModule("https://raw.githubusercontent.com/artem-zinnatullin/qualitymatters/master/rest_api/"))
                 .build();
     }
 
