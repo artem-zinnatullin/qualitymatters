@@ -36,10 +36,7 @@ public class ItemsModelTest {
 
     @Test
     public void getItems_shouldReturnItemsFromQualityMattersRestApi() {
-        List<Item> items = asList(
-                Item.builder().id("1").title("Item 1").shortDescription("s1").build(),
-                Item.builder().id("2").title("Item 2").shortDescription("s2").build()
-        );
+        List<Item> items = asList(mock(Item.class), mock(Item.class));
         when(qualityMattersRestApi.items()).thenReturn(Single.just(items));
 
         assertThat(itemsModel.getItems().toBlocking().value()).containsExactlyElementsOf(items);

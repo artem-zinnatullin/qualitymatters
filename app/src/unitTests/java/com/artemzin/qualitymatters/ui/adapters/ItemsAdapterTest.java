@@ -11,6 +11,7 @@ import android.widget.TextView;
 import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
+import com.squareup.picasso.Picasso;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -35,12 +36,17 @@ public class ItemsAdapterTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
+    private Picasso picasso;
+
+    @SuppressWarnings("NullableProblems") // Initialized in @Before.
+    @NonNull
     private ItemsAdapter adapter;
 
     @Before
     public void beforeEachTest() {
         layoutInflater = mock(LayoutInflater.class);
-        adapter = new ItemsAdapter(layoutInflater);
+        picasso = mock(Picasso.class);
+        adapter = new ItemsAdapter(layoutInflater, picasso);
     }
 
     @Test
@@ -50,11 +56,7 @@ public class ItemsAdapterTest {
 
     @Test
     public void getItemCount_shouldReturnCorrectValueAfterSetData() {
-        adapter.setData(asList(
-                        Item.builder().id("1").title("T1").shortDescription("s1").build(),
-                        Item.builder().id("2").title("T2").shortDescription("s2").build())
-        );
-
+        adapter.setData(asList(mock(Item.class), mock(Item.class)));
         assertThat(adapter.getItemCount()).isEqualTo(2);
     }
 
@@ -84,7 +86,7 @@ public class ItemsAdapterTest {
 
         when(layoutInflater.inflate(R.layout.list_item, parent, false)).thenReturn(itemView);
 
-        ItemsAdapter.ItemViewHolder viewHolder = adapter.onCreateViewHolder(parent, 0);
+        ItemViewHolder viewHolder = adapter.onCreateViewHolder(parent, 0);
         verify(layoutInflater).inflate(R.layout.list_item, parent, false);
 
         assertThat(viewHolder.itemView).isSameAs(itemView);
@@ -96,15 +98,15 @@ public class ItemsAdapterTest {
     @Test
     public void onBindViewHolder_shouldBindItemsToTheViewHolders() {
         List<Item> items = asList(
-                Item.builder().id("1").title("t1").shortDescription("s1").build(),
-                Item.builder().id("2").title("t2").shortDescription("s2").build(),
-                Item.builder().id("3").title("t3").shortDescription("s3").build()
+                Item.builder().id("1").imagePreviewUrl("https://url1").title("t1").shortDescription("s1").build(),
+                Item.builder().id("2").imagePreviewUrl("https://url2").title("t2").shortDescription("s2").build(),
+                Item.builder().id("3").imagePreviewUrl("https://url3").title("t3").shortDescription("s3").build()
         );
 
         adapter.setData(items);
 
         for (int position = 0, size = items.size(); position < size; position++) {
-            ItemsAdapter.ItemViewHolder itemViewHolder = mock(ItemsAdapter.ItemViewHolder.class);
+            ItemViewHolder itemViewHolder = mock(ItemViewHolder.class);
             adapter.onBindViewHolder(itemViewHolder, position);
 
             verify(itemViewHolder).bind(items.get(position));

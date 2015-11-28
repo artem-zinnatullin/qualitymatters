@@ -13,6 +13,7 @@ import com.google.auto.value.AutoValue;
 public abstract class Item {
 
     private static final String JSON_PROPERTY_ID = "id";
+    private static final String JSON_PROPERTY_IMAGE_PREVIEW_URL = "image_preview_url";
     private static final String JSON_PROPERTY_TITLE = "title";
     private static final String JSON_PROPERTY_SHORT_DESCRIPTION = "short_description";
 
@@ -24,6 +25,10 @@ public abstract class Item {
     @NonNull
     @JsonProperty(JSON_PROPERTY_ID)
     public abstract String id();
+
+    @NonNull
+    @JsonProperty(JSON_PROPERTY_IMAGE_PREVIEW_URL)
+    public abstract String imagePreviewUrl();
 
     @NonNull
     @JsonProperty(JSON_PROPERTY_TITLE)
@@ -39,6 +44,10 @@ public abstract class Item {
         @NonNull
         @JsonProperty(JSON_PROPERTY_ID)
         public abstract Builder id(@NonNull String id);
+
+        @NonNull
+        @JsonProperty(JSON_PROPERTY_IMAGE_PREVIEW_URL)
+        public abstract Builder imagePreviewUrl(@NonNull String imagePreviewUrl);
 
         @NonNull
         @JsonProperty(JSON_PROPERTY_TITLE)

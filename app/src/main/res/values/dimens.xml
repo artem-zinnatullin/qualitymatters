@@ -8,4 +8,5 @@
     <dimen name="list_item_min_height">250dp</dimen>
     <dimen name="list_item_image_height">150dp</dimen>
     <dimen name="list_item_title_text_size">21sp</dimen>
+    <dimen name="list_item_vertical_space_between_items">8dp</dimen>
 </resources>

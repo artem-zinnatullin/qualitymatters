@@ -87,6 +87,7 @@ dependencies {
     compile libraries.supportCardView
 
     compile libraries.butterKnife
+    compile libraries.picasso
 
     testCompile libraries.junit
     testCompile libraries.robolectric

@@ -17,9 +17,11 @@ import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.artemzin.qualitymatters.models.ItemsModel;
 import com.artemzin.qualitymatters.ui.adapters.ItemsAdapter;
+import com.artemzin.qualitymatters.ui.others.VerticalSpaceItemDecoration;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenter;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenterConfiguration;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -76,6 +78,9 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @Inject
     ItemsPresenter itemsPresenter;
 
+    @Inject
+    Picasso picasso;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +97,8 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         ButterKnife.bind(this, view);
         contentUiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
-        itemsAdapter = new ItemsAdapter(getActivity().getLayoutInflater());
+        contentUiRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration((int) getResources().getDimension(R.dimen.list_item_vertical_space_between_items)));
+        itemsAdapter = new ItemsAdapter(getActivity().getLayoutInflater(), picasso);
         contentUiRecyclerView.setAdapter(itemsAdapter);
         itemsPresenter.bindView(this);
         itemsPresenter.reloadData();

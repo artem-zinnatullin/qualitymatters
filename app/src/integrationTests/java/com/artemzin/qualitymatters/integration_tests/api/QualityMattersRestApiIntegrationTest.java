@@ -60,9 +60,9 @@ public class QualityMattersRestApiIntegrationTest {
     @Test
     public void items_shouldHandleCorrectResponse() {
         mockWebServer.enqueue(new MockResponse().setBody("["
-                + "{ \"id\": \"test_id_1\", \"title\": \"Test title 1\", \"short_description\": \"Short desc 1\"},"
-                + "{ \"id\": \"test_id_2\", \"title\": \"Test title 2\", \"short_description\": \"Short desc 2\"},"
-                + "{ \"id\": \"test_id_3\", \"title\": \"Test title 3\", \"short_description\": \"Short desc 3\"}"
+                + "{ \"id\": \"test_id_1\", \"image_preview_url\": \"https://url1\", \"title\": \"Test title 1\", \"short_description\": \"Short desc 1\"},"
+                + "{ \"id\": \"test_id_2\", \"image_preview_url\": \"https://url2\", \"title\": \"Test title 2\", \"short_description\": \"Short desc 2\"},"
+                + "{ \"id\": \"test_id_3\", \"image_preview_url\": \"https://url3\", \"title\": \"Test title 3\", \"short_description\": \"Short desc 3\"}"
                 + "]"));
 
         // Get items from the API
@@ -71,14 +71,17 @@ public class QualityMattersRestApiIntegrationTest {
         assertThat(items).hasSize(3);
 
         assertThat(items.get(0).id()).isEqualTo("test_id_1");
+        assertThat(items.get(0).imagePreviewUrl()).isEqualTo("https://url1");
         assertThat(items.get(0).title()).isEqualTo("Test title 1");
         assertThat(items.get(0).shortDescription()).isEqualTo("Short desc 1");
 
         assertThat(items.get(1).id()).isEqualTo("test_id_2");
+        assertThat(items.get(1).imagePreviewUrl()).isEqualTo("https://url2");
         assertThat(items.get(1).title()).isEqualTo("Test title 2");
         assertThat(items.get(1).shortDescription()).isEqualTo("Short desc 2");
 
         assertThat(items.get(2).id()).isEqualTo("test_id_3");
+        assertThat(items.get(2).imagePreviewUrl()).isEqualTo("https://url3");
         assertThat(items.get(2).title()).isEqualTo("Test title 3");
         assertThat(items.get(2).shortDescription()).isEqualTo("Short desc 3");
     }

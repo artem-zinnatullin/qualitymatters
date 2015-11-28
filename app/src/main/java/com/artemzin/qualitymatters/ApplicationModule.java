@@ -5,6 +5,7 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.squareup.picasso.Picasso;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -38,5 +39,10 @@ public class ApplicationModule {
     @Provides @NonNull @Named(MAIN_THREAD_HANDLER) @Singleton
     public Handler provideMainThreadHandler() {
         return new Handler(Looper.getMainLooper());
+    }
+
+    @Provides @NonNull @Singleton
+    public Picasso providePicasso(@NonNull QualityMattersApp qualityMattersApp) {
+        return Picasso.with(qualityMattersApp);
     }
 }

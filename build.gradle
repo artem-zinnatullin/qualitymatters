@@ -75,6 +75,7 @@ ext.libraries = [
         supportCardView         : 'com.android.support:cardview-v7:' + supportLibsVersion,
 
         butterKnife             : 'com.jakewharton:butterknife:7.0.1',
+        picasso                 : 'com.squareup.picasso:picasso:2.5.2',
 
         // Test dependencies
         junit                   : 'junit:junit:4.12',
