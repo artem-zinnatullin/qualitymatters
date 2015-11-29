@@ -70,8 +70,8 @@ public class ItemsPresenterTest {
         verifyZeroInteractions(itemsView);
 
         List<Item> items = asList(
-                Item.builder().id("1").title("t1").shortDescription("s1").build(),
-                Item.builder().id("2").title("t2").shortDescription("s2").build()
+                Item.builder().id("1").imagePreviewUrl("i1").title("t1").shortDescription("s1").build(),
+                Item.builder().id("2").imagePreviewUrl("i2").title("t2").shortDescription("s2").build()
         );
 
         when(itemsModel.getItems()).thenReturn(Single.just(items));

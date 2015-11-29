@@ -33,8 +33,11 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/items_content_ui"
+        android:background="@color/items_list_background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
         android:visibility="gone" />
 
 </FrameLayout>
