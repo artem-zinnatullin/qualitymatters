@@ -3,10 +3,11 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
-    <dimen name="card_view_corner_radius">4dp</dimen>
+    <dimen name="card_view_corner_radius">2dp</dimen>
+    <dimen name="card_view_elevation">2dp</dimen>
 
     <dimen name="list_item_min_height">250dp</dimen>
     <dimen name="list_item_image_height">150dp</dimen>
     <dimen name="list_item_title_text_size">21sp</dimen>
-    <dimen name="list_item_vertical_space_between_items">8dp</dimen>
+    <dimen name="list_item_vertical_space_between_items">4dp</dimen>
 </resources>
