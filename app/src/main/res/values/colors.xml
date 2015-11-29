@@ -8,4 +8,5 @@
     <color name="list_item_card_background">#eeeeee</color>
     <color name="list_item_title_background">#44000000</color>
     <color name="list_item_title_text_color">#ffffff</color>
+    <color name="list_item_short_description_text_color">#000000</color>
 </resources>

@@ -22,7 +22,7 @@ public class VerticalSpaceItemDecorationTest {
 
         verticalSpaceItemDecoration.getItemOffsets(outRect, view, recyclerView, state);
         assertThat(outRect.bottom).isEqualTo(10);
-        assertThat(outRect.top).isEqualTo(0);
+        assertThat(outRect.top).isEqualTo(10);
         assertThat(outRect.left).isEqualTo(0);
         assertThat(outRect.right).isEqualTo(0);
 
