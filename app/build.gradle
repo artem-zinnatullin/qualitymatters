@@ -15,6 +15,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName '1.0'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     compileOptions {
@@ -30,7 +31,7 @@ android {
     }
 
     sourceSets {
-        // Common code for JVM tests lives in src/jvmTestsCommon
+        // Common code for JVM tests lives in src/jvmTestsCommon.
         test.java.srcDir 'src/jvmTestsCommon/java'
 
         // Unit tests live in src/unitTest.
@@ -38,14 +39,20 @@ android {
 
         // Integration tests live in src/integrationTest.
         test.java.srcDir 'src/integrationTests/java'
+
+        // Unit tests for debug build type live in src/debugUnitTest.
+        debugTest.java.srcDir 'src/debugUnitTests/java'
+
+        // Functional tests live in src/functionalTests.
+        androidTest.java.srcDir 'src/functionalTests/java'
     }
 
     lintOptions {
         warningsAsErrors true
-        abortOnError true // Fail early
+        abortOnError true // Fail early.
 
-        disable 'GoogleAppIndexingWarning' // App does not have deep linking
-        disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK
+        disable 'GoogleAppIndexingWarning' // App does not have deep linking.
+        disable 'InvalidPackage' // Okio references java.nio that does not presented in Android SDK.
     }
 
     packagingOptions {
@@ -55,6 +62,7 @@ android {
         exclude 'META-INF/services/javax.annotation.processing.Processor'
     }
 
+    // This allows us see tests execution progress in the output on the CI.
     testOptions.unitTests.all {
         testLogging {
             events 'passed', 'skipped', 'failed', 'standardOut', 'standardError'
@@ -81,6 +89,7 @@ dependencies {
 
     compile libraries.autoValue
 
+    compile libraries.supportAnnotations
     compile libraries.supportAppCompat
     compile libraries.supportDesign
     compile libraries.supportRecyclerView
@@ -95,6 +104,24 @@ dependencies {
     testCompile libraries.equalsVerifier
     testCompile libraries.okHttpMockWebServer
     testCompile libraries.mockitoCore
+
+    androidTestCompile libraries.supportTestRunner
+    androidTestCompile libraries.supportTestRules
+    androidTestCompile libraries.espressoCore
+    androidTestCompile(libraries.espressoContrib) {
+        // Causes IncompatibleClassChangeError. As always…
+        exclude module: 'support-annotations'
+        exclude module: 'recyclerview-v7'
+        exclude module: 'support-v4'
+    }
+    androidTestCompile libraries.okHttpMockWebServer
+}
+
+configurations.all {
+    resolutionStrategy {
+        // Force our version of support-annotations, we have a conflict between app and androidTest dependency resolution.
+        force libraries.supportAnnotations
+    }
 }
 
 task findbugs(type: FindBugs, dependsOn: assemble) {
