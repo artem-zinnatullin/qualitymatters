@@ -6,7 +6,7 @@ public interface AsyncJobsObserver {
 
     interface Listener {
         @AnyThread
-        void onNoMoreAsyncJobsRunning();
+        void onNumberOfRunningAsyncJobsChanged(int numberOfRunningAsyncJobs);
     }
 
     @AnyThread
@@ -20,7 +20,7 @@ public interface AsyncJobsObserver {
 
     @AnyThread
     @NonNull
-    AsyncJob asyncJobStarted();
+    AsyncJob asyncJobStarted(@NonNull String name);
 
     @AnyThread
     void asyncJobFinished(@NonNull AsyncJob asyncJob);

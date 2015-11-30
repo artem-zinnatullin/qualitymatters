@@ -18,8 +18,12 @@ public abstract class Presenter<V> {
 
     public abstract void bindView(@NonNull V view);
 
-    protected final void unsubscribeOnUnbindView(@NonNull Subscription subscription) {
+    protected final void unsubscribeOnUnbindView(@NonNull Subscription subscription, @NonNull Subscription... subscriptions) {
         subscriptionsToUnsubscribeOnUnbindView.add(subscription);
+
+        for (Subscription s : subscriptions) {
+            subscriptionsToUnsubscribeOnUnbindView.add(s);
+        }
     }
 
     @CallSuper

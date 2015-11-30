@@ -1,4 +1,4 @@
-package com.artemzin.qualitymatters.ui.rules;
+package com.artemzin.qualitymatters.functional_tests.rules;
 
 import android.support.annotation.NonNull;
 

@@ -1,8 +1,8 @@
-package com.artemzin.qualitymatters.ui.rules;
+package com.artemzin.qualitymatters.functional_tests.rules;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.ui.others.TestUtils;
+import com.artemzin.qualitymatters.functional_tests.TestUtils;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 
 import org.junit.rules.TestRule;

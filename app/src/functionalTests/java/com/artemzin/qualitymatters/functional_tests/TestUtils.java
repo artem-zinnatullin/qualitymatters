@@ -1,4 +1,4 @@
-package com.artemzin.qualitymatters.ui.others;
+package com.artemzin.qualitymatters.functional_tests;
 
 import android.support.annotation.NonNull;
 import android.support.test.InstrumentationRegistry;

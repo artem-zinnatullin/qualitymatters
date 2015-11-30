@@ -12,6 +12,6 @@ public class AsyncJobsModule {
 
     @Provides @NonNull @Singleton
     public AsyncJobsObserver provideAsyncJobsObserver() {
-        return new AsyncJobsObserverImpl();
+        return new NoOpAsyncJobsObserver();
     }
 }

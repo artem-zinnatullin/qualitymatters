@@ -13,12 +13,15 @@ import static java.util.Collections.newSetFromMap;
 public class AsyncJobsObserverImpl implements AsyncJobsObserver {
 
     @NonNull
+    @AnyThread
     private final AtomicInteger asyncJobsIdGenerator = new AtomicInteger(0);
 
     @NonNull
+    @AnyThread
     private final Set<AsyncJob> asyncJobs = newSetFromMap(new ConcurrentHashMap<>());
 
     @NonNull
+    @AnyThread
     private final Queue<Listener> listeners = new ConcurrentLinkedQueue<>();
 
     @AnyThread
@@ -30,7 +33,11 @@ public class AsyncJobsObserverImpl implements AsyncJobsObserver {
     @AnyThread
     @Override
     public void removeListener(@NonNull Listener listener) {
-        listeners.remove(listener);
+        final boolean removed = listeners.remove(listener);
+
+        if (!removed) {
+            throw new IllegalArgumentException("Listener was not registered!");
+        }
     }
 
     @AnyThread
@@ -42,9 +49,10 @@ public class AsyncJobsObserverImpl implements AsyncJobsObserver {
     @AnyThread
     @NonNull
     @Override
-    public AsyncJob asyncJobStarted() {
-        AsyncJob asyncJob = AsyncJob.create(asyncJobsIdGenerator.getAndIncrement());
+    public AsyncJob asyncJobStarted(@NonNull String name) {
+        AsyncJob asyncJob = AsyncJob.create(asyncJobsIdGenerator.getAndIncrement(), name);
         asyncJobs.add(asyncJob);
+        notifyListenersAboutChangedNumberOfRunningAsyncJobs();
         return asyncJob;
     }
 
@@ -54,13 +62,18 @@ public class AsyncJobsObserverImpl implements AsyncJobsObserver {
         final boolean removed = asyncJobs.remove(asyncJob);
 
         if (!removed) {
-            throw new AssertionError("Async job were registered in the AsyncJobsObserver! Job: " + asyncJob);
+            throw new IllegalArgumentException("Async job were registered in the AsyncJobsObserver! Job: " + asyncJob);
         }
 
-        if (numberOfRunningAsyncJobs() == 0) {
-            for (Listener listener : listeners) {
-                listener.onNoMoreAsyncJobsRunning();
-            }
+        notifyListenersAboutChangedNumberOfRunningAsyncJobs();
+    }
+
+    private void notifyListenersAboutChangedNumberOfRunningAsyncJobs() {
+        // This is not super consistent since we don't want to do synchronization, but it's okay for us in this case.
+        final int numberOfRunningAsyncJobs = numberOfRunningAsyncJobs();
+
+        for (Listener listener : listeners) {
+            listener.onNumberOfRunningAsyncJobsChanged(numberOfRunningAsyncJobs);
         }
     }
 }

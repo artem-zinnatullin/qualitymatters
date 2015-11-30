@@ -1,4 +1,4 @@
-package com.artemzin.qualitymatters.ui.tests;
+package com.artemzin.qualitymatters.functional_tests.tests;
 
 import android.support.annotation.NonNull;
 import android.support.test.espresso.action.ViewActions;
@@ -8,8 +8,8 @@ import android.support.test.runner.AndroidJUnit4;
 
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.ui.activities.MainActivity;
-import com.artemzin.qualitymatters.ui.rules.MockWebServerRule;
-import com.artemzin.qualitymatters.ui.rules.NeedsMockWebServer;
+import com.artemzin.qualitymatters.functional_tests.rules.MockWebServerRule;
+import com.artemzin.qualitymatters.functional_tests.rules.NeedsMockWebServer;
 import com.squareup.okhttp.mockwebserver.MockResponse;
 import com.squareup.okhttp.mockwebserver.MockWebServer;
 

@@ -8,9 +8,12 @@ import com.google.auto.value.AutoValue;
 public abstract class AsyncJob {
 
     @NonNull
-    public static AsyncJob create(int id) {
-        return new AutoValue_AsyncJob(id);
+    public static AsyncJob create(int id, @NonNull String name) {
+        return new AutoValue_AsyncJob(id, name);
     }
 
     public abstract int id();
+
+    @NonNull
+    public abstract String name();
 }
