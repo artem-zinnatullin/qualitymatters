@@ -16,8 +16,9 @@ import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.artemzin.qualitymatters.models.ItemsModel;
+import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.adapters.ItemsAdapter;
-import com.artemzin.qualitymatters.ui.others.VerticalSpaceItemDecoration;
+import com.artemzin.qualitymatters.functional_tests.others.VerticalSpaceItemDecoration;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenter;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenterConfiguration;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
@@ -52,10 +53,11 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
 
         @Provides
         @NonNull
-        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel) {
+        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel, @NonNull AsyncJobsObserver asyncJobsObserver) {
             return new ItemsPresenter(
                     ItemsPresenterConfiguration.builder().ioScheduler(Schedulers.io()).build(),
-                    itemsModel
+                    itemsModel,
+                    asyncJobsObserver
             );
         }
     }

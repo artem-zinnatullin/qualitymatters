@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.artemzin.qualitymatters.models.ItemsModel;
+import com.artemzin.qualitymatters.performance.AsyncJob;
+import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
 
 import org.junit.Before;
@@ -42,6 +44,14 @@ public class ItemsPresenterTest {
     @NonNull
     private ItemsView itemsView;
 
+    @SuppressWarnings("NullableProblems") // Initialized in @Before.
+    @NonNull
+    private AsyncJobsObserver asyncJobsObserver;
+
+    @SuppressWarnings("NullableProblems") // Initialized in @Before.
+    @NonNull
+    private AsyncJob asyncJob;
+
     @Before
     public void beforeEachTest() {
         itemsModel = mock(ItemsModel.class);
@@ -49,25 +59,32 @@ public class ItemsPresenterTest {
                 .ioScheduler(Schedulers.immediate()) // We don't need async behavior in tests.
                 .build();
 
-        itemsPresenter = new ItemsPresenter(presenterConfiguration, itemsModel);
+        asyncJobsObserver = mock(AsyncJobsObserver.class);
+        asyncJob = mock(AsyncJob.class);
+        when(asyncJobsObserver.asyncJobStarted("Reload data in ItemsPresenter")).thenReturn(asyncJob);
+
+        itemsPresenter = new ItemsPresenter(presenterConfiguration, itemsModel, asyncJobsObserver);
         itemsView = mock(ItemsView.class);
     }
 
     @Test
     public void reloadData_shouldMoveViewToLoadingState() {
         itemsPresenter.bindView(itemsView);
-        verifyZeroInteractions(itemsView);
+        verifyZeroInteractions(itemsView, asyncJobsObserver);
 
         when(itemsModel.getItems()).thenReturn(Single.just(emptyList()));
 
         itemsPresenter.reloadData();
         verify(itemsView).showLoadingUi();
+
+        verify(asyncJobsObserver).asyncJobStarted("Reload data in ItemsPresenter");
+        verify(asyncJobsObserver).asyncJobFinished(asyncJob);
     }
 
     @Test
     public void reloadData_shouldSendDataToTheView() {
         itemsPresenter.bindView(itemsView);
-        verifyZeroInteractions(itemsView);
+        verifyZeroInteractions(itemsView, asyncJobsObserver);
 
         List<Item> items = asList(
                 Item.builder().id("1").imagePreviewUrl("i1").title("t1").shortDescription("s1").build(),
@@ -79,12 +96,14 @@ public class ItemsPresenterTest {
         itemsPresenter.reloadData();
         verify(itemsView).showContentUi(items);
         verify(itemsView, never()).showErrorUi(any(Throwable.class));
+        verify(asyncJobsObserver).asyncJobStarted("Reload data in ItemsPresenter");
+        verify(asyncJobsObserver).asyncJobFinished(asyncJob);
     }
 
     @Test
     public void reloadData_shouldSendErrorToTheView() {
         itemsPresenter.bindView(itemsView);
-        verifyZeroInteractions(itemsView);
+        verifyZeroInteractions(itemsView, asyncJobsObserver);
 
         Throwable error = new RuntimeException();
         when(itemsModel.getItems()).thenReturn(Single.error(error));
@@ -92,5 +111,7 @@ public class ItemsPresenterTest {
         itemsPresenter.reloadData();
         verify(itemsView).showErrorUi(error);
         verify(itemsView, never()).showContentUi(anyListOf(Item.class));
+        verify(asyncJobsObserver).asyncJobStarted("Reload data in ItemsPresenter");
+        verify(asyncJobsObserver).asyncJobFinished(asyncJob);
     }
 }

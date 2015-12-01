@@ -35,12 +35,18 @@ public class PresenterTest {
 
     @Test
     public void unsubscribeOnUnbindView_shouldWorkAccordingItsContract() {
-        Subscription subscription = mock(Subscription.class);
+        Subscription subscription1 = mock(Subscription.class);
+        Subscription subscription2 = mock(Subscription.class);
+        Subscription subscription3 = mock(Subscription.class);
 
-        presenter.unsubscribeOnUnbindView(subscription);
-        verify(subscription, never()).unsubscribe();
+        presenter.unsubscribeOnUnbindView(subscription1, subscription2, subscription3);
+        verify(subscription1, never()).unsubscribe();
+        verify(subscription2, never()).unsubscribe();
+        verify(subscription3, never()).unsubscribe();
 
         presenter.unbindView(view);
-        verify(subscription).unsubscribe();
+        verify(subscription1).unsubscribe();
+        verify(subscription2).unsubscribe();
+        verify(subscription3).unsubscribe();
     }
 }

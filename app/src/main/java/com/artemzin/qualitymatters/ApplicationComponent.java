@@ -6,6 +6,8 @@ import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.ApiModule;
 import com.artemzin.qualitymatters.api.ChangeableBaseUrl;
 import com.artemzin.qualitymatters.network.NetworkModule;
+import com.artemzin.qualitymatters.performance.AsyncJobsModule;
+import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.fragments.ItemsFragment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -17,7 +19,8 @@ import dagger.Component;
 @Component(modules = {
         ApplicationModule.class,
         NetworkModule.class,
-        ApiModule.class
+        ApiModule.class,
+        AsyncJobsModule.class
 })
 public interface ApplicationComponent {
 
@@ -31,6 +34,10 @@ public interface ApplicationComponent {
 
     @NonNull
     ChangeableBaseUrl changeableBaseUrl();
+
+    // Provide AsyncJobObserver from the real app to the tests without need in injection to the test.
+    @NonNull
+    AsyncJobsObserver asyncJobsObserver();
 
     @NonNull
     ItemsFragment.ItemsFragmentComponent plus(@NonNull ItemsFragment.ItemsFragmentModule itemsFragmentModule);

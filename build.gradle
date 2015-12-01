@@ -46,10 +46,13 @@ ext {
     compileSdkVersion = 23
     buildToolsVersion = '23.0.2'
 
+    preDexLibs = !project.hasProperty('disablePreDex')
+
     supportLibsVersion = '23.1.1'
     daggerVersion = '2.0.2'
     okHttpVersion = '2.6.0'
     retrofitVersion = '2.0.0-beta2'
+    espressoVersion = '2.2.1'
 }
 
 ext.libraries = [
@@ -69,6 +72,7 @@ ext.libraries = [
 
         autoValue               : 'com.google.auto.value:auto-value:1.1',
 
+        supportAnnotations      : 'com.android.support:support-annotations:' + supportLibsVersion,
         supportAppCompat        : 'com.android.support:appcompat-v7:' + supportLibsVersion,
         supportDesign           : 'com.android.support:design:' + supportLibsVersion,
         supportRecyclerView     : 'com.android.support:recyclerview-v7:' + supportLibsVersion,
@@ -84,4 +88,29 @@ ext.libraries = [
         equalsVerifier          : 'nl.jqno.equalsverifier:equalsverifier:1.7.5',
         okHttpMockWebServer     : 'com.squareup.okhttp:mockwebserver:' + okHttpVersion,
         mockitoCore             : 'org.mockito:mockito-core:1.10.19',
+        supportTestRunner       : 'com.android.support.test:runner:0.4.1',
+        supportTestRules        : 'com.android.support.test:rules:0.4.1',
+        espressoCore            : 'com.android.support.test.espresso:espresso-core:' + espressoVersion,
+        espressoContrib         : 'com.android.support.test.espresso:espresso-contrib:' + espressoVersion,
 ]
+
+subprojects {
+    project.plugins.whenPluginAdded { plugin ->
+        if ('com.android.build.gradle.AppPlugin'.equals(plugin.class.name) || 'com.android.build.gradle.LibraryPlugin'.equals(plugin.class.name)) {
+            // enable or disable pre-dexing
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        }
+    }
+}
+
+afterEvaluate {
+    // Log instrumentation tests results.
+    tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
+        task.doFirst {
+            logging.level = LogLevel.INFO
+        }
+        task.doLast {
+            logging.level = LogLevel.LIFECYCLE
+        }
+    }
+}
