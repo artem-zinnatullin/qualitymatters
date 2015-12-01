@@ -18,7 +18,7 @@ import com.artemzin.qualitymatters.api.entities.Item;
 import com.artemzin.qualitymatters.models.ItemsModel;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.adapters.ItemsAdapter;
-import com.artemzin.qualitymatters.functional_tests.others.VerticalSpaceItemDecoration;
+import com.artemzin.qualitymatters.ui.adapters.VerticalSpaceItemDecoration;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenter;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenterConfiguration;
 import com.artemzin.qualitymatters.ui.views.ItemsView;

@@ -1,4 +1,4 @@
-package com.artemzin.qualitymatters.functional_tests.others;
+package com.artemzin.qualitymatters.ui.adapters;
 
 import android.graphics.Rect;
 import android.support.annotation.NonNull;
