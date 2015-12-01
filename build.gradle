@@ -46,6 +46,8 @@ ext {
     compileSdkVersion = 23
     buildToolsVersion = '23.0.2'
 
+    preDexLibs = !project.hasProperty('disablePreDex')
+
     supportLibsVersion = '23.1.1'
     daggerVersion = '2.0.2'
     okHttpVersion = '2.6.0'
@@ -91,3 +93,12 @@ ext.libraries = [
         espressoCore            : 'com.android.support.test.espresso:espresso-core:' + espressoVersion,
         espressoContrib         : 'com.android.support.test.espresso:espresso-contrib:' + espressoVersion,
 ]
+
+subprojects {
+    project.plugins.whenPluginAdded { plugin ->
+        if ('com.android.build.gradle.AppPlugin'.equals(plugin.class.name) || 'com.android.build.gradle.LibraryPlugin'.equals(plugin.class.name)) {
+            // enable or disable pre-dexing
+            project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
+        }
+    }
+}
