@@ -96,7 +96,7 @@ public class AsyncJobsObserverImplTest {
             asyncJobsObserver.asyncJobFinished(asyncJob);
             failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
         } catch (IllegalArgumentException e) {
-            assertThat(e).hasMessage("Async job were registered in the AsyncJobsObserver! Job: " + asyncJob);
+            assertThat(e).hasMessage("Async job was not registered in the AsyncJobsObserver! Job: " + asyncJob);
         }
     }
 

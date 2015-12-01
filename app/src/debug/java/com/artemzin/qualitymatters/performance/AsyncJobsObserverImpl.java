@@ -62,7 +62,7 @@ public class AsyncJobsObserverImpl implements AsyncJobsObserver {
         final boolean removed = asyncJobs.remove(asyncJob);
 
         if (!removed) {
-            throw new IllegalArgumentException("Async job were registered in the AsyncJobsObserver! Job: " + asyncJob);
+            throw new IllegalArgumentException("Async job was not registered in the AsyncJobsObserver! Job: " + asyncJob);
         }
 
         notifyListenersAboutChangedNumberOfRunningAsyncJobs();

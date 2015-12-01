@@ -4,7 +4,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 
 import com.artemzin.qualitymatters.models.ItemsModel;
-import com.artemzin.qualitymatters.other.DisposableSubscription;
+import com.artemzin.qualitymatters.other.FinishAsyncJobSubscription;
 import com.artemzin.qualitymatters.performance.AsyncJob;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
@@ -80,6 +80,6 @@ public class ItemsPresenter extends Presenter<ItemsView> {
                 );
 
         // Prevent memory leak.
-        unsubscribeOnUnbindView(subscription, new DisposableSubscription(() -> asyncJobsObserver.asyncJobFinished(asyncJob)));
+        unsubscribeOnUnbindView(subscription, new FinishAsyncJobSubscription(asyncJobsObserver, asyncJob));
     }
 }
