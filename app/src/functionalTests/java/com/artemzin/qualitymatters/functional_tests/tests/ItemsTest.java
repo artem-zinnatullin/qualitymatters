@@ -4,6 +4,8 @@ import android.support.annotation.NonNull;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 
+import com.artemzin.qualitymatters.R;
+import com.artemzin.qualitymatters.functional_tests.TestUtils;
 import com.artemzin.qualitymatters.functional_tests.rules.AsyncJobsObserverRule;
 import com.artemzin.qualitymatters.functional_tests.rules.MockWebServerRule;
 import com.artemzin.qualitymatters.functional_tests.rules.NeedsMockWebServer;
@@ -34,6 +36,11 @@ public class ItemsTest {
     @Before
     public void beforeEachTest() {
         itemsScreen = new ItemsScreen();
+    }
+
+    @Test // For real, it's really easy to break Toolbar, so why not test it?
+    public void shouldDisplayTitle() {
+        itemsScreen.shouldDisplayTitle(TestUtils.app().getString(R.string.app_name));
     }
 
     /**

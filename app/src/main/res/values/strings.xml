@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Android Development Culture</string>
+    <string name="app_name">QualityMatters</string>
     <string name="items_loading_error_text">Couldn\'t load items :(</string>
     <string name="common_try_again_button">Try again</string>
     <string name="list_item_image_content_description">Item image</string>
