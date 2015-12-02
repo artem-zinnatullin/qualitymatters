@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'findbugs'
-apply plugin: 'pmd'
 apply from: '../code_quality_tools/jacoco.gradle'
 
 android {
@@ -145,11 +144,4 @@ task findbugs(type: FindBugs, dependsOn: assemble) {
     classpath = files()
 
     excludeFilter = file("${project.projectDir}/static_analyzers/findbugs-filter.xml")
-}
-
-task pmd(type: Pmd, dependsOn: assemble) {
-    ignoreFailures = false // Fail early
-    ruleSets = ['java-basic', 'java-braces', 'java-strings', 'java-design', 'java-unusedcode']
-
-    source = fileTree('src/main/java')
 }
