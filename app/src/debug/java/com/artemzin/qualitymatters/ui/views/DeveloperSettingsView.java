@@ -13,6 +13,9 @@ public interface DeveloperSettingsView {
     void changeLeakCanaryState(boolean enabled);
 
     @AnyThread
+    void changeTinyDancerState(boolean enabled);
+
+    @AnyThread
     void showMessage(@NonNull String message);
 
     @AnyThread

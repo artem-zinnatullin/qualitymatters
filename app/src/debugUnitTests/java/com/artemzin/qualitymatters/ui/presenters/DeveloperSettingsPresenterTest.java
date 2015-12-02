@@ -73,6 +73,24 @@ public class DeveloperSettingsPresenterTest {
     }
 
     @Test
+    public void bindView_shouldSendTinyDancerEnabledStateToTheView() {
+        when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(true);
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        verify(developerSettingsView).changeTinyDancerState(true);
+        verify(developerSettingsModel).isTinyDancerEnabled();
+    }
+
+    @Test
+    public void bindView_shouldSendTinyDancerDisabledStateToTheView() {
+        when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(false);
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        verify(developerSettingsView).changeTinyDancerState(false);
+        verify(developerSettingsModel).isTinyDancerEnabled();
+    }
+
+    @Test
     public void changeStethoState_shouldNoOpIfStateAlreadySameAndEnabled() {
         when(developerSettingsModel.isStethoEnabled()).thenReturn(true);
 
@@ -174,5 +192,50 @@ public class DeveloperSettingsPresenterTest {
         verify(developerSettingsModel).changeLeakCanaryState(false);
         verify(developerSettingsView).showMessage("LeakCanary was disabled");
         verify(developerSettingsView).showAppNeedsToBeRestarted();
+    }
+
+    @Test
+    public void changeTinyDancerState_shouldNoOpIfStateAlreadySameAndEnabled() {
+        when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(true);
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.changeTinyDancerState(true);
+
+        verify(developerSettingsModel, never()).changeTinyDancerState(anyBoolean());
+        verify(developerSettingsView, never()).showMessage(anyString());
+        verify(developerSettingsView, never()).showAppNeedsToBeRestarted();
+    }
+
+    @Test
+    public void changeTinyDancerState_shouldNoOpIfStateAlreadySameAndDisabled() {
+        when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(false);
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        developerSettingsPresenter.changeTinyDancerState(false);
+
+        verify(developerSettingsModel, never()).changeTinyDancerState(anyBoolean());
+        verify(developerSettingsView, never()).showMessage(anyString());
+        verify(developerSettingsView, never()).showAppNeedsToBeRestarted();
+    }
+
+    @Test
+    public void changeTinyDancerState_shouldEnableTinyDancerAndNotifyView() {
+        developerSettingsPresenter.bindView(developerSettingsView);
+
+        developerSettingsPresenter.changeTinyDancerState(true);
+        verify(developerSettingsModel).changeTinyDancerState(true);
+        verify(developerSettingsView).showMessage("TinyDancer was enabled");
+        verify(developerSettingsView, never()).showAppNeedsToBeRestarted();
+    }
+
+    @Test
+    public void changeTinyDancerState_shouldDisableTinyDancerAndNotifyView() {
+        when(developerSettingsModel.isTinyDancerEnabled()).thenReturn(true);
+        developerSettingsPresenter.bindView(developerSettingsView);
+
+        developerSettingsPresenter.changeTinyDancerState(false);
+        verify(developerSettingsModel).changeTinyDancerState(false);
+        verify(developerSettingsView).showMessage("TinyDancer was disabled");
+        verify(developerSettingsView, never()).showAppNeedsToBeRestarted();
     }
 }

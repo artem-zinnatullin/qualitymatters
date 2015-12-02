@@ -33,6 +33,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Bind(R.id.developer_settings_leak_canary_switch)
     Switch leakCanarySwitch;
 
+    @Bind(R.id.developer_settings_tiny_dancer_switch)
+    Switch tinyDancerSwitch;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +60,11 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         presenter.changeStethoState(checked);
     }
 
+    @OnCheckedChanged(R.id.developer_settings_tiny_dancer_switch)
+    void onTinyDancerSwitchCheckedChanged(boolean checked) {
+        presenter.changeTinyDancerState(checked);
+    }
+
     @Override
     @AnyThread
     public void changeStethoState(boolean enabled) {
@@ -72,6 +80,15 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         runOnUiThreadIfFragmentAlive(() -> {
             assert leakCanarySwitch != null;
             leakCanarySwitch.setChecked(enabled);
+        });
+    }
+
+    @Override
+    @AnyThread
+    public void changeTinyDancerState(boolean enabled) {
+        runOnUiThreadIfFragmentAlive(() -> {
+            assert tinyDancerSwitch != null;
+            tinyDancerSwitch.setChecked(enabled);
         });
     }
 

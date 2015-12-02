@@ -19,6 +19,7 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
         super.bindView(view);
         view.changeStethoState(developerSettingsModel.isStethoEnabled());
         view.changeLeakCanaryState(developerSettingsModel.isLeakCanaryEnabled());
+        view.changeTinyDancerState(developerSettingsModel.isTinyDancerEnabled());
     }
 
     public void changeStethoState(boolean enabled) {
@@ -29,7 +30,6 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
         boolean stethoWasEnabled = developerSettingsModel.isStethoEnabled();
 
         developerSettingsModel.changeStethoState(enabled);
-        developerSettingsModel.apply();
 
         final DeveloperSettingsView view = view();
 
@@ -48,13 +48,26 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
         }
 
         developerSettingsModel.changeLeakCanaryState(enabled);
-        developerSettingsModel.apply();
 
         final DeveloperSettingsView view = view();
 
         if (view != null) {
             view.showMessage("LeakCanary was " + booleanToEnabledDisabled(enabled));
             view.showAppNeedsToBeRestarted(); // LeakCanary can not be enabled on demand (or it's possible?)
+        }
+    }
+
+    public void changeTinyDancerState(boolean enabled) {
+        if (developerSettingsModel.isTinyDancerEnabled() == enabled) {
+            return; // no-op
+        }
+
+        developerSettingsModel.changeTinyDancerState(enabled);
+
+        final DeveloperSettingsView view = view();
+
+        if (view != null) {
+            view.showMessage("TinyDancer was " + booleanToEnabledDisabled(enabled));
         }
     }
 

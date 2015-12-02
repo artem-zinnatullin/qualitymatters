@@ -119,6 +119,7 @@ dependencies {
     debugCompile libraries.stetho
     debugCompile libraries.stethoOkHttp
     debugCompile libraries.leakCanary
+    debugCompile libraries.tinyDancer
 
     testCompile libraries.junit
     testCompile libraries.robolectric

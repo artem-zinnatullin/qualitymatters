@@ -22,4 +22,16 @@
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">#dddddd</item>
     </style>
+
+    <style name="DeveloperSettingsToolContainer">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="DeveloperSettingsToolSwitch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
 </resources>
