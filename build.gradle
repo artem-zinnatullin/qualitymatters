@@ -53,6 +53,7 @@ ext {
     okHttpVersion = '2.6.0'
     retrofitVersion = '2.0.0-beta2'
     espressoVersion = '2.2.1'
+    stethoVersion = '1.2.0'
 }
 
 ext.libraries = [
@@ -80,6 +81,10 @@ ext.libraries = [
 
         butterKnife             : 'com.jakewharton:butterknife:7.0.1',
         picasso                 : 'com.squareup.picasso:picasso:2.5.2',
+
+        // Developer Tools
+        stetho                  : 'com.facebook.stetho:stetho:' + stethoVersion,
+        stethoOkHttp            : 'com.facebook.stetho:stetho-okhttp:' + stethoVersion,
 
         // Test dependencies
         junit                   : 'junit:junit:4.12',

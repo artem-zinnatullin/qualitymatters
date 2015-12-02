@@ -2,12 +2,15 @@ package com.artemzin.qualitymatters;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.ApiModule;
 import com.artemzin.qualitymatters.api.ChangeableBaseUrl;
+import com.artemzin.qualitymatters.api.QualityMattersRestApi;
+import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsComponent;
+import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
 import com.artemzin.qualitymatters.network.NetworkModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
+import com.artemzin.qualitymatters.ui.activities.MainActivity;
 import com.artemzin.qualitymatters.ui.fragments.ItemsFragment;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -20,7 +23,8 @@ import dagger.Component;
         ApplicationModule.class,
         NetworkModule.class,
         ApiModule.class,
-        AsyncJobsModule.class
+        AsyncJobsModule.class,
+        DeveloperSettingsModule.class
 })
 public interface ApplicationComponent {
 
@@ -41,4 +45,11 @@ public interface ApplicationComponent {
 
     @NonNull
     ItemsFragment.ItemsFragmentComponent plus(@NonNull ItemsFragment.ItemsFragmentModule itemsFragmentModule);
+
+    @NonNull
+    DeveloperSettingsComponent plusDeveloperSettingsComponent();
+
+    void inject(@NonNull QualityMattersApp qualityMattersApp);
+
+    void inject(@NonNull MainActivity mainActivity);
 }

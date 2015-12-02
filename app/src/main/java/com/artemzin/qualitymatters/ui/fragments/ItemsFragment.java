@@ -4,18 +4,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.annotation.WorkerThread;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.ApplicationModule;
+import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.artemzin.qualitymatters.models.ItemsModel;
+import com.artemzin.qualitymatters.performance.AnyThread;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.adapters.ItemsAdapter;
 import com.artemzin.qualitymatters.ui.adapters.VerticalSpaceItemDecoration;
@@ -109,9 +109,9 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @SuppressWarnings("ResourceType")
     // Lint does not understand that we shift execution on Main Thread.
     @Override
-    @WorkerThread
+    @AnyThread
     public void showLoadingUi() {
-        mainThreadHandler.post(() -> {
+        runOnUiThreadIfFragmentAlive(() -> {
             loadingUiView.setVisibility(VISIBLE);
             errorUiView.setVisibility(GONE);
             contentUiRecyclerView.setVisibility(GONE);
@@ -121,9 +121,9 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @SuppressWarnings("ResourceType")
     // Lint does not understand that we shift execution on Main Thread.
     @Override
-    @WorkerThread
+    @AnyThread
     public void showErrorUi(@NonNull Throwable error) {
-        mainThreadHandler.post(() -> {
+        runOnUiThreadIfFragmentAlive(() -> {
             loadingUiView.setVisibility(GONE);
             errorUiView.setVisibility(VISIBLE);
             contentUiRecyclerView.setVisibility(GONE);
@@ -133,9 +133,9 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @SuppressWarnings("ResourceType")
     // Lint does not understand that we shift execution on Main Thread.
     @Override
-    @WorkerThread
+    @AnyThread
     public void showContentUi(@NonNull List<Item> items) {
-        mainThreadHandler.post(() -> {
+        runOnUiThreadIfFragmentAlive(() -> {
             loadingUiView.setVisibility(GONE);
             errorUiView.setVisibility(GONE);
             contentUiRecyclerView.setVisibility(VISIBLE);
