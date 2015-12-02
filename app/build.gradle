@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
-apply plugin: 'findbugs'
 apply from: '../code_quality_tools/jacoco.gradle'
 
 android {
@@ -130,18 +129,4 @@ configurations.all {
         // Force our version of support-annotations, we have a conflict between app and androidTest dependency resolution.
         force libraries.supportAnnotations
     }
-}
-
-task findbugs(type: FindBugs, dependsOn: assemble) {
-    ignoreFailures = false // Fail early
-    effort = 'max'
-    reportLevel = 'low' // Report even low priority problems
-
-    classes = files("${project.projectDir}/build/intermediates/classes")
-    source = fileTree('src/main/java')
-
-    // If somebody has an idea how to make this work with support libraries -> open a PR please.
-    classpath = files()
-
-    excludeFilter = file("${project.projectDir}/static_analyzers/findbugs-filter.xml")
 }

@@ -90,9 +90,7 @@ public class ItemsAdapterTest {
         verify(layoutInflater).inflate(R.layout.list_item, parent, false);
 
         assertThat(viewHolder.itemView).isSameAs(itemView);
-        assertThat(viewHolder.imageView).isSameAs(imageView);
-        assertThat(viewHolder.titleTextView).isSameAs(titleTextView);
-        assertThat(viewHolder.shortDescriptionTextView).isSameAs(shortDescriptionTextView);
+        // Also, we don't expect exceptions here.
     }
 
     @Test
