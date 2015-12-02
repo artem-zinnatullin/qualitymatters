@@ -1,6 +1,6 @@
 # QualityMatters
 
-This is the app that follows all principles of [Android Development Culture described here](artemzin.com/blog/android-development-culture-the-document-qualitymatters/).
+This is the app that follows all principles of [Android Development Culture described here](http://artemzin.com/blog/android-development-culture-the-document-qualitymatters/).
 
 What does it have:
 
