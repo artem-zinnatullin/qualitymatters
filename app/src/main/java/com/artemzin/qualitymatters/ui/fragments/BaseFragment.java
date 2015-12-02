@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
+import com.artemzin.qualitymatters.QualityMattersApp;
+
 @SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class BaseFragment extends Fragment {
 
@@ -26,5 +28,11 @@ public abstract class BaseFragment extends Fragment {
 
     private boolean isFragmentAlive() {
         return getActivity() != null && isAdded() && !isDetached() && getView() != null && !isRemoving();
+    }
+
+    @Override
+    public void onDestroy() {
+        QualityMattersApp.get(getContext()).applicationComponent().leakCanaryProxy().watch(this);
+        super.onDestroy();
     }
 }

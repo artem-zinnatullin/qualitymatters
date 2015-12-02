@@ -37,4 +37,18 @@ public class DeveloperSettingsTest {
         developerSettings.saveIsStethoEnabled(false);
         assertThat(developerSettings.isStethoEnabled()).isFalse();
     }
+
+    @Test
+    public void isLeakCanaryEnabled_shouldReturnFalseByDefault() {
+        assertThat(developerSettings.isLeakCanaryEnabled()).isFalse();
+    }
+
+    @Test
+    public void saveIsLeakCanaryEnabled_isLeakCanaryEnabled() {
+        developerSettings.saveIsLeakCanaryEnabled(true);
+        assertThat(developerSettings.isLeakCanaryEnabled()).isTrue();
+
+        developerSettings.saveIsLeakCanaryEnabled(false);
+        assertThat(developerSettings.isLeakCanaryEnabled()).isFalse();
+    }
 }

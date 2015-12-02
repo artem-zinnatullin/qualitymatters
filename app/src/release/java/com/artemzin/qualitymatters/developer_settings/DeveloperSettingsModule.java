@@ -6,6 +6,7 @@ import com.artemzin.qualitymatters.ui.other.NoOpViewModifier;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 
 import javax.inject.Named;
+import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
@@ -27,5 +28,12 @@ public class DeveloperSettingsModule {
         return () -> {
             // no-op!
         };
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public LeakCanaryProxy provideLeakCanaryProxy() {
+        return new NoOpLeakCanaryProxy();
     }
 }

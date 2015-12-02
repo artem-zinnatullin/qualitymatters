@@ -41,14 +41,22 @@ public class DeveloperSettingsModule {
         return new DeveloperSettings(qualityMattersApp.getSharedPreferences("developer_settings", MODE_PRIVATE));
     }
 
+    @Provides
+    @NonNull
+    @Singleton
+    public LeakCanaryProxy provideLeakCanaryProxy(@NonNull QualityMattersApp qualityMattersApp) {
+        return new LeakCanaryProxyImpl(qualityMattersApp);
+    }
+
     // We will use this concrete type for debug code, but main code will see only DeveloperSettingsModel interface.
     @Provides
     @NonNull
     @Singleton
     public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
                                                                         @NonNull DeveloperSettings developerSettings,
-                                                                        @NonNull OkHttpClient okHttpClient) {
-        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient);
+                                                                        @NonNull OkHttpClient okHttpClient,
+                                                                        @NonNull LeakCanaryProxy leakCanaryProxy) {
+        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient, leakCanaryProxy);
     }
 
     @Provides

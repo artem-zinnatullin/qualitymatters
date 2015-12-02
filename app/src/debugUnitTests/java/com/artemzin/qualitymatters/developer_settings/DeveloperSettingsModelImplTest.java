@@ -27,7 +27,12 @@ public class DeveloperSettingsModelImplTest {
     @Before
     public void beforeEachTest() {
         developerSettings = mock(DeveloperSettings.class);
-        developerSettingsModel = new DeveloperSettingsModelImpl(mock(QualityMattersApp.class), developerSettings, mock(OkHttpClient.class));
+        developerSettingsModel = new DeveloperSettingsModelImpl(
+                mock(QualityMattersApp.class),
+                developerSettings,
+                mock(OkHttpClient.class),
+                mock(LeakCanaryProxy.class)
+        );
     }
 
     @Test
@@ -39,5 +44,16 @@ public class DeveloperSettingsModelImplTest {
         when(developerSettings.isStethoEnabled()).thenReturn(false);
         assertThat(developerSettingsModel.isStethoEnabled()).isFalse();
         verify(developerSettings, times(2)).isStethoEnabled();
+    }
+
+    @Test
+    public void isLeakCanaryEnabled_shouldReturnValueFromDeveloperSettings() {
+        when(developerSettings.isLeakCanaryEnabled()).thenReturn(true);
+        assertThat(developerSettingsModel.isLeakCanaryEnabled()).isTrue();
+        verify(developerSettings).isLeakCanaryEnabled();
+
+        when(developerSettings.isLeakCanaryEnabled()).thenReturn(false);
+        assertThat(developerSettingsModel.isLeakCanaryEnabled()).isFalse();
+        verify(developerSettings, times(2)).isLeakCanaryEnabled();
     }
 }

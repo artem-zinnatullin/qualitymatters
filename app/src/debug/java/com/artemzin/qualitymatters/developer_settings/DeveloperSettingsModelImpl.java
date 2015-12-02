@@ -21,14 +21,22 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
     private final OkHttpClient okHttpClient;
 
     @NonNull
+    private final LeakCanaryProxy leakCanaryProxy;
+
+    @NonNull
     private AtomicBoolean stethoAlreadyEnabled = new AtomicBoolean();
+
+    @NonNull
+    private AtomicBoolean leakCanaryAlreadyEnabled = new AtomicBoolean();
 
     public DeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
                                       @NonNull DeveloperSettings developerSettings,
-                                      @NonNull OkHttpClient okHttpClient) {
+                                      @NonNull OkHttpClient okHttpClient,
+                                      @NonNull LeakCanaryProxy leakCanaryProxy) {
         this.qualityMattersApp = qualityMattersApp;
         this.developerSettings = developerSettings;
         this.okHttpClient = okHttpClient;
+        this.leakCanaryProxy = leakCanaryProxy;
     }
 
     public boolean isStethoEnabled() {
@@ -40,6 +48,15 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
         apply();
     }
 
+    public boolean isLeakCanaryEnabled() {
+        return developerSettings.isLeakCanaryEnabled();
+    }
+
+    public void changeLeakCanaryState(boolean enabled) {
+        developerSettings.saveIsLeakCanaryEnabled(enabled);
+        apply();
+    }
+
     @Override
     public void apply() {
         // Stetho can not be enabled twice.
@@ -47,6 +64,13 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
             if (isStethoEnabled()) {
                 Stetho.initializeWithDefaults(qualityMattersApp);
                 okHttpClient.interceptors().add(new StethoInterceptor());
+            }
+        }
+
+        // LeakCanary can not be enabled twice.
+        if (leakCanaryAlreadyEnabled.compareAndSet(false, true)) {
+            if (isLeakCanaryEnabled()) {
+                leakCanaryProxy.init();
             }
         }
     }
