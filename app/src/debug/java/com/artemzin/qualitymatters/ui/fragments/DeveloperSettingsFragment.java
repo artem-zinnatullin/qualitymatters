@@ -30,6 +30,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Bind(R.id.developer_settings_stetho_switch)
     Switch stethoSwitch;
 
+    @Bind(R.id.developer_settings_leak_canary_switch)
+    Switch leakCanarySwitch;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -61,6 +64,27 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
             assert stethoSwitch != null;
             stethoSwitch.setChecked(enabled);
         });
+    }
+
+    @Override
+    @AnyThread
+    public void changeLeakCanaryState(boolean enabled) {
+        runOnUiThreadIfFragmentAlive(() -> {
+            assert leakCanarySwitch != null;
+            leakCanarySwitch.setChecked(enabled);
+        });
+    }
+
+    @SuppressLint("ShowToast") // Yeah, Lambdas and Lint are not good friends…
+    @Override
+    @AnyThread
+    public void showMessage(@NonNull String message) {
+        runOnUiThreadIfFragmentAlive(() -> Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show());
+    }
+
+    @OnCheckedChanged(R.id.developer_settings_leak_canary_switch)
+    void onLeakCanarySwitchCheckedChanged(boolean checked) {
+        presenter.changeLeakCanaryState(checked);
     }
 
     @SuppressLint("ShowToast") // Yeah, Lambdas and Lint are not good friends…

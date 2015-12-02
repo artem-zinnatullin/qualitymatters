@@ -104,6 +104,7 @@ dependencies {
     // Developer tools (Developer Settings)
     debugCompile libraries.stetho
     debugCompile libraries.stethoOkHttp
+    debugCompile libraries.leakCanary
 
     testCompile libraries.junit
     testCompile libraries.robolectric

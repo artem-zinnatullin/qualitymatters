@@ -9,6 +9,7 @@ import android.support.annotation.NonNull;
 public class DeveloperSettings {
 
     private static final String KEY_IS_STETHO_ENABLED = "is_stetho_enabled";
+    private static final String KEY_IS_LEAK_CANARY_ENABLED = "is_leak_canary_enabled";
 
     @NonNull
     private final SharedPreferences sharedPreferences;
@@ -23,5 +24,13 @@ public class DeveloperSettings {
 
     public void saveIsStethoEnabled(boolean isStethoEnabled) {
         sharedPreferences.edit().putBoolean(KEY_IS_STETHO_ENABLED, isStethoEnabled).apply();
+    }
+
+    public boolean isLeakCanaryEnabled() {
+        return sharedPreferences.getBoolean(KEY_IS_LEAK_CANARY_ENABLED, false);
+    }
+
+    public void saveIsLeakCanaryEnabled(boolean isLeakCanaryEnabled) {
+        sharedPreferences.edit().putBoolean(KEY_IS_LEAK_CANARY_ENABLED, isLeakCanaryEnabled).apply();
     }
 }

@@ -50,6 +50,26 @@
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DeveloperSettingsToolTitle"
+                android:text="LeakCanary"
+                tools:ignore="HardcodedText" />
+
+            <Switch
+                android:id="@+id/developer_settings_leak_canary_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end" />
+
+        </LinearLayout>
+
+
     </LinearLayout>
 
 </ScrollView>
