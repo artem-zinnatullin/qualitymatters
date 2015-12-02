@@ -62,7 +62,7 @@ ext.libraries = [
         javaxInject             : 'javax.inject:javax.inject:1',
         javaxAnnotationApi      : 'javax.annotation:javax.annotation-api:1.2',
 
-        rxJava                  : 'io.reactivex:rxjava:1.0.16',
+        rxJava                  : 'io.reactivex:rxjava:1.0.17',
 
         okHttp                  : 'com.squareup.okhttp:okhttp:' + okHttpVersion,
         okHttpLoggingInterceptor: 'com.squareup.okhttp:logging-interceptor:' + okHttpVersion,
