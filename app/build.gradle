@@ -22,8 +22,22 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
 
+    signingConfigs {
+        qualityMatters {
+            storeFile file('keystore.jks')
+            storePassword 'qualitymatters'
+            keyAlias 'qualitymatters'
+            keyPassword 'qualitymatters'
+        }
+    }
+
     buildTypes {
+        debug {
+            signingConfig signingConfigs.qualityMatters
+        }
+
         release {
+            signingConfig signingConfigs.qualityMatters
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
