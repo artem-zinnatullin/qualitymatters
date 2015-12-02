@@ -56,4 +56,15 @@ public class DeveloperSettingsModelImplTest {
         assertThat(developerSettingsModel.isLeakCanaryEnabled()).isFalse();
         verify(developerSettings, times(2)).isLeakCanaryEnabled();
     }
+
+    @Test
+    public void isTinyDancerEnabled_shouldReturnValueFromDeveloperSettings() {
+        when(developerSettings.isTinyDancerEnabled()).thenReturn(true);
+        assertThat(developerSettingsModel.isTinyDancerEnabled()).isTrue();
+        verify(developerSettings).isTinyDancerEnabled();
+
+        when(developerSettings.isTinyDancerEnabled()).thenReturn(false);
+        assertThat(developerSettingsModel.isTinyDancerEnabled()).isFalse();
+        verify(developerSettings, times(2)).isTinyDancerEnabled();
+    }
 }

@@ -10,6 +10,7 @@ public class DeveloperSettings {
 
     private static final String KEY_IS_STETHO_ENABLED = "is_stetho_enabled";
     private static final String KEY_IS_LEAK_CANARY_ENABLED = "is_leak_canary_enabled";
+    private static final String KEY_IS_TINY_DANCER_ENABLED = "is_tiny_dancer_enabled";
 
     @NonNull
     private final SharedPreferences sharedPreferences;
@@ -32,5 +33,13 @@ public class DeveloperSettings {
 
     public void saveIsLeakCanaryEnabled(boolean isLeakCanaryEnabled) {
         sharedPreferences.edit().putBoolean(KEY_IS_LEAK_CANARY_ENABLED, isLeakCanaryEnabled).apply();
+    }
+
+    public boolean isTinyDancerEnabled() {
+        return sharedPreferences.getBoolean(KEY_IS_TINY_DANCER_ENABLED, false);
+    }
+
+    public void saveIsTinyDancerEnabled(boolean isTinyDancerEnabled) {
+        sharedPreferences.edit().putBoolean(KEY_IS_TINY_DANCER_ENABLED, isTinyDancerEnabled).apply();
     }
 }
