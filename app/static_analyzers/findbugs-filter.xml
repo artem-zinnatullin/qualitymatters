@@ -10,6 +10,11 @@
         <Class name="~.*Manifest\$.*"/>
     </Match>
 
+    <!-- Do not check auto-generated classes (Dagger puts $ into class names) -->
+    <Match>
+        <Class name="~.*Dagger*.*"/>
+    </Match>
+
     <!-- Do not check for non-initialized fields in tests because usually we initialize them in @Before -->
     <Match>
         <Class name="~.*Test"/>
@@ -21,4 +26,5 @@
         <Bug code="UPM" />
         <Class name="~.*\$\$Lambda\$.*"/>
     </Match>
+
 </FindBugsFilter>

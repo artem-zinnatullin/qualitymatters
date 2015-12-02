@@ -60,6 +60,7 @@ android {
 
     packagingOptions {
         exclude 'META-INF/NOTICE'
+        exclude 'META-INF/NOTICE.txt'
         exclude 'META-INF/LICENSE'
         exclude 'META-INF/LICENSE.txt'
         exclude 'META-INF/services/javax.annotation.processing.Processor'
@@ -100,6 +101,10 @@ dependencies {
 
     compile libraries.butterKnife
     compile libraries.picasso
+
+    // Developer tools (Developer Settings)
+    debugCompile libraries.stetho
+    debugCompile libraries.stethoOkHttp
 
     testCompile libraries.junit
     testCompile libraries.robolectric

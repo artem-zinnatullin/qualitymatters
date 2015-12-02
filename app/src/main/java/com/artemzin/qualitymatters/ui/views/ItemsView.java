@@ -1,9 +1,9 @@
 package com.artemzin.qualitymatters.ui.views;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.WorkerThread;
 
 import com.artemzin.qualitymatters.api.entities.Item;
+import com.artemzin.qualitymatters.performance.AnyThread;
 
 import java.util.List;
 
@@ -13,13 +13,13 @@ import java.util.List;
  */
 public interface ItemsView {
 
-    // Presenter should not know about Main Thread. It's a detail of View implementation.
-    @WorkerThread
+    // Presenter does not know about Main Thread. It's a detail of View implementation!
+    @AnyThread
     void showLoadingUi();
 
-    @WorkerThread
+    @AnyThread
     void showErrorUi(@NonNull Throwable error);
 
-    @WorkerThread
+    @AnyThread
     void showContentUi(@NonNull List<Item> items);
 }

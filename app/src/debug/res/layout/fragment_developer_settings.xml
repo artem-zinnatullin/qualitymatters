@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#88000000"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="@dimen/activity_vertical_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
+        android:paddingTop="@dimen/activity_vertical_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Developer Settings #qualitymatters"
+            android:textColor="#eeeeee"
+            android:textSize="18sp"
+            tools:ignore="HardcodedText" />
+
+        <TextView
+            style="@style/DeveloperSettingsCategoryTitle"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:text="Inspection tools"
+            tools:ignore="HardcodedText" />
+
+        <View style="@style/DeveloperSettingsCategoryDivider" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/activity_vertical_margin"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/DeveloperSettingsToolTitle"
+                android:text="Stetho"
+                tools:ignore="HardcodedText" />
+
+            <Switch
+                android:id="@+id/developer_settings_stetho_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView>

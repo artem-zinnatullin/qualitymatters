@@ -1,7 +1,6 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 
 import com.artemzin.qualitymatters.models.ItemsModel;
 import com.artemzin.qualitymatters.other.FinishAsyncJobSubscription;
@@ -24,9 +23,6 @@ public class ItemsPresenter extends Presenter<ItemsView> {
     @NonNull
     private final AsyncJobsObserver asyncJobsObserver;
 
-    @Nullable
-    private volatile ItemsView itemsView;
-
     @Inject
     public ItemsPresenter(@NonNull ItemsPresenterConfiguration presenterConfiguration,
                           @NonNull ItemsModel itemsModel,
@@ -36,15 +32,10 @@ public class ItemsPresenter extends Presenter<ItemsView> {
         this.asyncJobsObserver = asyncJobsObserver;
     }
 
-    @Override
-    public void bindView(@NonNull ItemsView view) {
-        this.itemsView = view;
-    }
-
     public void reloadData() {
         {
             // Tip: in Kotlin you can use ? to operate with nullable values.
-            final ItemsView view = itemsView;
+            final ItemsView view = view();
 
             if (view != null) {
                 view.showLoadingUi();
@@ -59,7 +50,7 @@ public class ItemsPresenter extends Presenter<ItemsView> {
                 .subscribe(
                         items -> {
                             // Tip: in Kotlin you can use ? to operate with nullable values.
-                            final ItemsView view = itemsView;
+                            final ItemsView view = view();
 
                             if (view != null) {
                                 view.showContentUi(items);
@@ -69,7 +60,7 @@ public class ItemsPresenter extends Presenter<ItemsView> {
                         },
                         error -> {
                             // Tip: in Kotlin you can use ? to operate with nullable values.
-                            final ItemsView view = itemsView;
+                            final ItemsView view = view();
 
                             if (view != null) {
                                 view.showErrorUi(error);
