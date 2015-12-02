@@ -5,6 +5,8 @@ import android.os.Looper;
 import android.support.annotation.NonNull;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.picasso.OkHttpDownloader;
 import com.squareup.picasso.Picasso;
 
 import javax.inject.Named;
@@ -42,7 +44,9 @@ public class ApplicationModule {
     }
 
     @Provides @NonNull @Singleton
-    public Picasso providePicasso(@NonNull QualityMattersApp qualityMattersApp) {
-        return Picasso.with(qualityMattersApp);
+    public Picasso providePicasso(@NonNull QualityMattersApp qualityMattersApp, @NonNull OkHttpClient okHttpClient) {
+        return new Picasso.Builder(qualityMattersApp)
+                .downloader(new OkHttpDownloader(okHttpClient))
+                .build();
     }
 }
