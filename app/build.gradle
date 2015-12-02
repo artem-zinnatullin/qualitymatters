@@ -3,6 +3,7 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'findbugs'
 apply plugin: 'pmd'
+apply from: '../code_quality_tools/jacoco.gradle'
 
 android {
     // See build.gradle in the root of the project
