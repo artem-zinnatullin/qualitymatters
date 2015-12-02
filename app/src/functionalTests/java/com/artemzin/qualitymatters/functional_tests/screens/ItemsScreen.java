@@ -11,6 +11,7 @@ import static android.support.test.espresso.contrib.RecyclerViewActions.actionOn
 import static android.support.test.espresso.matcher.ViewMatchers.hasDescendant;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
+import static android.support.test.espresso.matcher.ViewMatchers.withParent;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 import static com.artemzin.qualitymatters.functional_tests.espresso.ViewActions.noOp;
 import static com.artemzin.qualitymatters.functional_tests.espresso.ViewAssertions.recyclerViewShouldHaveItemsCount;
@@ -18,6 +19,12 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
 
 public class ItemsScreen {
+
+    @NonNull
+    public ItemsScreen shouldDisplayTitle(@NonNull String title) {
+        onView(allOf(withText(title), withParent(withId(R.id.toolbar)))).check(matches(isDisplayed()));
+        return this;
+    }
 
     @NonNull
     public ItemsScreen shouldDisplayItemWithTitle(@NonNull String title) {
