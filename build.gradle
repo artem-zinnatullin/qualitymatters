@@ -107,12 +107,21 @@ subprojects {
         }
     }
 
+    apply plugin: 'pmd'
+
+    task pmd(type: Pmd) {
+        ignoreFailures = false // Fail early.
+        ruleSets = ['java-basic', 'java-braces', 'java-strings', 'java-design', 'java-unusedcode']
+
+        source = fileTree('src/main/java')
+    }
+
     plugins.apply('checkstyle')
 
     task checkstyle(type: Checkstyle) {
         configFile rootProject.file('code_quality_tools/checkstyle.xml')
 
-        ignoreFailures false
+        ignoreFailures false // Fail early.
         showViolations true
 
         source 'src'
@@ -122,7 +131,12 @@ subprojects {
     }
 
     afterEvaluate {
-        tasks.findByName('check').dependsOn('checkstyle')
+        tasks.findByName('pmd').dependsOn('assemble')
+
+        def checkTask = tasks.findByName('check')
+
+        checkTask.dependsOn('pmd')
+        checkTask.dependsOn('checkstyle')
 
         // Log instrumentation tests results.
         tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
