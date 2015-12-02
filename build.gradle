@@ -106,16 +106,32 @@ subprojects {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         }
     }
-}
 
-afterEvaluate {
-    // Log instrumentation tests results.
-    tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
-        task.doFirst {
-            logging.level = LogLevel.INFO
-        }
-        task.doLast {
-            logging.level = LogLevel.LIFECYCLE
+    plugins.apply('checkstyle')
+
+    task checkstyle(type: Checkstyle) {
+        configFile rootProject.file('code_quality_tools/checkstyle.xml')
+
+        ignoreFailures false
+        showViolations true
+
+        source 'src'
+        include '**/*.java'
+
+        classpath = files()
+    }
+
+    afterEvaluate {
+        tasks.findByName('check').dependsOn('checkstyle')
+
+        // Log instrumentation tests results.
+        tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
+            task.doFirst {
+                logging.level = LogLevel.INFO
+            }
+            task.doLast {
+                logging.level = LogLevel.LIFECYCLE
+            }
         }
     }
 }

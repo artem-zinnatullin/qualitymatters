@@ -2,7 +2,6 @@ package com.artemzin.qualitymatters;
 
 import android.support.annotation.NonNull;
 
-import org.junit.runners.model.InitializationError;
 import org.robolectric.RobolectricGradleTestRunner;
 import org.robolectric.RuntimeEnvironment;
 import org.robolectric.annotation.Config;
@@ -15,7 +14,7 @@ public class QualityMattersRobolectricTestRunner extends RobolectricGradleTestRu
     // This value should be changed as soon as Robolectric will support newer api.
     private static final int SDK_EMULATE_LEVEL = 21;
 
-    public QualityMattersRobolectricTestRunner(@NonNull Class<?> klass) throws InitializationError {
+    public QualityMattersRobolectricTestRunner(@NonNull Class<?> klass) throws Exception {
         super(klass);
     }
 

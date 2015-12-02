@@ -1,0 +1,41 @@
+<?xml version="1.0"?><!DOCTYPE module PUBLIC
+    "-//Puppy Crawl//DTD Check Configuration 1.2//EN"
+    "http://www.puppycrawl.com/dtds/configuration_1_2.dtd">
+<module name="Checker">
+    <module name="FileTabCharacter" />
+    <module name="TreeWalker">
+        <module name="ConstantName" />
+        <module name="LocalFinalVariableName" />
+        <module name="LocalVariableName" />
+        <module name="MemberName" />
+        <module name="PackageName" />
+        <module name="ParameterName" />
+        <module name="AvoidStarImport" />
+        <module name="IllegalImport" />
+        <module name="RedundantImport" />
+        <module name="UnusedImports" />
+        <module name="LineLength">
+            <property name="max" value="180" />
+        </module>
+        <module name="MethodLength" />
+        <module name="GenericWhitespace" />
+        <module name="EmptyForIteratorPad" />
+        <module name="MethodParamPad" />
+        <module name="NoWhitespaceAfter" />
+        <module name="NoWhitespaceBefore" />
+        <module name="ParenPad" />
+        <module name="TypecastParenPad" />
+        <module name="WhitespaceAfter" />
+        <module name="RedundantModifier" />
+        <module name="LeftCurly" />
+        <module name="RightCurly" />
+        <module name="CovariantEquals" />
+        <module name="EmptyStatement" />
+        <module name="EqualsHashCode" />
+        <module name="IllegalInstantiation" />
+        <module name="RedundantThrows" />
+        <module name="HideUtilityClassConstructor" />
+        <module name="InterfaceIsType" />
+        <module name="ArrayTypeStyle" />
+    </module>
+</module>
