@@ -81,6 +81,7 @@ ext.libraries = [
 
         butterKnife             : 'com.jakewharton:butterknife:7.0.1',
         picasso                 : 'com.squareup.picasso:picasso:2.5.2',
+        timber                  : 'com.jakewharton.timber:timber:4.1.0',
 
         // Developer Tools
         stetho                  : 'com.facebook.stetho:stetho:' + stethoVersion,

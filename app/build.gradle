@@ -114,6 +114,7 @@ dependencies {
 
     compile libraries.butterKnife
     compile libraries.picasso
+    compile libraries.timber
 
     // Developer tools (Developer Settings)
     debugCompile libraries.stetho
