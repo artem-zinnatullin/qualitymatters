@@ -107,13 +107,29 @@ subprojects {
         }
     }
 
-    apply plugin: 'pmd'
+    plugins.apply('pmd')
 
     task pmd(type: Pmd) {
         ignoreFailures = false // Fail early.
         ruleSets = ['java-basic', 'java-braces', 'java-strings', 'java-design', 'java-unusedcode']
 
         source = fileTree('src/main/java')
+    }
+
+    plugins.apply('findbugs')
+
+    task findbugs(type: FindBugs) {
+        ignoreFailures = false // Fail early.
+        effort = 'max'
+        reportLevel = 'low' // Report even low priority problems.
+
+        classes = files("${project.projectDir}/build/intermediates/classes")
+        source = fileTree('src/main/java')
+
+        // If somebody has an idea how to make this work with support libraries -> open a PR please.
+        classpath = files()
+
+        excludeFilter = rootProject.file('code_quality_tools/findbugs-filter.xml')
     }
 
     plugins.apply('checkstyle')
@@ -132,10 +148,12 @@ subprojects {
 
     afterEvaluate {
         tasks.findByName('pmd').dependsOn('assemble')
+        tasks.findByName('findbugs').dependsOn('assemble')
 
         def checkTask = tasks.findByName('check')
 
         checkTask.dependsOn('pmd')
+        checkTask.dependsOn('findbugs')
         checkTask.dependsOn('checkstyle')
 
         // Log instrumentation tests results.

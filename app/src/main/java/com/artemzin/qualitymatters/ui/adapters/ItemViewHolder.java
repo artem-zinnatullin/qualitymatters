@@ -10,27 +10,23 @@ import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.squareup.picasso.Picasso;
 
-import butterknife.Bind;
-import butterknife.ButterKnife;
-
 class ItemViewHolder extends RecyclerView.ViewHolder {
 
     @NonNull
     private final Picasso picasso;
 
-    @Bind(R.id.list_item_image_view)
-    ImageView imageView;
+    private final ImageView imageView;
 
-    @Bind(R.id.list_item_title_text_view)
-    TextView titleTextView;
+    private final TextView titleTextView;
 
-    @Bind(R.id.list_item_short_description_text_view)
-    TextView shortDescriptionTextView;
+    private final TextView shortDescriptionTextView;
 
     public ItemViewHolder(@NonNull View itemView, @NonNull Picasso picasso) {
         super(itemView);
         this.picasso = picasso;
-        ButterKnife.bind(this, itemView);
+        imageView = (ImageView) itemView.findViewById(R.id.list_item_image_view);
+        titleTextView = (TextView) itemView.findViewById(R.id.list_item_title_text_view);
+        shortDescriptionTextView = (TextView) itemView.findViewById(R.id.list_item_short_description_text_view);
     }
 
     public void bind(@NonNull Item item) {
