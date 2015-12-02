@@ -10,6 +10,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import timber.log.Timber;
 
 import static com.squareup.okhttp.logging.HttpLoggingInterceptor.Level.BODY;
 import static com.squareup.okhttp.logging.HttpLoggingInterceptor.Level.NONE;
@@ -26,7 +27,7 @@ public class NetworkModule {
 
     @Provides @NonNull @Singleton
     public HttpLoggingInterceptor provideHttpLoggingInterceptor() {
-        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor();
+        HttpLoggingInterceptor httpLoggingInterceptor = new HttpLoggingInterceptor(message -> Timber.d(message));
         httpLoggingInterceptor.setLevel(BuildConfig.DEBUG ? BODY : NONE);
         return httpLoggingInterceptor;
     }

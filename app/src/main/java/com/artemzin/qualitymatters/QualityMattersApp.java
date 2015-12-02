@@ -10,6 +10,7 @@ import com.artemzin.qualitymatters.developer_settings.DeveloperSettingModel;
 import javax.inject.Inject;
 
 import dagger.Lazy;
+import timber.log.Timber;
 
 public class QualityMattersApp extends Application {
 
@@ -30,6 +31,8 @@ public class QualityMattersApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        // Since this is app for developers we can log even in release build.
+        Timber.plant(new Timber.DebugTree());
 
         applicationComponent = DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))

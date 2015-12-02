@@ -2,7 +2,6 @@ package com.artemzin.qualitymatters.developer_settings;
 
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
-import android.util.Log;
 
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.codemonkeylabs.fpslibrary.TinyDancer;
@@ -11,6 +10,8 @@ import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+
+import timber.log.Timber;
 
 import static android.view.Gravity.START;
 import static android.view.Gravity.TOP;
@@ -107,8 +108,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
                 TinyDancer.hide(qualityMattersApp);
             } catch (Exception e) {
                 // In some cases TinyDancer can not be hidden without exception: for example when you start it first time on Android 6.
-                // TODO LOG via logger
-                Log.e(DeveloperSettingsModelImpl.class.getSimpleName(), "Can not hide TinyDancer", e);
+                Timber.e(e, "Can not hide TinyDancer");
             }
         }
     }
