@@ -6,8 +6,8 @@ What does it have:
 
 * CI (Travis)
 * Unit tests (some under Robolectric, some are under plain JUnit runner with mocked `android.jar`).
-* Integration tests to see that Http, REST, JSON parsing and RxJava work good in composition.
-* Functional (UI) tests (Espresso with custom rules, mocked server and Screen-architecure) to check that app works according to the expectations.
+* Integration tests to see that Http, REST, JSON parsing and RxJava work well in composition.
+* Functional (UI) tests (Espresso with custom rules, mocked server and Screen-architecture) to check that app works according to the expectations.
 * Static code analysis (FindBugs, PMD, Android Lint, Checkstyle) (see root `build.gradle`).
 * Code coverage (currently in process of fighting with jacoco-coverage plugin to fail the build if coverage is not big enough).
 * Developer Settings Menu where you can enable/disable [Stetho](http://facebook.github.io/stetho/), [LeakCanary](https://github.com/square/leakcanary), etc. See full list below (feel free to add more tools!).
@@ -24,8 +24,17 @@ Screenshots:
 
 <img src="/site/screenshot1.png" width="400"> <img src="/site/screenshot2.png" width="400">
 
-####Developer Settings
+###Developer Settings
+
+**Tools:**
 
 * [Stetho](http://facebook.github.io/stetho/) — inspect the app via Chromium Developer Tools (network requests, db, preferences and so on). Must have for developers.
 * [LeakCanary](https://github.com/square/leakcanary) — detect memory leaks without IDE! Must have for QAs and developers.
 * [TinyDancer](https://github.com/brianPlummer/TinyDancer) — see frame rate right on your screen. Must have for QAs and developers.
+
+**Details of implementation**
+
+Developer Settings presented only in `debug` build type, libraries and resources used for Developer Settings compiled only into `debug` build and main source set knows only little abstractions over Developer Settings just to initialize real implementation in the `debug` build code. In release build type `DeveloperSettingsModule` (Dagger) just returns `no-op` implementation of `DeveloperSettingsModel`.
+
+**Why only debug builds?**
+Answer is simple — dex limit. LeakCanary brings about 3k of methods, Stetho brings about 2k and so on. The more tools you add to Developer Settings — the bigger apk you receive. Situation is even worse if your main code is near to 65k methods. In our production app we had to turn on `multidex` for `debug` builds.
