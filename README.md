@@ -10,7 +10,7 @@ What does it have:
 * Functional (UI) tests (Espresso with custom rules, mocked server and Screen-architecure) to check that app works according to the expectations.
 * Static code analysis (FindBugs, PMD, Android Lint, Checkstyle) (see root `build.gradle`).
 * Code coverage (currently in process of fighting with jacoco-coverage plugin to fail the build if coverage is not big enough).
-* Developer Settings Menu where you can enable/disable Stetho, LeakCanary (feel free to add more tools!).
+* Developer Settings Menu where you can enable/disable [Stetho](http://facebook.github.io/stetho/), [LeakCanary](https://github.com/square/leakcanary), etc. See full list below (feel free to add more tools!).
 * MVP, RxJava, Dagger 2, Retrofit 2 and so on.
 
 You can download apk from the [releases page](https://github.com/artem-zinnatullin/qualitymatters/releases).
@@ -24,3 +24,8 @@ Screenshots:
 
 <img src="/site/screenshot1.png" width="400"> <img src="/site/screenshot2.png" width="400">
 
+####Developer Settings
+
+* [Stetho](http://facebook.github.io/stetho/) — inspect the app via Chromium Developer Tools (network requests, db, preferences and so on). Must have for developers.
+* [LeakCanary](https://github.com/square/leakcanary) — detect memory leaks without IDE! Must have for QAs and developers.
+* [TinyDancer](https://github.com/brianPlummer/TinyDancer) — see frame rate right on your screen. Must have for QAs and developers.
