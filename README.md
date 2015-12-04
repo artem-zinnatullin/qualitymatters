@@ -7,7 +7,7 @@ What does it have:
 * CI (Travis)
 * Unit tests (some under Robolectric, some are under plain JUnit runner with mocked `android.jar`).
 * Integration tests to see that Http, REST, JSON parsing and RxJava work well in composition.
-* Functional (UI) tests (Espresso with custom rules, mocked server and Screen-architecture) to check that app works according to the expectations.
+* Functional (UI) tests (Espresso with custom rules, mocked server and Screen-architecture) to check that app works according to the expectations from the user's point of view.
 * Static code analysis (FindBugs, PMD, Android Lint, Checkstyle) (see root `build.gradle`).
 * Code coverage (currently in process of fighting with jacoco-coverage plugin to fail the build if coverage is not big enough).
 * Developer Settings Menu where you can enable/disable [Stetho](http://facebook.github.io/stetho/), [LeakCanary](https://github.com/square/leakcanary), etc. See full list below (feel free to add more tools!).
@@ -37,4 +37,10 @@ Screenshots:
 Developer Settings presented only in `debug` build type, libraries and resources used for Developer Settings compiled only into `debug` build and main source set knows only little abstractions over Developer Settings just to initialize real implementation in the `debug` build code. In release build type `DeveloperSettingsModule` (Dagger) just returns `no-op` implementation of `DeveloperSettingsModel`.
 
 **Why only debug builds?**
-Answer is simple — dex limit. LeakCanary brings about 3k of methods, Stetho brings about 2k and so on. The more tools you add to Developer Settings — the bigger apk you receive. Situation is even worse if your main code is near to 65k methods. In our production app we had to turn on `multidex` for `debug` builds.
+The Answer is simple — dex limit. LeakCanary brings about 3k of methods, Stetho brings about 2k and so on. The more tools you add to Developer Settings — the bigger apk you receive. Situation is even worse if your main code is near to 65k methods. In our production app we had to turn on `multidex` for `debug` builds.
+
+###Packages structure
+
+Many people ask why app has component-based structure of the packages: `presenters`, `models`, etc. instead of feature-based structure: `itemslist`, `developersettings`, etc.
+
+Feel free to use once that works for you. Personally I like component-based one because new persons on the project (like those who read the code of this app) can easily find what `presenters` does the app have, what `views`, `models` and so on. If you read the code and you want to quickly move to some class related to current one you can [simply press `t` right on the GitHub and search](https://github.com/blog/793-introducing-the-file-finder) for the required file!
