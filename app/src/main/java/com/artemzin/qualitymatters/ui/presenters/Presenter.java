@@ -45,6 +45,7 @@ public class Presenter<V> {
     }
 
     @CallSuper
+    @SuppressWarnings("PMD.CompareObjectsWithEquals")
     public void unbindView(@NonNull V view) {
         final V previousView = this.view;
 
