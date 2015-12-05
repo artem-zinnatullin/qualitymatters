@@ -42,26 +42,6 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class ItemsFragment extends BaseFragment implements ItemsView {
-
-    @Subcomponent(modules = ItemsFragmentModule.class)
-    public interface ItemsFragmentComponent {
-        void inject(@NonNull ItemsFragment itemsFragment);
-    }
-
-    @Module
-    public static class ItemsFragmentModule {
-
-        @Provides
-        @NonNull
-        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel, @NonNull AsyncJobsObserver asyncJobsObserver) {
-            return new ItemsPresenter(
-                    ItemsPresenterConfiguration.builder().ioScheduler(Schedulers.io()).build(),
-                    itemsModel,
-                    asyncJobsObserver
-            );
-        }
-    }
-
     @Bind(R.id.items_loading_ui)
     View loadingUiView;
 
@@ -152,5 +132,24 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     public void onDestroyView() {
         itemsPresenter.unbindView(this);
         super.onDestroyView();
+    }
+
+    @Subcomponent(modules = ItemsFragmentModule.class)
+    public interface ItemsFragmentComponent {
+        void inject(@NonNull ItemsFragment itemsFragment);
+    }
+
+    @Module
+    public static class ItemsFragmentModule {
+
+        @Provides
+        @NonNull
+        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel, @NonNull AsyncJobsObserver asyncJobsObserver) {
+            return new ItemsPresenter(
+                    ItemsPresenterConfiguration.builder().ioScheduler(Schedulers.io()).build(),
+                    itemsModel,
+                    asyncJobsObserver
+            );
+        }
     }
 }

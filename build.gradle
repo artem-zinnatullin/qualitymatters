@@ -112,6 +112,10 @@ subprojects {
 
     plugins.apply('pmd')
 
+    pmd {
+        toolVersion = '5.4.0'
+    }
+
     task pmd(type: Pmd) {
         ignoreFailures = false // Fail early.
         ruleSets = ['java-basic', 'java-braces', 'java-strings', 'java-design', 'java-unusedcode']
