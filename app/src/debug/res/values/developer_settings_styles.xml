@@ -4,6 +4,7 @@
     <style name="DeveloperSettingsCategoryTitle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textColor">#eeeeee</item>
     </style>

@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class DeveloperSettingsModelImplTest {
                 mock(QualityMattersApp.class),
                 developerSettings,
                 mock(OkHttpClient.class),
+                new HttpLoggingInterceptor(),
                 mock(LeakCanaryProxy.class)
         );
     }
@@ -67,4 +69,16 @@ public class DeveloperSettingsModelImplTest {
         assertThat(developerSettingsModel.isTinyDancerEnabled()).isFalse();
         verify(developerSettings, times(2)).isTinyDancerEnabled();
     }
+
+    @Test
+    public void getHttpLoggingInterceptor_shouldReturnValueFromDeveloperSettings() {
+        for (HttpLoggingInterceptor.Level loggingLevel : HttpLoggingInterceptor.Level.values()) {
+            when(developerSettings.getHttpLoggingLevel()).thenReturn(loggingLevel);
+            assertThat(developerSettingsModel.getHttpLoggingLevel()).isEqualTo(loggingLevel);
+        }
+    }
+
+    // To test apply() method we will need a lof of abstractions over the libraries used
+    // for Developer Settings, because most of them initialized statically and hardly mockable/verifiable :(
+    // So, sorry, no tests for apply(). But, feel free to PR!
 }
