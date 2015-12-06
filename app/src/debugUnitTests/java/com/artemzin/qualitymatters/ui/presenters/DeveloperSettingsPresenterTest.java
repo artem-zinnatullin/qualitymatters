@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModelImpl;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -88,6 +89,21 @@ public class DeveloperSettingsPresenterTest {
         developerSettingsPresenter.bindView(developerSettingsView);
         verify(developerSettingsView).changeTinyDancerState(false);
         verify(developerSettingsModel).isTinyDancerEnabled();
+    }
+
+    @Test
+    public void bindView_shouldSendHttpLoggingLevelToTheView() {
+        for (HttpLoggingInterceptor.Level loggingLevel : HttpLoggingInterceptor.Level.values()) {
+            when(developerSettingsModel.getHttpLoggingLevel()).thenReturn(loggingLevel);
+
+            developerSettingsPresenter.bindView(developerSettingsView);
+            verify(developerSettingsView).changeHttpLoggingLevel(loggingLevel);
+            verify(developerSettingsModel).getHttpLoggingLevel();
+
+            developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
+            developerSettingsView = mock(DeveloperSettingsView.class);
+            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+        }
     }
 
     @Test
@@ -237,5 +253,20 @@ public class DeveloperSettingsPresenterTest {
         verify(developerSettingsModel).changeTinyDancerState(false);
         verify(developerSettingsView).showMessage("TinyDancer was disabled");
         verify(developerSettingsView, never()).showAppNeedsToBeRestarted();
+    }
+
+    @Test
+    public void changeHttpLoggingLevel_shouldChangeLevelAndNotifyView() {
+        for (HttpLoggingInterceptor.Level loggingLevel : HttpLoggingInterceptor.Level.values()) {
+            developerSettingsPresenter.bindView(developerSettingsView);
+
+            developerSettingsPresenter.changeHttpLoggingLevel(loggingLevel);
+            verify(developerSettingsModel).changeHttpLoggingLevel(loggingLevel);
+            verify(developerSettingsView).showMessage("Http logging level was changed to " + loggingLevel.toString());
+
+            developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
+            developerSettingsView = mock(DeveloperSettingsView.class);
+            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+        }
     }
 }

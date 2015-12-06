@@ -6,6 +6,7 @@ import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -55,8 +56,9 @@ public class DeveloperSettingsModule {
     public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
                                                                         @NonNull DeveloperSettings developerSettings,
                                                                         @NonNull OkHttpClient okHttpClient,
+                                                                        @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                                                         @NonNull LeakCanaryProxy leakCanaryProxy) {
-        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient, leakCanaryProxy);
+        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient, httpLoggingInterceptor, leakCanaryProxy);
     }
 
     @Provides

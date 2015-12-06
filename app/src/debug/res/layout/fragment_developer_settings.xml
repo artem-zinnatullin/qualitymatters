@@ -25,7 +25,6 @@
 
         <TextView
             style="@style/DeveloperSettingsCategoryTitle"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
             android:text="Inspection tools"
             tools:ignore="HardcodedText" />
 
@@ -67,6 +66,27 @@
             <Switch
                 android:id="@+id/developer_settings_tiny_dancer_switch"
                 style="@style/DeveloperSettingsToolSwitch" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/DeveloperSettingsCategoryTitle"
+            android:text="Logging"
+            tools:ignore="HardcodedText" />
+
+        <View style="@style/DeveloperSettingsCategoryDivider" />
+
+        <LinearLayout style="@style/DeveloperSettingsToolContainer">
+
+            <TextView
+                style="@style/DeveloperSettingsToolTitle"
+                android:text="Http logging level"
+                tools:ignore="HardcodedText" />
+
+            <android.support.v7.widget.AppCompatSpinner
+                android:id="@+id/developer_settings_http_logging_level_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
 
         </LinearLayout>
 

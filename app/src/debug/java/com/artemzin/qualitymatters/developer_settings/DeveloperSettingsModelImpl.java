@@ -8,6 +8,7 @@ import com.codemonkeylabs.fpslibrary.TinyDancer;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp.StethoInterceptor;
 import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -28,6 +29,9 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
     private final OkHttpClient okHttpClient;
 
     @NonNull
+    private final HttpLoggingInterceptor httpLoggingInterceptor;
+
+    @NonNull
     private final LeakCanaryProxy leakCanaryProxy;
 
     @NonNull
@@ -42,10 +46,12 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
     public DeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
                                       @NonNull DeveloperSettings developerSettings,
                                       @NonNull OkHttpClient okHttpClient,
+                                      @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                       @NonNull LeakCanaryProxy leakCanaryProxy) {
         this.qualityMattersApp = qualityMattersApp;
         this.developerSettings = developerSettings;
         this.okHttpClient = okHttpClient;
+        this.httpLoggingInterceptor = httpLoggingInterceptor;
         this.leakCanaryProxy = leakCanaryProxy;
     }
 
@@ -73,6 +79,16 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
 
     public void changeTinyDancerState(boolean enabled) {
         developerSettings.saveIsTinyDancerEnabled(enabled);
+        apply();
+    }
+
+    @NonNull
+    public HttpLoggingInterceptor.Level getHttpLoggingLevel() {
+        return developerSettings.getHttpLoggingLevel();
+    }
+
+    public void changeHttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
+        developerSettings.saveHttpLoggingLevel(loggingLevel);
         apply();
     }
 
@@ -111,5 +127,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
                 Timber.e(e, "Can not hide TinyDancer");
             }
         }
+
+        httpLoggingInterceptor.setLevel(developerSettings.getHttpLoggingLevel());
     }
 }

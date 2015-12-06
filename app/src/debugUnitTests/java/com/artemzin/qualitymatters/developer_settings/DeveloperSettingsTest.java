@@ -3,6 +3,7 @@ package com.artemzin.qualitymatters.developer_settings;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -64,5 +65,18 @@ public class DeveloperSettingsTest {
 
         developerSettings.saveIsTinyDancerEnabled(false);
         assertThat(developerSettings.isTinyDancerEnabled()).isFalse();
+    }
+
+    @Test
+    public void getHttpLoggingLevel_shouldReturnBaseByDefault() {
+        assertThat(developerSettings.getHttpLoggingLevel()).isEqualTo(HttpLoggingInterceptor.Level.BASIC);
+    }
+
+    @Test
+    public void saveHttpLoggingLevel_getHttpLoggingLevel() {
+        for (HttpLoggingInterceptor.Level loggingLevel : HttpLoggingInterceptor.Level.values()) {
+            developerSettings.saveHttpLoggingLevel(loggingLevel);
+            assertThat(developerSettings.getHttpLoggingLevel()).isEqualTo(loggingLevel);
+        }
     }
 }

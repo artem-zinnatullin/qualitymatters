@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModelImpl;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView> {
 
@@ -20,6 +21,7 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
         view.changeStethoState(developerSettingsModel.isStethoEnabled());
         view.changeLeakCanaryState(developerSettingsModel.isLeakCanaryEnabled());
         view.changeTinyDancerState(developerSettingsModel.isTinyDancerEnabled());
+        view.changeHttpLoggingLevel(developerSettingsModel.getHttpLoggingLevel());
     }
 
     public void changeStethoState(boolean enabled) {
@@ -68,6 +70,20 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
 
         if (view != null) {
             view.showMessage("TinyDancer was " + booleanToEnabledDisabled(enabled));
+        }
+    }
+
+    public void changeHttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
+        if (developerSettingsModel.getHttpLoggingLevel() == loggingLevel) {
+            return; // no-op
+        }
+
+        developerSettingsModel.changeHttpLoggingLevel(loggingLevel);
+
+        final DeveloperSettingsView view = view();
+
+        if (view != null) {
+            view.showMessage("Http logging level was changed to " + loggingLevel.toString());
         }
     }
 

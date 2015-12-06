@@ -7,20 +7,27 @@ import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.Toast;
 
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.performance.AnyThread;
+import com.artemzin.qualitymatters.ui.adapters.DeveloperSettingsSpinnerAdapter;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
+import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.inject.Inject;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.OnItemSelected;
 
 public class DeveloperSettingsFragment extends BaseFragment implements DeveloperSettingsView {
 
@@ -35,6 +42,9 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
 
     @Bind(R.id.developer_settings_tiny_dancer_switch)
     Switch tinyDancerSwitch;
+
+    @Bind(R.id.developer_settings_http_logging_level_spinner)
+    Spinner httpLoggingLevelSpinner;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,6 +62,11 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
+
+        httpLoggingLevelSpinner
+                .setAdapter(new DeveloperSettingsSpinnerAdapter<>(getActivity().getLayoutInflater())
+                .setSelectionOptions(HttpLoggingLevel.allValues()));
+
         presenter.bindView(this);
     }
 
@@ -63,6 +78,11 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @OnCheckedChanged(R.id.developer_settings_tiny_dancer_switch)
     void onTinyDancerSwitchCheckedChanged(boolean checked) {
         presenter.changeTinyDancerState(checked);
+    }
+
+    @OnItemSelected(R.id.developer_settings_http_logging_level_spinner)
+    void onHttpLoggingLevelChanged(int position) {
+        presenter.changeHttpLoggingLevel(((HttpLoggingLevel) httpLoggingLevelSpinner.getItemAtPosition(position)).loggingLevel);
     }
 
     @Override
@@ -92,6 +112,23 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         });
     }
 
+    @Override
+    @AnyThread
+    public void changeHttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
+        runOnUiThreadIfFragmentAlive(() -> {
+            assert httpLoggingLevelSpinner != null;
+
+            for (int position = 0, count = httpLoggingLevelSpinner.getCount(); position < count; position++) {
+                if (loggingLevel == ((HttpLoggingLevel) httpLoggingLevelSpinner.getItemAtPosition(position)).loggingLevel) {
+                    httpLoggingLevelSpinner.setSelection(position);
+                    return;
+                }
+            }
+
+            throw new IllegalStateException("Unknown loggingLevel, looks like a serious bug. Passed loggingLevel = " + loggingLevel);
+        });
+    }
+
     @SuppressLint("ShowToast") // Yeah, Lambdas and Lint are not good friends…
     @Override
     @AnyThread
@@ -115,5 +152,31 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     public void onDestroyView() {
         presenter.unbindView(this);
         super.onDestroyView();
+    }
+
+    private static class HttpLoggingLevel implements DeveloperSettingsSpinnerAdapter.SelectionOption {
+
+        @NonNull
+        public final HttpLoggingInterceptor.Level loggingLevel;
+
+        public HttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
+            this.loggingLevel = loggingLevel;
+        }
+
+        @NonNull
+        @Override
+        public String title() {
+            return loggingLevel.toString();
+        }
+
+        @NonNull
+        static List<HttpLoggingLevel> allValues() {
+            final HttpLoggingInterceptor.Level[] loggingLevels = HttpLoggingInterceptor.Level.values();
+            final List<HttpLoggingLevel> values = new ArrayList<>(loggingLevels.length);
+            for (HttpLoggingInterceptor.Level loggingLevel : loggingLevels) {
+                values.add(new HttpLoggingLevel(loggingLevel));
+            }
+            return values;
+        }
     }
 }
