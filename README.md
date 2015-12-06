@@ -13,8 +13,6 @@ What does it have:
 * Developer Settings Menu where you can enable/disable [Stetho](http://facebook.github.io/stetho/), [LeakCanary](https://github.com/square/leakcanary), etc. See full list below (feel free to add more tools!).
 * MVP, RxJava, Dagger 2, Retrofit 2 and so on.
 
-You can download apk from the [releases page](https://github.com/artem-zinnatullin/qualitymatters/releases).
-
 ---
 >Made with ❤️ by Artem Zinnatullin [https://twitter.com/artem_zin](https://twitter.com/artem_zin).
 
@@ -43,4 +41,4 @@ The Answer is simple — dex limit. LeakCanary brings about 3k of methods, Steth
 
 Many people ask why app has component-based structure of the packages: `presenters`, `models`, etc. instead of feature-based structure: `itemslist`, `developersettings`, etc.
 
-Feel free to use once that works for you. Personally I like component-based one because new persons on the project (like those who read the code of this app) can easily find what `presenters` does the app have, what `views`, `models` and so on. If you read the code and you want to quickly move to some class related to current one you can [simply press `t` right on the GitHub and search](https://github.com/blog/793-introducing-the-file-finder) for the required file!
+With component-based structure of packages new persons on the project (like those who read the code of this app) can easily find what `presenters` does the app have, what `views`, `models` and so on. If you read the code and you want to quickly move to some class related to current one you can [simply press `t` right on the GitHub and search](https://github.com/blog/793-introducing-the-file-finder) for the required file!
