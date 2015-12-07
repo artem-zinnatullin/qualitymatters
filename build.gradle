@@ -118,7 +118,8 @@ subprojects {
 
     task pmd(type: Pmd) {
         ignoreFailures = false // Fail early.
-        ruleSets = ['java-basic', 'java-braces', 'java-strings', 'java-design', 'java-unusedcode']
+        ruleSetFiles = project.files(rootProject.file("code_quality_tools/ruleset.xml"))
+        ruleSets = []
 
         source = fileTree('src/main/java')
     }
