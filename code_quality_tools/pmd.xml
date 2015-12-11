@@ -13,6 +13,7 @@
         <exclude name="TooManyStaticImports"/>
     </rule>
     <rule ref="rulesets/java/unusedcode.xml"/>
+    <rule ref="rulesets/java/junit.xml"/>
     <rule ref="rulesets/java/logging-java.xml"/>
     <rule ref="rulesets/java/braces.xml"/>
     <rule ref="rulesets/java/strings.xml"/>
