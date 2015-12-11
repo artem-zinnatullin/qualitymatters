@@ -18,5 +18,6 @@
     <rule ref="rulesets/java/strings.xml"/>
     <rule ref="rulesets/java/basic.xml"/>
     <rule ref="rulesets/java/design.xml"/>
+    <rule ref="rulesets/java/typeresolution.xml"/>
 
 </ruleset>
