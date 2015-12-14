@@ -15,9 +15,11 @@ import static org.mockito.Mockito.verify;
 
 public class PresenterTest {
 
+    @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
     private Presenter<Object> presenter;
 
+    @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
     private Object view;
 
