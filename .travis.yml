@@ -24,7 +24,7 @@ script:
   - sh ci.sh
 
 notifications:
-  email: false
+  email: true
 
 cache:
   directories:
