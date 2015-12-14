@@ -98,7 +98,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
         if (stethoAlreadyEnabled.compareAndSet(false, true)) {
             if (isStethoEnabled()) {
                 Stetho.initializeWithDefaults(qualityMattersApp);
-                okHttpClient.interceptors().add(new StethoInterceptor());
+                okHttpClient.networkInterceptors().add(new StethoInterceptor());
             }
         }
 
