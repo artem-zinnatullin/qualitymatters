@@ -116,7 +116,7 @@ ext.libraries = [
         okHttpMockWebServer     : "com.squareup.okhttp:mockwebserver:$versions.okHttp",
         mockitoCore             : "org.mockito:mockito-core:$versions.mockito",
         supportTestRunner       : "com.android.support.test:runner:$versions.supportTestRunner",
-        supportTestRules        : 'com.android.support.test:rules:$versions.supportTestRunner',
+        supportTestRules        : "com.android.support.test:rules:$versions.supportTestRunner",
         espressoCore            : "com.android.support.test.espresso:espresso-core:$versions.espresso",
         espressoContrib         : "com.android.support.test.espresso:espresso-contrib:$versions.espresso",
 ]
