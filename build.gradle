@@ -56,7 +56,7 @@ ext.versions = [
         javaxAnnotationApi: '1.2',
         rxJava            : '1.1.0',
         supportLibs       : '23.1.1',
-        okHttp            : '2.6.0',
+        okHttp            : '2.7.0',
         retrofit          : '2.0.0-beta2',
         jackson           : '2.6.3',
         autoValue         : '1.1',
