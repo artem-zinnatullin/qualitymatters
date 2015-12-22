@@ -18,6 +18,11 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
     @Override
     public void bindView(@NonNull DeveloperSettingsView view) {
         super.bindView(view);
+
+        view.changeGitSha(developerSettingsModel.getGitSha());
+        view.changeBuildDate(developerSettingsModel.getBuildDate());
+        view.changeBuildVersionCode(developerSettingsModel.getBuildVersionCode());
+        view.changeBuildVersionName(developerSettingsModel.getBuildVersionName());
         view.changeStethoState(developerSettingsModel.isStethoEnabled());
         view.changeLeakCanaryState(developerSettingsModel.isLeakCanaryEnabled());
         view.changeTinyDancerState(developerSettingsModel.isTinyDancerEnabled());

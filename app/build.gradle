@@ -3,6 +3,20 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply from: '../code_quality_tools/jacoco.gradle'
 
+def getGitSha() {
+    return 'git rev-parse --short HEAD'.execute().text.trim()
+}
+
+def getBuildDateForDebugBuild() {
+    // To prevent frequent breaking of incremental compilation we don't put minutes and seconds in debug builds.
+    return new Date().format("dd-MM-yyyy HH:00:00 z", TimeZone.getTimeZone("UTC"))
+}
+
+def getBuildDateForReleaseBuild() {
+    return new Date().format("dd-MM-yyyy HH:mm:ss z", TimeZone.getTimeZone("UTC"))
+}
+
+
 android {
     // See build.gradle in the root of the project
     compileSdkVersion versions.compileSdk
@@ -14,6 +28,10 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.code
         versionName versions.name
+
+        // Notice that each change of git sha will require recompilation of the BuildConfig class (which can cause full assemble task run).
+        buildConfigField 'String', 'GIT_SHA', "\"${getGitSha()}\""
+
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
@@ -34,10 +52,13 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.qualityMatters
+            buildConfigField 'String', 'BUILD_DATE', "\"${getBuildDateForDebugBuild()}\""
         }
 
         release {
             signingConfig signingConfigs.qualityMatters
+            buildConfigField 'String', 'BUILD_DATE', "\"${getBuildDateForReleaseBuild()}\""
+
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
         }
