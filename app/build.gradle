@@ -26,7 +26,7 @@ android {
         applicationId 'com.artemzin.qualitymatters'
         minSdkVersion versions.minSdk
         targetSdkVersion versions.targetSdk
-        versionCode versions.code
+        versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
         versionName versions.name
 
         // Notice that each change of git sha will require recompilation of the BuildConfig class (which can cause full assemble task run).
