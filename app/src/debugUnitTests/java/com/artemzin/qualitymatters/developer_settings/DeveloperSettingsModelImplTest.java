@@ -38,6 +38,64 @@ public class DeveloperSettingsModelImplTest {
     }
 
     @Test
+    public void getGitSha_shouldNotBeNull() {
+        // We can not check real git commit sha here, so let's just check that it's not null.
+        assertThat(developerSettingsModel.getGitSha()).isNotNull();
+    }
+
+    @Test
+    public void getGitSha_shouldReturnSameResultForSeveralCalls() {
+        String sha1 = developerSettingsModel.getGitSha();
+        String sha2 = developerSettingsModel.getGitSha();
+        String sha3 = developerSettingsModel.getGitSha();
+
+        assertThat(sha1).isEqualTo(sha2).isEqualTo(sha3);
+    }
+
+    @Test
+    public void getBuildDate_shouldNotBeNull() {
+        // We can not check real build date here, so let's just check that it's not null.
+        assertThat(developerSettingsModel.getBuildDate()).isNotNull();
+    }
+
+    @Test
+    public void getBuildDate_shouldReturnSameResultForSeveralCalls() {
+        String buildDate1 = developerSettingsModel.getBuildDate();
+        String buildDate2 = developerSettingsModel.getBuildDate();
+        String buildDate3 = developerSettingsModel.getBuildDate();
+
+        assertThat(buildDate1).isEqualTo(buildDate2).isEqualTo(buildDate3);
+    }
+
+    @Test
+    public void getBuildVersionCode_shouldNotBeNull() {
+        assertThat(developerSettingsModel.getBuildVersionCode()).isNotNull();
+    }
+
+    @Test
+    public void getBuildVersionCode_shouldReturnSameResultForSeveralCalls() {
+        String buildVersionCode1 = developerSettingsModel.getBuildVersionCode();
+        String buildVersionCode2 = developerSettingsModel.getBuildVersionCode();
+        String buildVersionCode3 = developerSettingsModel.getBuildVersionCode();
+
+        assertThat(buildVersionCode1).isEqualTo(buildVersionCode2).isEqualTo(buildVersionCode3);
+    }
+
+    @Test
+    public void getBuildVersionName_shouldNotBeNull() {
+        assertThat(developerSettingsModel.getBuildVersionName()).isNotNull();
+    }
+
+    @Test
+    public void getBuildVersionName_shouldReturnSameResultForSeveralCalls() {
+        String buildVersionName1 = developerSettingsModel.getBuildVersionName();
+        String buildVersionName2 = developerSettingsModel.getBuildVersionName();
+        String buildVersionName3 = developerSettingsModel.getBuildVersionName();
+
+        assertThat(buildVersionName1).isEqualTo(buildVersionName2).isEqualTo(buildVersionName3);
+    }
+
+    @Test
     public void isStethoEnabled_shouldReturnValueFromDeveloperSettings() {
         when(developerSettings.isStethoEnabled()).thenReturn(true);
         assertThat(developerSettingsModel.isStethoEnabled()).isTrue();

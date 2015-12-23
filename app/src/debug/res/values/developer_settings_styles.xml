@@ -16,7 +16,7 @@
         <item name="android:layout_marginTop">2dp</item>
     </style>
 
-    <style name="DeveloperSettingsToolTitle">
+    <style name="DeveloperSettingsItemTitle">
         <item name="android:layout_weight">1</item>
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
@@ -24,15 +24,16 @@
         <item name="android:textColor">#dddddd</item>
     </style>
 
-    <style name="DeveloperSettingsToolContainer">
+    <style name="DeveloperSettingsItemContainer">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
         <item name="android:orientation">horizontal</item>
     </style>
 
-    <style name="DeveloperSettingsToolSwitch">
+    <style name="DeveloperSettingsItemControl">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">#dddddd</item>
     </style>
 </resources>

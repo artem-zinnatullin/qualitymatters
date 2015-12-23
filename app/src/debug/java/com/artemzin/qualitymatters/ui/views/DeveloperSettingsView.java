@@ -8,6 +8,18 @@ import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 public interface DeveloperSettingsView {
 
     @AnyThread
+    void changeGitSha(@NonNull String gitSha);
+
+    @AnyThread
+    void changeBuildDate(@NonNull String date);
+
+    @AnyThread
+    void changeBuildVersionCode(@NonNull String versionCode);
+
+    @AnyThread
+    void changeBuildVersionName(@NonNull String versionName);
+
+    @AnyThread
     void changeStethoState(boolean enabled);
 
     @AnyThread

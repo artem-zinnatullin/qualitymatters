@@ -3,6 +3,7 @@ package com.artemzin.qualitymatters.developer_settings;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 
+import com.artemzin.qualitymatters.BuildConfig;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.codemonkeylabs.fpslibrary.TinyDancer;
 import com.facebook.stetho.Stetho;
@@ -53,6 +54,26 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
         this.okHttpClient = okHttpClient;
         this.httpLoggingInterceptor = httpLoggingInterceptor;
         this.leakCanaryProxy = leakCanaryProxy;
+    }
+
+    @NonNull
+    public String getGitSha() {
+        return BuildConfig.GIT_SHA;
+    }
+
+    @NonNull
+    public String getBuildDate() {
+        return BuildConfig.BUILD_DATE;
+    }
+
+    @NonNull
+    public String getBuildVersionCode() {
+        return String.valueOf(BuildConfig.VERSION_CODE);
+    }
+
+    @NonNull
+    public String getBuildVersionName() {
+        return BuildConfig.VERSION_NAME;
     }
 
     public boolean isStethoEnabled() {
