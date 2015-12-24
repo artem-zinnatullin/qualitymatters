@@ -22,6 +22,39 @@ Screenshots:
 
 <img src="/site/screenshot1.png" width="400"> <img src="/site/screenshot2.png" width="400">
 
+###Tests
+
+####Unit tests
+
+App has unit tests and they live mostly in [`src/unitTests`](/app/src/unitTests/)., but app also has **debug** and **release** specific code, so there are also [`debugUnitTests`](/app/src/debugUnitTests/) and [`releaseUnitTests`](/app/src/releaseUnitTests/).
+
+Unit tests check classes/methods in isolation from others, all dependencies are mocked.
+
+>All unit tests run on the JVM, no emulator or device is required.
+Mostly, unit tests run with mocked `android.jar` (it's a builtin feature of Android Gradle Plugin) but some of tests need things like `Intent`, etc and such tests run under `Robolectric`.
+
+Also, you might notice that app has custom [`unit test runner`](/app/src/unitTests/java/com/artemzin/qualitymatters/QualityMattersRobolectricUnitTestRunner.java). It's required to override and mock some dependencies under Robolectric, like `Analytics`, who needs real `Analytics` in Unit tests?
+
+####Integration tests
+
+App has integration tests and they live in [`src/integrationTests`](/app/src/integrationTests/).
+
+Integration tests check composition of multiple classes, for example OkHttp + Retrofit + Jackson + RxJava == API level, mostly all classes are real and not mocked, but for instance, we mock web server in integration tests.
+
+>All integration tests run on the JVM under `Robolectric`.
+
+Also, you might notice that app has custom [`integration test runner`](/app/src/integrationTests/java/com/artemzin/qualitymatters/QualityMattersIntegrationRobolectricTestRunner.java). It's required to override and mock some dependencies, like `Analytics`, who needs real `Analytics` in integration tests?
+
+####Functional (UI) tests
+
+App has functional (UI) tests and they live in [`src/functionalTests`](/app/src/functionalTests/).
+
+Functional tests check how the product (Android app) works from the point of User's view, so basically, functional test of Android app check UI of the app and different use cases.
+
+>All functional tests run on connected emulator/device via Instrumentation API.
+
+Also, you might notice that app has custom [`functional test runner`](/app/src/functionalTests/java/com/artemzin/qualitymatters/functional_tests/QualityMattersFunctionalTestsRunner.java) (yep). It's required to override and change implementation of some dependencies, like `Analytics`, instead of posting tons of useless data to `Analytics` during functional tests we simply output it to the LogCat!
+
 ###Developer Settings
 
 **Tools:**

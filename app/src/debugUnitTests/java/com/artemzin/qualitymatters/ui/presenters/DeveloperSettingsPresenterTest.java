@@ -3,6 +3,7 @@ package com.artemzin.qualitymatters.ui.presenters;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModelImpl;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
@@ -33,7 +34,7 @@ public class DeveloperSettingsPresenterTest {
     @Before
     public void beforeEachTest() {
         developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
-        developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+        developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel, mock(AnalyticsModel.class));
         developerSettingsView = mock(DeveloperSettingsView.class);
     }
 
@@ -134,7 +135,7 @@ public class DeveloperSettingsPresenterTest {
 
             developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
             developerSettingsView = mock(DeveloperSettingsView.class);
-            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel, mock(AnalyticsModel.class));
         }
     }
 
@@ -298,7 +299,7 @@ public class DeveloperSettingsPresenterTest {
 
             developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
             developerSettingsView = mock(DeveloperSettingsView.class);
-            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel, mock(AnalyticsModel.class));
         }
     }
 }

@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.squareup.picasso.Picasso;
@@ -27,7 +27,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-@RunWith(QualityMattersRobolectricTestRunner.class)
+@RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class ItemsAdapterTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.

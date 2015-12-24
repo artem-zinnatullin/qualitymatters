@@ -9,12 +9,12 @@ import org.robolectric.annotation.Config;
 import java.lang.reflect.Method;
 
 // Custom runner allows us set config in one place instead of setting it in each test class.
-public class QualityMattersRobolectricTestRunner extends RobolectricGradleTestRunner {
+public class QualityMattersIntegrationRobolectricTestRunner extends RobolectricGradleTestRunner {
 
     // This value should be changed as soon as Robolectric will support newer api.
     private static final int SDK_EMULATE_LEVEL = 21;
 
-    public QualityMattersRobolectricTestRunner(@NonNull Class<?> klass) throws Exception {
+    public QualityMattersIntegrationRobolectricTestRunner(@NonNull Class<?> klass) throws Exception {
         super(klass);
     }
 
@@ -29,7 +29,7 @@ public class QualityMattersRobolectricTestRunner extends RobolectricGradleTestRu
                 defaultConfig.resourceDir(),
                 defaultConfig.assetDir(),
                 defaultConfig.shadows(),
-                defaultConfig.application(),
+                QualityMattersIntegrationTestApp.class,
                 defaultConfig.libraries(),
                 defaultConfig.constants() == Void.class ? BuildConfig.class : defaultConfig.constants()
         );

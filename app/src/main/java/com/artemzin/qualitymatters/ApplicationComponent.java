@@ -8,6 +8,7 @@ import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsComponent;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
 import com.artemzin.qualitymatters.developer_settings.LeakCanaryProxy;
+import com.artemzin.qualitymatters.models.ModelsModule;
 import com.artemzin.qualitymatters.network.NetworkModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
@@ -25,7 +26,8 @@ import dagger.Component;
         NetworkModule.class,
         ApiModule.class,
         AsyncJobsModule.class,
-        DeveloperSettingsModule.class
+        ModelsModule.class,
+        DeveloperSettingsModule.class,
 })
 public interface ApplicationComponent {
 

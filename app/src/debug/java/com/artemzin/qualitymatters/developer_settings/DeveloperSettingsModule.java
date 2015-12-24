@@ -3,6 +3,7 @@ package com.artemzin.qualitymatters.developer_settings;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.QualityMattersApp;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.squareup.okhttp.OkHttpClient;
@@ -63,7 +64,8 @@ public class DeveloperSettingsModule {
 
     @Provides
     @NonNull
-    public DeveloperSettingsPresenter provideDeveloperSettingsPresenter(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl) {
-        return new DeveloperSettingsPresenter(developerSettingsModelImpl);
+    public DeveloperSettingsPresenter provideDeveloperSettingsPresenter(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl,
+                                                                        @NonNull AnalyticsModel analyticsModel) {
+        return new DeveloperSettingsPresenter(developerSettingsModelImpl, analyticsModel);
     }
 }

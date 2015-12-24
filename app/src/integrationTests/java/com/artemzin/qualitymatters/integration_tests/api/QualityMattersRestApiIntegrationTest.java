@@ -2,7 +2,7 @@ package com.artemzin.qualitymatters.integration_tests.api;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.squareup.okhttp.mockwebserver.MockResponse;
@@ -30,7 +30,7 @@ import static org.assertj.core.api.Assertions.fail;
  * <li>Execution layer (ie RxJava)</li>
  * </ul>
  */
-@RunWith(QualityMattersRobolectricTestRunner.class)
+@RunWith(QualityMattersIntegrationRobolectricTestRunner.class)
 public class QualityMattersRestApiIntegrationTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
@@ -47,9 +47,9 @@ public class QualityMattersRestApiIntegrationTest {
         mockWebServer.start();
 
         // Change base url to the mocked
-        QualityMattersRobolectricTestRunner.qualityMattersApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
+        QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
 
-        qualityMattersRestApi = QualityMattersRobolectricTestRunner.qualityMattersApp().applicationComponent().qualityMattersApi();
+        qualityMattersRestApi = QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().qualityMattersApi();
     }
 
     @After

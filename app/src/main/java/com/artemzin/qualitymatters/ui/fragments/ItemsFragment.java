@@ -14,6 +14,7 @@ import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ItemsModel;
 import com.artemzin.qualitymatters.performance.AnyThread;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
@@ -144,11 +145,14 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
 
         @Provides
         @NonNull
-        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel, @NonNull AsyncJobsObserver asyncJobsObserver) {
+        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel,
+                                                    @NonNull AsyncJobsObserver asyncJobsObserver,
+                                                    @NonNull AnalyticsModel analyticsModel) {
             return new ItemsPresenter(
                     ItemsPresenterConfiguration.builder().ioScheduler(Schedulers.io()).build(),
                     itemsModel,
-                    asyncJobsObserver
+                    asyncJobsObserver,
+                    analyticsModel
             );
         }
     }

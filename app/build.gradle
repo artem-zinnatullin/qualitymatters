@@ -32,7 +32,8 @@ android {
         // Notice that each change of git sha will require recompilation of the BuildConfig class (which can cause full assemble task run).
         buildConfigField 'String', 'GIT_SHA', "\"${getGitSha()}\""
 
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        // Notice that we have custom Instrumentation test runner to change application class (to mock dependencies)!
+        testInstrumentationRunner 'com.artemzin.qualitymatters.functional_tests.QualityMattersFunctionalTestsRunner'
     }
 
     compileOptions {
@@ -136,6 +137,10 @@ dependencies {
     compile libraries.butterKnife
     compile libraries.picasso
     compile libraries.timber
+
+    // Analytics. Why? To make app more real.
+    // We mock analytics for Integration tests under Robolectric and Functional (UI) tests under Instrumentation!
+    compile libraries.yandexAppMetrica
 
     // Developer tools (Developer Settings)
     debugCompile libraries.stetho

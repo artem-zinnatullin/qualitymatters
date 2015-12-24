@@ -3,6 +3,7 @@ package com.artemzin.qualitymatters.ui.presenters;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.api.entities.Item;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ItemsModel;
 import com.artemzin.qualitymatters.performance.AsyncJob;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
@@ -63,7 +64,7 @@ public class ItemsPresenterTest {
         asyncJob = mock(AsyncJob.class);
         when(asyncJobsObserver.asyncJobStarted("Reload data in ItemsPresenter")).thenReturn(asyncJob);
 
-        itemsPresenter = new ItemsPresenter(presenterConfiguration, itemsModel, asyncJobsObserver);
+        itemsPresenter = new ItemsPresenter(presenterConfiguration, itemsModel, asyncJobsObserver, mock(AnalyticsModel.class));
         itemsView = mock(ItemsView.class);
     }
 
