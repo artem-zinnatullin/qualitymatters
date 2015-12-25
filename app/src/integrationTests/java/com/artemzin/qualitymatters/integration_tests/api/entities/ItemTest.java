@@ -1,6 +1,6 @@
 package com.artemzin.qualitymatters.integration_tests.api.entities;
 
-import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -11,7 +11,7 @@ import java.io.IOException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(QualityMattersRobolectricTestRunner.class)
+@RunWith(QualityMattersIntegrationRobolectricTestRunner.class)
 public class ItemTest {
 
     // Why test JSON serialization/deserialization?
@@ -19,7 +19,7 @@ public class ItemTest {
     // 2. Be sure that @JsonIgnore and similar annotations do not affect expected behavior (cc @karlicos).
     @Test
     public void fromJson() throws IOException {
-        ObjectMapper objectMapper = QualityMattersRobolectricTestRunner.qualityMattersApp().applicationComponent().objectMapper();
+        ObjectMapper objectMapper = QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().objectMapper();
 
         Item item = objectMapper.readValue("{ " +
                         "\"id\": \"test_id\", " +
