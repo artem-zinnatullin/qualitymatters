@@ -4,7 +4,7 @@ This is the app that follows all principles of [Android Development Culture desc
 
 What does it have:
 
-* CI (Travis)
+* CI (Travis) - [![build status](https://travis-ci.org/artem-zinnatullin/qualitymatters.svg)](https://travis-ci.org/artem-zinnatullin/qualitymatters)
 * Unit tests (some under Robolectric, some are under plain JUnit runner with mocked `android.jar`).
 * Integration tests to see that Http, REST, JSON parsing and RxJava work well in composition.
 * Functional (UI) tests (Espresso with custom rules, mocked server and Screen-architecture) to check that app works according to the expectations from the user's point of view.
