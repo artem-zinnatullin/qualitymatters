@@ -157,6 +157,24 @@
 
         </LinearLayout>
 
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
+
+            <TextView
+                style="@style/DeveloperSettingsItemTitle"
+                android:text="LogCat"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                style="@style/DeveloperSettingsButton"
+                android:id="@+id/b_show_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show"
+                tools:ignore="HardcodedText"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
 
 </ScrollView>
