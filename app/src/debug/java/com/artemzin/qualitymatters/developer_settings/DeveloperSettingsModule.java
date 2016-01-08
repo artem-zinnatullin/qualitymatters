@@ -32,7 +32,7 @@ public class DeveloperSettingsModule {
 
     @Provides
     @NonNull
-    public DeveloperSettingModel provideDeveloperSettingsModel(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl) {
+    public DeveloperSettingsModel provideDeveloperSettingsModel(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl) {
         return developerSettingsModelImpl;
     }
 

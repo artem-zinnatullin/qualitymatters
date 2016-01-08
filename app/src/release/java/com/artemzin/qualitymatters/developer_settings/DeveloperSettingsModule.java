@@ -24,7 +24,7 @@ public class DeveloperSettingsModule {
 
     @Provides
     @NonNull
-    public DeveloperSettingModel provideDeveloperSettingModel() {
+    public DeveloperSettingsModel provideDeveloperSettingsModel() {
         return () -> {
             // no-op!
         };

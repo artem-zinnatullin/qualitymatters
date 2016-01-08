@@ -5,7 +5,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.api.ApiModule;
-import com.artemzin.qualitymatters.developer_settings.DeveloperSettingModel;
+import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModel;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 
 import javax.inject.Inject;
@@ -30,7 +30,7 @@ public class QualityMattersApp extends Application {
     @SuppressWarnings("NullableProblems") // Initialize in onCreate.
     @Inject
     @NonNull
-    Lazy<DeveloperSettingModel> developerSettingModel;
+    Lazy<DeveloperSettingsModel> developerSettingModel;
 
     // Prevent need in a singleton (global) reference to the application object.
     @NonNull
