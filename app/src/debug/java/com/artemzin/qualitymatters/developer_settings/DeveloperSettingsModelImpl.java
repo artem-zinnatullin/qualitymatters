@@ -18,7 +18,7 @@ import timber.log.Timber;
 import static android.view.Gravity.START;
 import static android.view.Gravity.TOP;
 
-public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
+public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
 
     @NonNull
     private final QualityMattersApp qualityMattersApp;
