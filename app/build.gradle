@@ -110,7 +110,7 @@ android {
     }
 }
 
-// Libraries declared in build.gradle in the root of the project
+// Libraries declared in dependencies.gradle in the root of the project
 dependencies {
     compile libraries.dagger
     apt libraries.daggerCompiler
