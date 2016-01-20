@@ -14,6 +14,7 @@ import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import hu.supercluster.paperwork.Paperwork;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -50,6 +51,13 @@ public class DeveloperSettingsModule {
         return new LeakCanaryProxyImpl(qualityMattersApp);
     }
 
+    @Provides
+    @NonNull
+    @Singleton
+    public Paperwork providePaperwork(@NonNull QualityMattersApp qualityMattersApp) {
+        return new Paperwork(qualityMattersApp);
+    }
+
     // We will use this concrete type for debug code, but main code will see only DeveloperSettingsModel interface.
     @Provides
     @NonNull
@@ -58,8 +66,9 @@ public class DeveloperSettingsModule {
                                                                         @NonNull DeveloperSettings developerSettings,
                                                                         @NonNull OkHttpClient okHttpClient,
                                                                         @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
-                                                                        @NonNull LeakCanaryProxy leakCanaryProxy) {
-        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient, httpLoggingInterceptor, leakCanaryProxy);
+                                                                        @NonNull LeakCanaryProxy leakCanaryProxy,
+                                                                        @NonNull Paperwork paperwork) {
+        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient, httpLoggingInterceptor, leakCanaryProxy, paperwork);
     }
 
     @Provides

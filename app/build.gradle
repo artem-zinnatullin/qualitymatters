@@ -1,21 +1,15 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'hu.supercluster.paperwork'
 apply from: '../code_quality_tools/jacoco.gradle'
 
-def getGitSha() {
-    return 'git rev-parse --short HEAD'.execute().text.trim()
+paperwork {
+    set = [
+        gitSha:    gitSha(),
+        buildDate: buildTime("dd-MM-yyyy HH:00:00 z", "UTC"),
+    ]
 }
-
-def getBuildDateForDebugBuild() {
-    // To prevent frequent breaking of incremental compilation we don't put minutes and seconds in debug builds.
-    return new Date().format("dd-MM-yyyy HH:00:00 z", TimeZone.getTimeZone("UTC"))
-}
-
-def getBuildDateForReleaseBuild() {
-    return new Date().format("dd-MM-yyyy HH:mm:ss z", TimeZone.getTimeZone("UTC"))
-}
-
 
 android {
     // See build.gradle in the root of the project
@@ -28,9 +22,6 @@ android {
         targetSdkVersion versions.targetSdk
         versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
         versionName versions.name
-
-        // Notice that each change of git sha will require recompilation of the BuildConfig class (which can cause full assemble task run).
-        buildConfigField 'String', 'GIT_SHA', "\"${getGitSha()}\""
 
         // Notice that we have custom Instrumentation test runner to change application class (to mock dependencies)!
         testInstrumentationRunner 'com.artemzin.qualitymatters.functional_tests.QualityMattersFunctionalTestsRunner'
@@ -53,12 +44,10 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.qualityMatters
-            buildConfigField 'String', 'BUILD_DATE', "\"${getBuildDateForDebugBuild()}\""
         }
 
         release {
             signingConfig signingConfigs.qualityMatters
-            buildConfigField 'String', 'BUILD_DATE', "\"${getBuildDateForReleaseBuild()}\""
 
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
@@ -147,6 +136,7 @@ dependencies {
     debugCompile libraries.stethoOkHttp
     debugCompile libraries.leakCanary
     debugCompile libraries.tinyDancer
+    debugCompile libraries.paperwork
 
     testCompile libraries.junit
     testCompile libraries.robolectric

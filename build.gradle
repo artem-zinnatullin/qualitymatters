@@ -2,6 +2,10 @@
 apply from: 'dependencies.gradle'
 
 buildscript {
+    // Gradle will not find vars defined in an external file when referring to them
+    // in the buildscript block, unless you link it from the buildscript block, too.
+    apply from: 'dependencies.gradle'
+
     repositories {
         jcenter()
     }
@@ -16,6 +20,9 @@ buildscript {
 
         // Workaround for Lint + Retrolambda.
         classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
+
+        // Generates build info without breaking incremental builds
+        classpath libraries.paperworkPlugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
