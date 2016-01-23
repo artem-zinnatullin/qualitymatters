@@ -24,6 +24,7 @@ ext.versions = [
         leakCanary        : '1.3.1',
         tinyDancer        : '0.0.8',
         yandexAppMetrica  : '2.30',
+        paperwork         : '1.2.1',
 
         junit             : '4.12',
         robolectric       : '3.0',
@@ -68,6 +69,8 @@ ext.libraries = [
         stethoOkHttp            : "com.facebook.stetho:stetho-okhttp:$versions.stetho",
         leakCanary              : "com.squareup.leakcanary:leakcanary-android:$versions.leakCanary",
         tinyDancer              : "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
+        paperworkPlugin         : "hu.supercluster:paperwork-plugin:$versions.paperwork",
+        paperwork               : "hu.supercluster:paperwork:$versions.paperwork",
 
         // Test dependencies
         junit                   : "junit:junit:$versions.junit",
