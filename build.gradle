@@ -79,6 +79,13 @@ subprojects {
         effort = 'max'
         reportLevel = 'low' // Report even low priority problems.
 
+        reports {
+            xml {
+                enabled = true
+                withMessages = true
+            }
+        }
+
         classes = files("${project.projectDir}/build/intermediates/classes")
         source = fileTree('src/main/java')
 
