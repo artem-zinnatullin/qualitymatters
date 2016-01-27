@@ -1,6 +1,6 @@
 # QualityMatters
 
-This is the app that follows all principles of [Android Development Culture described here](http://artemzin.com/blog/android-development-culture-the-document-qualitymatters/).
+This is the app that follows all principles of [Android Development Culture Document](http://artemzin.com/blog/android-development-culture-the-document-qualitymatters/).
 
 What does it have:
 
@@ -11,6 +11,7 @@ What does it have:
 * Static code analysis (FindBugs, PMD, Android Lint, Checkstyle) (see root `build.gradle`).
 * Code coverage (currently in process of fighting with jacoco-coverage plugin to fail the build if coverage is not big enough).
 * Developer Settings Menu where you can enable/disable [Stetho](http://facebook.github.io/stetho/), [LeakCanary](https://github.com/square/leakcanary), etc. See full list below (feel free to add more tools!).
+* Git sha & build time without breaking incremental compilation! (Thanks to [Paperwork](https://github.com/zsoltk/paperwork))
 * MVP, RxJava, Dagger 2, Retrofit 2 and so on.
 
 ---
