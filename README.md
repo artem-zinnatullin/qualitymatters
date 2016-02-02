@@ -63,6 +63,7 @@ Also, you might notice that app has custom [`functional test runner`](/app/src/f
 * [Stetho](http://facebook.github.io/stetho/) — inspect the app via Chromium Developer Tools (network requests, db, preferences and so on). Must have for developers.
 * [LeakCanary](https://github.com/square/leakcanary) — detect memory leaks without IDE! Must have for QAs and developers.
 * [TinyDancer](https://github.com/brianPlummer/TinyDancer) — see frame rate right on your screen. Must have for QAs and developers.
+* [Lynx](https://github.com/pedrovgs/Lynx) — see LogCat output right in the app, useful for QAs and developers.
 
 **Details of implementation**
 

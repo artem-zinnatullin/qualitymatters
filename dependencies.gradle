@@ -25,6 +25,7 @@ ext.versions = [
         tinyDancer        : '0.0.8',
         yandexAppMetrica  : '2.30',
         paperwork         : '1.2.1',
+        lynx              : '1.6',
 
         junit             : '4.12',
         robolectric       : '3.0',
@@ -71,6 +72,7 @@ ext.libraries = [
         tinyDancer              : "com.github.brianPlummer:tinydancer:$versions.tinyDancer",
         paperworkPlugin         : "hu.supercluster:paperwork-plugin:$versions.paperwork",
         paperwork               : "hu.supercluster:paperwork:$versions.paperwork",
+        lynx                    : "com.github.pedrovgs:lynx:$versions.lynx",
 
         // Test dependencies
         junit                   : "junit:junit:$versions.junit",

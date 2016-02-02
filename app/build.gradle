@@ -137,6 +137,7 @@ dependencies {
     debugCompile libraries.leakCanary
     debugCompile libraries.tinyDancer
     debugCompile libraries.paperwork
+    debugCompile libraries.lynx
 
     testCompile libraries.junit
     testCompile libraries.robolectric

@@ -1,6 +1,7 @@
 package com.artemzin.qualitymatters.ui.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -18,6 +19,8 @@ import com.artemzin.qualitymatters.performance.AnyThread;
 import com.artemzin.qualitymatters.ui.adapters.DeveloperSettingsSpinnerAdapter;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
+import com.github.pedrovgs.lynx.LynxActivity;
+import com.github.pedrovgs.lynx.LynxConfig;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import java.util.ArrayList;
@@ -28,12 +31,16 @@ import javax.inject.Inject;
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import butterknife.OnItemSelected;
 
 public class DeveloperSettingsFragment extends BaseFragment implements DeveloperSettingsView {
 
     @Inject
     DeveloperSettingsPresenter presenter;
+
+    @Inject
+    LynxConfig lynxConfig;
 
     @Bind(R.id.developer_settings_git_sha_text_view)
     TextView gitShaTextView;
@@ -195,6 +202,12 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @AnyThread
     public void showAppNeedsToBeRestarted() {
         runOnUiThreadIfFragmentAlive(() -> Toast.makeText(getContext(), "To apply new settings app needs to be restarted", Toast.LENGTH_LONG).show());
+    }
+
+    @OnClick(R.id.b_show_log)
+    void showLog() {
+        Context context = getActivity();
+        context.startActivity(LynxActivity.getIntent(context, lynxConfig));
     }
 
     @Override

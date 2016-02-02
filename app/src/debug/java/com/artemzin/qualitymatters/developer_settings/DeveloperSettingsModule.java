@@ -6,6 +6,7 @@ import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
+import com.github.pedrovgs.lynx.LynxConfig;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
@@ -76,5 +77,11 @@ public class DeveloperSettingsModule {
     public DeveloperSettingsPresenter provideDeveloperSettingsPresenter(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl,
                                                                         @NonNull AnalyticsModel analyticsModel) {
         return new DeveloperSettingsPresenter(developerSettingsModelImpl, analyticsModel);
+    }
+
+    @NonNull
+    @Provides
+    public LynxConfig provideLynxConfig() {
+        return new LynxConfig();
     }
 }
