@@ -10,6 +10,7 @@ import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
 import com.artemzin.qualitymatters.developer_settings.LeakCanaryProxy;
 import com.artemzin.qualitymatters.models.ModelsModule;
 import com.artemzin.qualitymatters.network.NetworkModule;
+import com.artemzin.qualitymatters.network.OkHttpInterceptorsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.activities.MainActivity;
@@ -24,6 +25,7 @@ import dagger.Component;
 @Component(modules = {
         ApplicationModule.class,
         NetworkModule.class,
+        OkHttpInterceptorsModule.class,
         ApiModule.class,
         AsyncJobsModule.class,
         ModelsModule.class,

@@ -5,8 +5,6 @@ import android.support.annotation.NonNull;
 import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,7 +14,9 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
 
-import retrofit.HttpException;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import retrofit2.adapter.rxjava.HttpException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;

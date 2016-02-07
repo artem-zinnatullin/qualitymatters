@@ -5,7 +5,7 @@ import android.support.annotation.NonNull;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModelImpl;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView> {
 

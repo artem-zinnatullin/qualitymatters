@@ -3,12 +3,13 @@ package com.artemzin.qualitymatters.developer_settings;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
+
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import static android.content.Context.MODE_PRIVATE;
 import static org.assertj.core.api.Assertions.assertThat;

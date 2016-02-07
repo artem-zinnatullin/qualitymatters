@@ -109,7 +109,6 @@ dependencies {
     compile libraries.rxJava
 
     compile libraries.okHttp
-    compile libraries.okHttpLoggingInterceptor
     compile libraries.retrofit
     compile libraries.retrofitJacksonConverter
     compile libraries.retrofitRxJavaAdapter
@@ -125,6 +124,7 @@ dependencies {
 
     compile libraries.butterKnife
     compile libraries.picasso
+    compile libraries.picassoOkHttpDownloader
     compile libraries.timber
 
     // Analytics. Why? To make app more real.
@@ -132,6 +132,7 @@ dependencies {
     compile libraries.yandexAppMetrica
 
     // Developer tools (Developer Settings)
+    debugCompile libraries.okHttpLoggingInterceptor
     debugCompile libraries.stetho
     debugCompile libraries.stethoOkHttp
     debugCompile libraries.leakCanary

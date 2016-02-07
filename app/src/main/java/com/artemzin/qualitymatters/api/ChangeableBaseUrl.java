@@ -2,11 +2,10 @@ package com.artemzin.qualitymatters.api;
 
 import android.support.annotation.NonNull;
 
-import com.squareup.okhttp.HttpUrl;
-
 import java.util.concurrent.atomic.AtomicReference;
 
-import retrofit.BaseUrl;
+import okhttp3.HttpUrl;
+import retrofit2.BaseUrl;
 
 /**
  * Such implementation allows us easily change base url in the integration and functional tests!

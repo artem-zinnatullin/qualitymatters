@@ -3,7 +3,7 @@ package com.artemzin.qualitymatters.developer_settings;
 import android.content.SharedPreferences;
 import android.support.annotation.NonNull;
 
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import timber.log.Timber;
 
