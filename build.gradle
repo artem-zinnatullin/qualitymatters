@@ -8,6 +8,7 @@ buildscript {
 
     repositories {
         jcenter()
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
         // See dependencies.gradle for declaration of plugins.
@@ -31,6 +32,12 @@ buildscript {
 
         // Performance metrics library for Android development.
         classpath gradlePlugins.androidDevMetrics
+
+        // Catch common Java mistakes as compile-time errors
+        classpath gradlePlugins.errorProne
+
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
     }
 
     // Part of workaround for Lint + Retrolambda.
@@ -61,6 +68,13 @@ subprojects {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         }
     }
+
+    project.plugins.apply('net.ltgt.errorprone')
+
+    configurations.errorprone {
+        resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.0.8'
+    }
+
     afterEvaluate {
         tasks.findByName('pmd').dependsOn('assemble')
         tasks.findByName('findbugs').dependsOn('assemble')
