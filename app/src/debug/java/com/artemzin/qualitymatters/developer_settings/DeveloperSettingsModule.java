@@ -7,8 +7,8 @@ import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.github.pedrovgs.lynx.LynxConfig;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

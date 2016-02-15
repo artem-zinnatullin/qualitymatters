@@ -3,7 +3,7 @@ package com.artemzin.qualitymatters.ui.views;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.performance.AnyThread;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public interface DeveloperSettingsView {
 

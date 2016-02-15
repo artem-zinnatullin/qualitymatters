@@ -21,7 +21,7 @@ import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
 import com.github.pedrovgs.lynx.LynxActivity;
 import com.github.pedrovgs.lynx.LynxConfig;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -4,15 +4,15 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.BuildConfig;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.squareup.okhttp.OkHttpClient;
 
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
-import retrofit.JacksonConverterFactory;
-import retrofit.Retrofit;
-import retrofit.RxJavaCallAdapterFactory;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.jackson.JacksonConverterFactory;
 
 @Module
 public class ApiModule {
@@ -31,17 +31,13 @@ public class ApiModule {
 
     @Provides @NonNull @Singleton
     public QualityMattersRestApi provideQualityMattersApi(@NonNull OkHttpClient okHttpClient, @NonNull ObjectMapper objectMapper, @NonNull ChangeableBaseUrl changeableBaseUrl) {
-        final Retrofit.Builder builder = new Retrofit.Builder()
+        return new Retrofit.Builder()
                 .baseUrl(changeableBaseUrl)
                 .client(okHttpClient)
                 .addConverterFactory(JacksonConverterFactory.create(objectMapper))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
-
-        // Fail early: check Retrofit configuration at creation time
-        if (BuildConfig.DEBUG) {
-            builder.validateEagerly();
-        }
-
-        return builder.build().create(QualityMattersRestApi.class);
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .validateEagerly(BuildConfig.DEBUG)  // Fail early: check Retrofit configuration at creation time in Debug build.
+                .build()
+                .create(QualityMattersRestApi.class);
     }
 }

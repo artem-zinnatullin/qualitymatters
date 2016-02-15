@@ -19,7 +19,7 @@ public class HttpCodes {
             404,
             405,
             406,
-            408,
+            // 408, OkHttp will do silent retry, so either we need to test that separately or be able to include it in generic tests somehow.
             409,
             410,
             411,

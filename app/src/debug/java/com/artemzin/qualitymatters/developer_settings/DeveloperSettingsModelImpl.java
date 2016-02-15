@@ -7,13 +7,13 @@ import com.artemzin.qualitymatters.BuildConfig;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.codemonkeylabs.fpslibrary.TinyDancer;
 import com.facebook.stetho.Stetho;
-import com.facebook.stetho.okhttp.StethoInterceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import hu.supercluster.paperwork.Paperwork;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
 import static android.view.Gravity.START;

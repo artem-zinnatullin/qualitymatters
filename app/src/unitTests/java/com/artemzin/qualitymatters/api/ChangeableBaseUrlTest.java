@@ -1,8 +1,8 @@
 package com.artemzin.qualitymatters.api;
 
-import com.squareup.okhttp.HttpUrl;
-
 import org.junit.Test;
+
+import okhttp3.HttpUrl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

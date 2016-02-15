@@ -11,14 +11,15 @@ import com.artemzin.qualitymatters.functional_tests.rules.MockWebServerRule;
 import com.artemzin.qualitymatters.functional_tests.rules.NeedsMockWebServer;
 import com.artemzin.qualitymatters.functional_tests.screens.ItemsScreen;
 import com.artemzin.qualitymatters.ui.activities.MainActivity;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
 
 import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.RuleChain;
 import org.junit.runner.RunWith;
+
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 
 @RunWith(AndroidJUnit4.class)
 public class ItemsTest {

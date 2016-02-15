@@ -3,8 +3,6 @@ package com.artemzin.qualitymatters.developer_settings;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.QualityMattersApp;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,6 +11,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import hu.supercluster.paperwork.Paperwork;
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
