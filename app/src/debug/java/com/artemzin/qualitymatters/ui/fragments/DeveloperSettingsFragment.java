@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
+import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsComponent;
 import com.artemzin.qualitymatters.performance.AnyThread;
 import com.artemzin.qualitymatters.ui.adapters.DeveloperSettingsSpinnerAdapter;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
@@ -66,10 +67,19 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Bind(R.id.developer_settings_http_logging_level_spinner)
     Spinner httpLoggingLevelSpinner;
 
+    private DeveloperSettingsComponent developerSettingsComponent;
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        QualityMattersApp.get(getContext()).applicationComponent().plusDeveloperSettingsComponent().inject(this);
+        developerSettingsComponent = QualityMattersApp.get(getContext()).applicationComponent().plusDeveloperSettingsComponent();
+        developerSettingsComponent.inject(this);
+    }
+
+    @Override
+    public void onDestroy() {
+        developerSettingsComponent = null;
+        super.onDestroy();
     }
 
     @NonNull
