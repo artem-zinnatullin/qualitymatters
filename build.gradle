@@ -16,7 +16,7 @@ buildscript {
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
         // Backport of some Java 8 language features such as Lambdas and method references.
-        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
 
         // Workaround for Lint + Retrolambda.
         classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
