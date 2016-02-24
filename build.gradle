@@ -61,7 +61,7 @@ subprojects {
     plugins.apply('pmd')
 
     pmd {
-        toolVersion = '5.4.0'
+        toolVersion = '5.4.1'
     }
 
     task pmd(type: Pmd) {
