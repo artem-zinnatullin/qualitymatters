@@ -12,7 +12,7 @@ paperwork {
 }
 
 android {
-    // See build.gradle in the root of the project
+    // Declared in dependencies.gradle in the root of the project.
     compileSdkVersion versions.compileSdk
     buildToolsVersion versions.buildTools
 
