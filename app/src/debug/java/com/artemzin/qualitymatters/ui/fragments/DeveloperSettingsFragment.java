@@ -221,7 +221,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         @NonNull
         public final HttpLoggingInterceptor.Level loggingLevel;
 
-        public HttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
+        HttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
             this.loggingLevel = loggingLevel;
         }
 

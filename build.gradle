@@ -97,6 +97,10 @@ subprojects {
 
     plugins.apply('checkstyle')
 
+    checkstyle {
+        toolVersion = '6.15'
+    }
+
     task checkstyle(type: Checkstyle) {
         configFile rootProject.file('code_quality_tools/checkstyle.xml')
 

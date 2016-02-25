@@ -88,7 +88,7 @@ public class DeveloperSettingsSpinnerAdapter<T extends DeveloperSettingsSpinnerA
         @NonNull
         private final TextView titleTextView;
 
-        public ViewHolder(@NonNull View itemView) {
+        ViewHolder(@NonNull View itemView) {
             titleTextView = (TextView) itemView.findViewById(R.id.list_developer_settings_spinner_item_title_text_view);
         }
 

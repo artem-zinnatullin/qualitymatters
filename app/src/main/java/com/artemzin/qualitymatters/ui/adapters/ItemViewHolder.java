@@ -21,7 +21,7 @@ class ItemViewHolder extends RecyclerView.ViewHolder {
 
     private final TextView shortDescriptionTextView;
 
-    public ItemViewHolder(@NonNull View itemView, @NonNull Picasso picasso) {
+    ItemViewHolder(@NonNull View itemView, @NonNull Picasso picasso) {
         super(itemView);
         this.picasso = picasso;
         imageView = (ImageView) itemView.findViewById(R.id.list_item_image_view);
