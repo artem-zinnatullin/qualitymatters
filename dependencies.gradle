@@ -10,7 +10,7 @@ ext.versions = [
         dagger                 : '2.0.2',
         javaxInject            : '1',
         javaxAnnotationApi     : '1.2',
-        rxJava                 : '1.1.0',
+        rxJava                 : '1.1.1',
         supportLibs            : '23.1.1',
         okHttp                 : '3.1.2',
         retrofit               : '2.0.0-beta4',
