@@ -1,13 +1,12 @@
 package com.artemzin.qualitymatters.developer_settings;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.github.pedrovgs.lynx.LynxConfig;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
@@ -15,6 +14,7 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import hu.supercluster.paperwork.Paperwork;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -40,21 +40,21 @@ public class DeveloperSettingsModule {
     @Provides
     @NonNull
     @Singleton
-    public DeveloperSettings provideDeveloperSettings(@NonNull QualityMattersApp qualityMattersApp) {
+    public DeveloperSettings provideDeveloperSettings(@NonNull Application qualityMattersApp) {
         return new DeveloperSettings(qualityMattersApp.getSharedPreferences("developer_settings", MODE_PRIVATE));
     }
 
     @Provides
     @NonNull
     @Singleton
-    public LeakCanaryProxy provideLeakCanaryProxy(@NonNull QualityMattersApp qualityMattersApp) {
+    public LeakCanaryProxy provideLeakCanaryProxy(@NonNull Application qualityMattersApp) {
         return new LeakCanaryProxyImpl(qualityMattersApp);
     }
 
     @Provides
     @NonNull
     @Singleton
-    public Paperwork providePaperwork(@NonNull QualityMattersApp qualityMattersApp) {
+    public Paperwork providePaperwork(@NonNull Application qualityMattersApp) {
         return new Paperwork(qualityMattersApp);
     }
 
@@ -62,7 +62,7 @@ public class DeveloperSettingsModule {
     @Provides
     @NonNull
     @Singleton
-    public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
+    public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull Application qualityMattersApp,
                                                                         @NonNull DeveloperSettings developerSettings,
                                                                         @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                                                         @NonNull LeakCanaryProxy leakCanaryProxy,

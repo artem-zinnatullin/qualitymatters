@@ -1,5 +1,6 @@
 package com.artemzin.qualitymatters;
 
+import android.app.Application;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
@@ -21,14 +22,14 @@ public class ApplicationModule {
     public static final String MAIN_THREAD_HANDLER = "main_thread_handler";
 
     @NonNull
-    private final QualityMattersApp qualityMattersApp;
+    private final Application qualityMattersApp;
 
-    public ApplicationModule(@NonNull QualityMattersApp qualityMattersApp) {
+    public ApplicationModule(@NonNull Application qualityMattersApp) {
         this.qualityMattersApp = qualityMattersApp;
     }
 
     @Provides @NonNull @Singleton
-    public QualityMattersApp provideQualityMattersApp() {
+    public Application provideQualityMattersApp() {
         return qualityMattersApp;
     }
 
@@ -43,7 +44,7 @@ public class ApplicationModule {
     }
 
     @Provides @NonNull @Singleton
-    public Picasso providePicasso(@NonNull QualityMattersApp qualityMattersApp, @NonNull OkHttpClient okHttpClient) {
+    public Picasso providePicasso(@NonNull Application qualityMattersApp, @NonNull OkHttpClient okHttpClient) {
         return new Picasso.Builder(qualityMattersApp)
                 .downloader(new OkHttp3Downloader(okHttpClient))
                 .build();

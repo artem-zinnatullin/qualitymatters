@@ -1,8 +1,8 @@
 package com.artemzin.qualitymatters.models;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.yandex.metrica.YandexMetrica;
 
@@ -15,7 +15,7 @@ import dagger.Provides;
 public class ModelsModule {
 
     @Provides @NonNull @Singleton
-    public AnalyticsModel provideAnalyticsModel(@NonNull QualityMattersApp app) {
+    public AnalyticsModel provideAnalyticsModel(@NonNull Application app) {
         return new YandexAppMetricaAnalytics(app);
     }
 
@@ -27,9 +27,9 @@ public class ModelsModule {
     static class YandexAppMetricaAnalytics implements AnalyticsModel {
 
         @NonNull
-        private final QualityMattersApp app;
+        private final Application app;
 
-        YandexAppMetricaAnalytics(@NonNull QualityMattersApp app) {
+        YandexAppMetricaAnalytics(@NonNull Application app) {
             this.app = app;
         }
 
