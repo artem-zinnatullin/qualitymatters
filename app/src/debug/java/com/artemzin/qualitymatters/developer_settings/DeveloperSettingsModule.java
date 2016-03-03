@@ -7,7 +7,6 @@ import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.github.pedrovgs.lynx.LynxConfig;
-import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.inject.Named;
@@ -65,11 +64,10 @@ public class DeveloperSettingsModule {
     @Singleton
     public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
                                                                         @NonNull DeveloperSettings developerSettings,
-                                                                        @NonNull OkHttpClient okHttpClient,
                                                                         @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                                                         @NonNull LeakCanaryProxy leakCanaryProxy,
                                                                         @NonNull Paperwork paperwork) {
-        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient, httpLoggingInterceptor, leakCanaryProxy, paperwork);
+        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, httpLoggingInterceptor, leakCanaryProxy, paperwork);
     }
 
     @Provides
