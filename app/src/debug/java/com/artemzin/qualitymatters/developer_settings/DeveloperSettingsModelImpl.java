@@ -7,12 +7,10 @@ import com.artemzin.qualitymatters.BuildConfig;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.codemonkeylabs.fpslibrary.TinyDancer;
 import com.facebook.stetho.Stetho;
-import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import hu.supercluster.paperwork.Paperwork;
-import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
@@ -26,9 +24,6 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
 
     @NonNull
     private final DeveloperSettings developerSettings;
-
-    @NonNull
-    private final OkHttpClient okHttpClient;
 
     @NonNull
     private final HttpLoggingInterceptor httpLoggingInterceptor;
@@ -50,13 +45,11 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
 
     public DeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
                                       @NonNull DeveloperSettings developerSettings,
-                                      @NonNull OkHttpClient okHttpClient,
                                       @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                       @NonNull LeakCanaryProxy leakCanaryProxy,
                                       @NonNull Paperwork paperwork) {
         this.qualityMattersApp = qualityMattersApp;
         this.developerSettings = developerSettings;
-        this.okHttpClient = okHttpClient;
         this.httpLoggingInterceptor = httpLoggingInterceptor;
         this.leakCanaryProxy = leakCanaryProxy;
         this.paperwork = paperwork;
@@ -125,7 +118,6 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
         if (stethoAlreadyEnabled.compareAndSet(false, true)) {
             if (isStethoEnabled()) {
                 Stetho.initializeWithDefaults(qualityMattersApp);
-                okHttpClient.networkInterceptors().add(new StethoInterceptor());
             }
         }
 

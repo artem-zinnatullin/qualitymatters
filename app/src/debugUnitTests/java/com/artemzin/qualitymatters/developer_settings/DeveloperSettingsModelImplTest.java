@@ -11,7 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import hu.supercluster.paperwork.Paperwork;
-import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -43,7 +42,6 @@ public class DeveloperSettingsModelImplTest {
         developerSettingsModel = new DeveloperSettingsModelImpl(
                 mock(QualityMattersApp.class),
                 developerSettings,
-                mock(OkHttpClient.class),
                 new HttpLoggingInterceptor(),
                 mock(LeakCanaryProxy.class),
                 paperwork
