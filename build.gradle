@@ -98,7 +98,7 @@ subprojects {
     plugins.apply('checkstyle')
 
     checkstyle {
-        toolVersion = '6.15'
+        toolVersion = '6.16.1'
     }
 
     task checkstyle(type: Checkstyle) {
