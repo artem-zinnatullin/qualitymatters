@@ -1,5 +1,6 @@
 package com.artemzin.qualitymatters.functional_tests;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.DaggerApplicationComponent;
@@ -18,7 +19,7 @@ public class QualityMattersFunctionalTestApp extends QualityMattersApp {
                 .modelsModule(new ModelsModule() {
                     @NonNull
                     @Override
-                    public AnalyticsModel provideAnalyticsModel(@NonNull QualityMattersApp app) {
+                    public AnalyticsModel provideAnalyticsModel(@NonNull Application app) {
                         // We don't need real analytics in Functional tests, but let's just log it instead!
                         return new AnalyticsModel() {
 

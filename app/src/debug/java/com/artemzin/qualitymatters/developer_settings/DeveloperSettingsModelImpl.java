@@ -1,10 +1,10 @@
 package com.artemzin.qualitymatters.developer_settings;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 
 import com.artemzin.qualitymatters.BuildConfig;
-import com.artemzin.qualitymatters.QualityMattersApp;
 import com.codemonkeylabs.fpslibrary.TinyDancer;
 import com.facebook.stetho.Stetho;
 
@@ -20,7 +20,7 @@ import static android.view.Gravity.TOP;
 public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
 
     @NonNull
-    private final QualityMattersApp qualityMattersApp;
+    private final Application qualityMattersApp;
 
     @NonNull
     private final DeveloperSettings developerSettings;
@@ -43,7 +43,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
     @NonNull
     private AtomicBoolean tinyDancerDisplayed = new AtomicBoolean();
 
-    public DeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
+    public DeveloperSettingsModelImpl(@NonNull Application qualityMattersApp,
                                       @NonNull DeveloperSettings developerSettings,
                                       @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                       @NonNull LeakCanaryProxy leakCanaryProxy,

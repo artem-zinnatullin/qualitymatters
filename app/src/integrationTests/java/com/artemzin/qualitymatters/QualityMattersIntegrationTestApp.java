@@ -1,5 +1,6 @@
 package com.artemzin.qualitymatters;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.models.AnalyticsModel;
@@ -16,7 +17,7 @@ public class QualityMattersIntegrationTestApp extends QualityMattersApp {
                 .modelsModule(new ModelsModule() {
                     @NonNull
                     @Override
-                    public AnalyticsModel provideAnalyticsModel(@NonNull QualityMattersApp app) {
+                    public AnalyticsModel provideAnalyticsModel(@NonNull Application app) {
                         return mock(AnalyticsModel.class); // We don't need real analytics in integration tests.
                     }
                 });
