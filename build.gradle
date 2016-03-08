@@ -35,9 +35,6 @@ buildscript {
 
         // Catch common Java mistakes as compile-time errors
         classpath gradlePlugins.errorProne
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
     }
 
     // Part of workaround for Lint + Retrolambda.

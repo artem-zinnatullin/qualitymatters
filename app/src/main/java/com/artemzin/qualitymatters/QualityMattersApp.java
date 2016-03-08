@@ -36,7 +36,10 @@ public class QualityMattersApp extends Application {
     public void onCreate() {
         super.onCreate();
         applicationComponent = prepareApplicationComponent().build();
-        applicationComponent.inject(this);
+
+        analyticsModel = applicationComponent.analyticsModel();
+        developerSettingModel = applicationComponent.developerSettingModel();
+        devMetricsProxy = applicationComponent.devMetricsProxy();
 
         analyticsModel.init();
 
