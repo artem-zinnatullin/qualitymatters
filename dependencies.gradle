@@ -33,7 +33,7 @@ ext.versions = [
         assertJ                : '1.7.1',
         equalsVerifier         : '1.7.5',
         mockito                : '1.10.19',
-        supportTestRunner      : '0.4.1',
+        supportTestRunner      : '0.5',
 ]
 
 ext.libraries = [
