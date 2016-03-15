@@ -2,13 +2,11 @@
 // https://github.com/mgouline/android-samples/blob/master/jacoco/app/build.gradle
 // and https://github.com/pushtorefresh/storio/blob/master/gradle/jacoco-android.gradle
 
+// Requires Jacoco plugin in build classpath.
 apply plugin: 'jacoco'
 
-jacoco {
-    // See https://github.com/jacoco/jacoco/releases
-    toolVersion = '0.7.5.201505241946'
-}
-
+// Enables code coverage for JVM tests.
+// Android Gradle Plugin out of the box supports only code coverage for instrumentation tests.
 project.afterEvaluate {
     // Grab all build types and product flavors
     def buildTypes = android.buildTypes.collect { type -> type.name }
@@ -54,6 +52,7 @@ project.afterEvaluate {
                         "src/$productFlavorName/java",
                         "src/$buildTypeName/java"
                 ]
+
                 additionalSourceDirs = files(coverageSourceDirs)
                 sourceDirectories = files(coverageSourceDirs)
                 executionData = files("${project.buildDir}/jacoco/${testTaskName}.exec")

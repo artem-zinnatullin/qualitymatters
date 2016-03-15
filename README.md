@@ -9,7 +9,7 @@ What does it have:
 * Integration tests to see that Http, REST, JSON parsing and RxJava work well in composition.
 * Functional (UI) tests (Espresso with custom rules, mocked server and Screen-architecture) to check that app works according to the expectations from the user's point of view.
 * Static code analysis (FindBugs, PMD, Android Lint, Checkstyle) (see root `build.gradle`).
-* Code coverage (currently in process of fighting with jacoco-coverage plugin to fail the build if coverage is not big enough).
+* Code coverage [![codecov.io](https://codecov.io/github/artem-zinnatullin/qualitymatters/coverage.svg?branch=master)](https://codecov.io/github/artem-zinnatullin/qualitymatters?branch=master)
 * Developer Settings Menu where you can enable/disable [Stetho](http://facebook.github.io/stetho/), [LeakCanary](https://github.com/square/leakcanary), etc. See full list below (feel free to add more tools!).
 * Git sha & build time without breaking incremental compilation! (Thanks to [Paperwork](https://github.com/zsoltk/paperwork))
 * MVP, RxJava, Dagger 2, Retrofit 2 and so on.
