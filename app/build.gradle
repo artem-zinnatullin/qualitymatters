@@ -45,13 +45,20 @@ android {
         debug {
             signingConfig signingConfigs.qualityMatters
             applicationIdSuffix '.debug'
+
+            // Enables code coverage with Jacoco only for instrumentation tests.
+            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
+            testCoverageEnabled true
         }
 
         release {
             signingConfig signingConfigs.qualityMatters
-
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt')
+
+            // Enables code coverage with Jacoco only for instrumentation tests.
+            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
+            testCoverageEnabled true
         }
     }
 
