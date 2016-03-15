@@ -38,4 +38,11 @@ public class DisposableSubscriptionTest {
         disposableSubscription.unsubscribe();
         verify(disposeAction).call();
     }
+
+    @Test
+    public void unsubscribeTwice_shouldCallDisposableActionOnce() {
+        disposableSubscription.unsubscribe();
+        disposableSubscription.unsubscribe();
+        verify(disposeAction).call();
+    }
 }
