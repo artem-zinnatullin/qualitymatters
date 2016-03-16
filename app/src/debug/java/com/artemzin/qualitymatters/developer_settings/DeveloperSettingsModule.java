@@ -82,4 +82,11 @@ public class DeveloperSettingsModule {
     public LynxConfig provideLynxConfig() {
         return new LynxConfig();
     }
+
+    @NonNull
+    @Provides
+    @Singleton
+    public DevMetricsProxy provideDevMetricsProxy(@NonNull Application application) {
+        return new DevMetricsProxyImpl(application);
+    }
 }

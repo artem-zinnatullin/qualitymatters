@@ -26,6 +26,9 @@ buildscript {
 
         // Code coverage.
         classpath 'org.jacoco:org.jacoco.core:0.7.6.201602180812'
+        
+	// Performance metrics library for Android development.
+        classpath libraries.devMetricsPlugin
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
