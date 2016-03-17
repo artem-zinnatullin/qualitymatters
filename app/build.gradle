@@ -3,6 +3,7 @@ apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'hu.supercluster.paperwork'
 apply from: '../code_quality_tools/jacoco.gradle'
+apply plugin: 'com.frogermcs.androiddevmetrics'
 
 paperwork {
     set = [
@@ -154,6 +155,7 @@ dependencies {
     testCompile libraries.equalsVerifier
     testCompile libraries.okHttpMockWebServer
     testCompile libraries.mockitoCore
+    testCompile libraries.devMetricsNoOp
 
     androidTestCompile libraries.supportTestRunner
     androidTestCompile libraries.supportTestRules

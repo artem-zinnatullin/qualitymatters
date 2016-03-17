@@ -27,6 +27,7 @@ ext.versions = [
         yandexAppMetrica       : '2.30',
         paperwork              : '1.2.4',
         lynx                   : '1.6',
+        devMetrics             : '0.3.1',
 
         junit                  : '4.12',
         robolectric            : '3.0',
@@ -75,6 +76,8 @@ ext.libraries = [
         paperworkPlugin         : "hu.supercluster:paperwork-plugin:$versions.paperwork",
         paperwork               : "hu.supercluster:paperwork:$versions.paperwork",
         lynx                    : "com.github.pedrovgs:lynx:$versions.lynx",
+        devMetricsNoOp          : "com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:$versions.devMetrics",
+        devMetricsPlugin        : "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.devMetrics",
 
         // Test dependencies
         junit                   : "junit:junit:$versions.junit",

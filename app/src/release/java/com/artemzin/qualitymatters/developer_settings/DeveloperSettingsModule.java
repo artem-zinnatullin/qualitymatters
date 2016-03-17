@@ -36,4 +36,11 @@ public class DeveloperSettingsModule {
     public LeakCanaryProxy provideLeakCanaryProxy() {
         return new NoOpLeakCanaryProxy();
     }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public DevMetricsProxy provideDevMetricsProxy() {
+        return new NoOpDevMetricsProxy();
+    }
 }
