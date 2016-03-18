@@ -10,28 +10,27 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        // See dependencies.gradle for declaration of plugins.
 
-        // APT compile-time annotation processing
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath gradlePlugins.android
+
+        // Compile-time annotation processing.
+        classpath gradlePlugins.apt
 
         // Backport of some Java 8 language features such as Lambdas and method references.
-        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath gradlePlugins.retrolambda
 
-        // Workaround for Lint + Retrolambda.
-        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
+        // Needed for Lint + Retrolambda.
+        classpath gradlePlugins.lombok
 
-        // Generates build info without breaking incremental builds
-        classpath libraries.paperworkPlugin
+        // Generates build info without breaking incremental builds.
+        classpath gradlePlugins.paperwork
 
         // Code coverage.
-        classpath 'org.jacoco:org.jacoco.core:0.7.6.201602180812'
+        classpath gradlePlugins.jacoco
         
-	// Performance metrics library for Android development.
-        classpath libraries.devMetricsPlugin
-
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+	    // Performance metrics library for Android development.
+        classpath gradlePlugins.androidDevMetrics
     }
 
     // Part of workaround for Lint + Retrolambda.
@@ -72,7 +71,7 @@ subprojects {
 
     task pmd(type: Pmd) {
         ignoreFailures = false // Fail early.
-        ruleSetFiles = project.files(rootProject.file("code_quality_tools/pmd.xml"))
+        ruleSetFiles = project.files(rootProject.file('code_quality_tools/pmd.xml'))
         ruleSets = []
 
         source = fileTree('src/main/java')
