@@ -64,9 +64,6 @@ android {
     }
 
     sourceSets {
-        // Common code for JVM tests lives in src/jvmTestsCommon.
-        test.java.srcDir 'src/jvmTestsCommon/java'
-
         // Unit tests live in src/unitTest.
         test.java.srcDir 'src/unitTests/java'
 
