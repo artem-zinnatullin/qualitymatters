@@ -28,8 +28,8 @@ buildscript {
 
         // Code coverage.
         classpath gradlePlugins.jacoco
-        
-	    // Performance metrics library for Android development.
+
+        // Performance metrics library for Android development.
         classpath gradlePlugins.androidDevMetrics
     }
 
@@ -54,7 +54,6 @@ task clean(type: Delete) {
 }
 
 ext.preDexLibs = !project.hasProperty('disablePreDex')
-
 subprojects {
     project.plugins.whenPluginAdded { plugin ->
         if ('com.android.build.gradle.AppPlugin'.equals(plugin.class.name) || 'com.android.build.gradle.LibraryPlugin'.equals(plugin.class.name)) {
@@ -62,62 +61,6 @@ subprojects {
             project.android.dexOptions.preDexLibraries = rootProject.ext.preDexLibs
         }
     }
-
-    plugins.apply('pmd')
-
-    pmd {
-        toolVersion = '5.4.1'
-    }
-
-    task pmd(type: Pmd) {
-        ignoreFailures = false // Fail early.
-        ruleSetFiles = project.files(rootProject.file('code_quality_tools/pmd.xml'))
-        ruleSets = []
-
-        source = fileTree('src/main/java')
-    }
-
-    plugins.apply('findbugs')
-
-    task findbugs(type: FindBugs) {
-        ignoreFailures = false // Fail early.
-        effort = 'max'
-        reportLevel = 'low' // Report even low priority problems.
-
-        reports {
-            xml {
-                enabled = true
-                withMessages = true
-            }
-        }
-
-        classes = files("${project.projectDir}/build/intermediates/classes")
-        source = fileTree('src/main/java')
-
-        // If somebody has an idea how to make this work with support libraries -> open a PR please.
-        classpath = files()
-
-        excludeFilter = rootProject.file('code_quality_tools/findbugs-filter.xml')
-    }
-
-    plugins.apply('checkstyle')
-
-    checkstyle {
-        toolVersion = '6.16.1'
-    }
-
-    task checkstyle(type: Checkstyle) {
-        configFile rootProject.file('code_quality_tools/checkstyle.xml')
-
-        ignoreFailures false // Fail early.
-        showViolations true
-
-        source 'src'
-        include '**/*.java'
-
-        classpath = files()
-    }
-
     afterEvaluate {
         tasks.findByName('pmd').dependsOn('assemble')
         tasks.findByName('findbugs').dependsOn('assemble')
