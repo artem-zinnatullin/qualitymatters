@@ -1,0 +1,20 @@
+machine:
+  java:
+    version: oraclejdk8
+
+dependencies:
+  pre:
+    - echo y | android update sdk --no-ui --all --filter "platform-tools,tools,android-23,extra-android-m2repository,extra-android-support,sys-img-armeabi-v7a-android-18"
+    # Build tools should be installed after "tools", uh.
+    - echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2"
+
+test:
+  override:
+    - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
+    - emulator -avd test -no-skin -no-audio -no-window:
+        background: true
+        parallel: true
+    - circle-android wait-for-boot
+    - adb shell input keyevent 82
+    - sh ci.sh
+    - pip install --user codecov && codecov
