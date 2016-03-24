@@ -3,12 +3,12 @@ package com.artemzin.qualitymatters;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.api.ApiModule;
-import com.artemzin.qualitymatters.api.ChangeableBaseUrl;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsComponent;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
 import com.artemzin.qualitymatters.developer_settings.LeakCanaryProxy;
 import com.artemzin.qualitymatters.models.ModelsModule;
+import com.artemzin.qualitymatters.network.HostSelectionInterceptor;
 import com.artemzin.qualitymatters.network.NetworkModule;
 import com.artemzin.qualitymatters.network.OkHttpInterceptorsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsModule;
@@ -42,7 +42,7 @@ public interface ApplicationComponent {
     QualityMattersRestApi qualityMattersApi();
 
     @NonNull
-    ChangeableBaseUrl changeableBaseUrl();
+    HostSelectionInterceptor hostSelectionInterceptor();
 
     // Provide AsyncJobObserver from the real app to the tests without need in injection to the test.
     @NonNull

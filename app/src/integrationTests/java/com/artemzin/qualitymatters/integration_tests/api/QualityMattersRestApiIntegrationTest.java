@@ -47,7 +47,7 @@ public class QualityMattersRestApiIntegrationTest {
         mockWebServer.start();
 
         // Change base url to the mocked
-        QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
+        QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().hostSelectionInterceptor().setBaseUrl(mockWebServer.url("").toString());
 
         qualityMattersRestApi = QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().qualityMattersApi();
     }
