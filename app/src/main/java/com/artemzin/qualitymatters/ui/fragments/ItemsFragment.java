@@ -9,13 +9,16 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ItemsModel;
+import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
 import com.artemzin.qualitymatters.performance.AnyThread;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.adapters.ItemsAdapter;
@@ -23,19 +26,12 @@ import com.artemzin.qualitymatters.ui.adapters.VerticalSpaceItemDecoration;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenter;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenterConfiguration;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
-import com.squareup.picasso.Picasso;
-
-import java.util.List;
-
-import javax.inject.Inject;
-import javax.inject.Named;
-
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
+import java.util.List;
+import javax.inject.Inject;
+import javax.inject.Named;
 import rx.schedulers.Schedulers;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
@@ -62,7 +58,7 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     ItemsPresenter itemsPresenter;
 
     @Inject
-    Picasso picasso;
+    QualityMattersImageLoader networkBitmapClient;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -81,7 +77,7 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
         ButterKnife.bind(this, view);
         contentUiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
         contentUiRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration((int) getResources().getDimension(R.dimen.list_item_vertical_space_between_items)));
-        itemsAdapter = new ItemsAdapter(getActivity().getLayoutInflater(), picasso);
+        itemsAdapter = new ItemsAdapter(getActivity().getLayoutInflater(), networkBitmapClient);
         contentUiRecyclerView.setAdapter(itemsAdapter);
         itemsPresenter.bindView(this);
         itemsPresenter.reloadData();
