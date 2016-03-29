@@ -11,7 +11,7 @@ ext.versions = [
         aptGradlePlugin              : '1.8',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
-        paperworkGradlePlugin        : '1.2.4',
+        paperworkGradlePlugin        : '1.2.7',
         jacocoGradlePlugin           : '0.7.6.201602180812',
         androidDevMetricsGradlePlugin: '0.4',
 
