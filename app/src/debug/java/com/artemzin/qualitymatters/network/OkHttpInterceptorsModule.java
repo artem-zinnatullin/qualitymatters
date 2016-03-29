@@ -14,9 +14,7 @@ import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
-import static java.util.Arrays.asList;
 import static java.util.Collections.singletonList;
-import static java.util.Collections.unmodifiableList;
 
 /**
  * Provides OkHttp interceptors for debug build.
@@ -36,9 +34,8 @@ public class OkHttpInterceptorsModule {
     }
 
     @Provides @OkHttpInterceptors @Singleton @NonNull
-    public List<Interceptor> provideOkHttpInterceptors(@NonNull HttpLoggingInterceptor httpLoggingInterceptor,
-                                                       @NonNull HostSelectionInterceptor hostSelectionInterceptor) {
-        return unmodifiableList(asList(httpLoggingInterceptor, hostSelectionInterceptor));
+    public List<Interceptor> provideOkHttpInterceptors(@NonNull HttpLoggingInterceptor httpLoggingInterceptor) {
+        return singletonList(httpLoggingInterceptor);
     }
 
     @Provides @OkHttpNetworkInterceptors @Singleton @NonNull
