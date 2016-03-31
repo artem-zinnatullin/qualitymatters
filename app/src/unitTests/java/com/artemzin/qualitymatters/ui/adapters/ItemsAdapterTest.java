@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
-import com.squareup.picasso.Picasso;
+import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -36,7 +36,7 @@ public class ItemsAdapterTest {
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
-    private Picasso picasso;
+    private QualityMattersImageLoader imageLoader;
 
     @SuppressWarnings("NullableProblems") // Initialized in @Before.
     @NonNull
@@ -45,8 +45,8 @@ public class ItemsAdapterTest {
     @Before
     public void beforeEachTest() {
         layoutInflater = mock(LayoutInflater.class);
-        picasso = mock(Picasso.class);
-        adapter = new ItemsAdapter(layoutInflater, picasso);
+        imageLoader = mock(QualityMattersImageLoader.class);
+        adapter = new ItemsAdapter(layoutInflater, imageLoader);
     }
 
     @Test

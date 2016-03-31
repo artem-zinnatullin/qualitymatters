@@ -5,6 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 
+import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
+import com.artemzin.qualitymatters.models.PicassoImageLoader;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
@@ -48,5 +50,10 @@ public class ApplicationModule {
         return new Picasso.Builder(qualityMattersApp)
                 .downloader(new OkHttp3Downloader(okHttpClient))
                 .build();
+    }
+
+    @Provides @NonNull @Singleton
+    public QualityMattersImageLoader provideImageLoader(@NonNull Picasso picasso) {
+        return new PicassoImageLoader(picasso);
     }
 }
