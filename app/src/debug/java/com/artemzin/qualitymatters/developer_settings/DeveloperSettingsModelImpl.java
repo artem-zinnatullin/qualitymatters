@@ -20,7 +20,7 @@ import static android.view.Gravity.TOP;
 public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
 
     @NonNull
-    private final Application qualityMattersApp;
+    private final Application application;
 
     @NonNull
     private final DeveloperSettings developerSettings;
@@ -43,12 +43,12 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
     @NonNull
     private AtomicBoolean tinyDancerDisplayed = new AtomicBoolean();
 
-    public DeveloperSettingsModelImpl(@NonNull Application qualityMattersApp,
+    public DeveloperSettingsModelImpl(@NonNull Application application,
                                       @NonNull DeveloperSettings developerSettings,
                                       @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                       @NonNull LeakCanaryProxy leakCanaryProxy,
                                       @NonNull Paperwork paperwork) {
-        this.qualityMattersApp = qualityMattersApp;
+        this.application = application;
         this.developerSettings = developerSettings;
         this.httpLoggingInterceptor = httpLoggingInterceptor;
         this.leakCanaryProxy = leakCanaryProxy;
@@ -117,7 +117,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
         // Stetho can not be enabled twice.
         if (stethoAlreadyEnabled.compareAndSet(false, true)) {
             if (isStethoEnabled()) {
-                Stetho.initializeWithDefaults(qualityMattersApp);
+                Stetho.initializeWithDefaults(application);
             }
         }
 
@@ -129,7 +129,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
         }
 
         if (isTinyDancerEnabled() && tinyDancerDisplayed.compareAndSet(false, true)) {
-            final DisplayMetrics displayMetrics = qualityMattersApp.getResources().getDisplayMetrics();
+            final DisplayMetrics displayMetrics = application.getResources().getDisplayMetrics();
 
             TinyDancer.create()
                     .redFlagPercentage(0.2f)
@@ -137,10 +137,10 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
                     .startingGravity(TOP | START)
                     .startingXPosition(displayMetrics.widthPixels / 10)
                     .startingYPosition(displayMetrics.heightPixels / 4)
-                    .show(qualityMattersApp);
+                    .show(application);
         } else if (tinyDancerDisplayed.compareAndSet(true, false)) {
             try {
-                TinyDancer.hide(qualityMattersApp);
+                TinyDancer.hide(application);
             } catch (Exception e) {
                 // In some cases TinyDancer can not be hidden without exception: for example when you start it first time on Android 6.
                 Timber.e(e, "Can not hide TinyDancer");
