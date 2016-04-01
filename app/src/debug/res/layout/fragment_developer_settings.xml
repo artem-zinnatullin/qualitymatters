@@ -175,6 +175,16 @@
 
         </LinearLayout>
 
+        <Button
+            android:id="@+id/developer_settings_restart_app_button"
+            style="@style/DeveloperSettingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Restart app"
+            tools:ignore="HardcodedText"
+          />
+
     </LinearLayout>
 
 </ScrollView>

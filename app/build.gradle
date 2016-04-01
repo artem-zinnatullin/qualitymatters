@@ -149,6 +149,7 @@ dependencies {
     debugCompile libraries.tinyDancer
     debugCompile libraries.paperwork
     debugCompile libraries.lynx
+    debugCompile libraries.processPhoenix
 
     testCompile libraries.junit
     testCompile libraries.robolectric
