@@ -9,8 +9,6 @@ import com.artemzin.qualitymatters.performance.AsyncJob;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
 
-import javax.inject.Inject;
-
 import rx.Subscription;
 
 public class ItemsPresenter extends Presenter<ItemsView> {
@@ -27,7 +25,6 @@ public class ItemsPresenter extends Presenter<ItemsView> {
     @NonNull
     private final AnalyticsModel analyticsModel;
 
-    @Inject
     public ItemsPresenter(@NonNull ItemsPresenterConfiguration presenterConfiguration,
                           @NonNull ItemsModel itemsModel,
                           @NonNull AsyncJobsObserver asyncJobsObserver,
