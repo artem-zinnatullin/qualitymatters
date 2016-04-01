@@ -24,15 +24,15 @@ public class ApplicationModule {
     public static final String MAIN_THREAD_HANDLER = "main_thread_handler";
 
     @NonNull
-    private final Application qualityMattersApp;
+    private final Application application;
 
-    public ApplicationModule(@NonNull Application qualityMattersApp) {
-        this.qualityMattersApp = qualityMattersApp;
+    public ApplicationModule(@NonNull Application application) {
+        this.application = application;
     }
 
     @Provides @NonNull @Singleton
     public Application provideQualityMattersApp() {
-        return qualityMattersApp;
+        return application;
     }
 
     @Provides @NonNull @Singleton

@@ -40,34 +40,34 @@ public class DeveloperSettingsModule {
     @Provides
     @NonNull
     @Singleton
-    public DeveloperSettings provideDeveloperSettings(@NonNull Application qualityMattersApp) {
-        return new DeveloperSettings(qualityMattersApp.getSharedPreferences("developer_settings", MODE_PRIVATE));
+    public DeveloperSettings provideDeveloperSettings(@NonNull Application application) {
+        return new DeveloperSettings(application.getSharedPreferences("developer_settings", MODE_PRIVATE));
     }
 
     @Provides
     @NonNull
     @Singleton
-    public LeakCanaryProxy provideLeakCanaryProxy(@NonNull Application qualityMattersApp) {
-        return new LeakCanaryProxyImpl(qualityMattersApp);
+    public LeakCanaryProxy provideLeakCanaryProxy(@NonNull Application application) {
+        return new LeakCanaryProxyImpl(application);
     }
 
     @Provides
     @NonNull
     @Singleton
-    public Paperwork providePaperwork(@NonNull Application qualityMattersApp) {
-        return new Paperwork(qualityMattersApp);
+    public Paperwork providePaperwork(@NonNull Application application) {
+        return new Paperwork(application);
     }
 
     // We will use this concrete type for debug code, but main code will see only DeveloperSettingsModel interface.
     @Provides
     @NonNull
     @Singleton
-    public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull Application qualityMattersApp,
+    public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull Application application,
                                                                         @NonNull DeveloperSettings developerSettings,
                                                                         @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
                                                                         @NonNull LeakCanaryProxy leakCanaryProxy,
                                                                         @NonNull Paperwork paperwork) {
-        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, httpLoggingInterceptor, leakCanaryProxy, paperwork);
+        return new DeveloperSettingsModelImpl(application, developerSettings, httpLoggingInterceptor, leakCanaryProxy, paperwork);
     }
 
     @Provides
