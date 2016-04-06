@@ -114,6 +114,7 @@ dependencies {
     compile libraries.javaxAnnotationApi
 
     compile libraries.rxJava
+    compile libraries.rxLint
 
     compile libraries.okHttp
     compile libraries.retrofit
