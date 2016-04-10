@@ -36,6 +36,7 @@ ext.versions = [
         tinyDancer                   : '0.0.8',
         yandexAppMetrica             : '2.40',
         lynx                         : '1.6',
+        processPhoenix               : '1.0.2',
 
         junit                        : '4.12',
         robolectric                  : '3.0',
@@ -95,6 +96,7 @@ ext.libraries = [
         paperwork               : "hu.supercluster:paperwork:$versions.paperworkGradlePlugin",
         lynx                    : "com.github.pedrovgs:lynx:$versions.lynx",
         devMetricsNoOp          : "com.frogermcs.androiddevmetrics:androiddevmetrics-runtime-noop:$versions.androidDevMetricsGradlePlugin",
+        processPhoenix          : "com.jakewharton:process-phoenix:$versions.processPhoenix",
 
         // Test dependencies
         junit                   : "junit:junit:$versions.junit",

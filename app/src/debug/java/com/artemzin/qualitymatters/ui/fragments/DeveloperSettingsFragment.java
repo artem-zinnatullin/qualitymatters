@@ -2,9 +2,11 @@ package com.artemzin.qualitymatters.ui.fragments;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +23,7 @@ import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
 import com.github.pedrovgs.lynx.LynxActivity;
 import com.github.pedrovgs.lynx.LynxConfig;
+import com.jakewharton.processphoenix.ProcessPhoenix;
 import okhttp3.logging.HttpLoggingInterceptor;
 
 import java.util.ArrayList;
@@ -103,6 +106,12 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @OnItemSelected(R.id.developer_settings_http_logging_level_spinner)
     void onHttpLoggingLevelChanged(int position) {
         presenter.changeHttpLoggingLevel(((HttpLoggingLevel) httpLoggingLevelSpinner.getItemAtPosition(position)).loggingLevel);
+    }
+
+    @OnClick(R.id.developer_settings_restart_app_button)
+    void onRestartAppClick() {
+        final FragmentActivity activity = getActivity();
+        ProcessPhoenix.triggerRebirth(activity, new Intent(activity, activity.getClass()));
     }
 
     @Override
