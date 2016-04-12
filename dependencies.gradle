@@ -15,7 +15,7 @@ ext.versions = [
         jacocoGradlePlugin           : '0.7.6.201602180812',
         androidDevMetricsGradlePlugin: '0.4',
 
-        dagger                       : '2.2',
+        dagger                       : '2.3',
         javaxInject                  : '1',
         javaxAnnotationApi           : '1.2',
         rxJava                       : '1.1.3',
