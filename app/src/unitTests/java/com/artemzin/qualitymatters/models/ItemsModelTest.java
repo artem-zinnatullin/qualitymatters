@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.models;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
 

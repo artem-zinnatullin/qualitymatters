@@ -1,6 +1,5 @@
 package com.artemzin.qualitymatters.functional_tests.tests;
 
-import android.support.annotation.NonNull;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
 

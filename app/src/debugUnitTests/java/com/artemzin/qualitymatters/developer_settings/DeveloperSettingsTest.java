@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.developer_settings;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 
 import org.junit.Before;

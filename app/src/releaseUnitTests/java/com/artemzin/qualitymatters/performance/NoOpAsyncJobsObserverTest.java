@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.performance;
 
-import android.support.annotation.NonNull;
-
 import org.junit.Before;
 import org.junit.Test;
 

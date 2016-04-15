@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.developer_settings;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.QualityMattersApp;
 
 import org.junit.Before;

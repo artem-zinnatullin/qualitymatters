@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModelImpl;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;

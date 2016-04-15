@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.integration_tests.api;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;

@@ -1,6 +1,5 @@
 package com.artemzin.qualitymatters.models;
 
-import android.support.annotation.NonNull;
 import android.widget.ImageView;
 
 import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;

@@ -1,6 +1,5 @@
 package com.artemzin.qualitymatters.ui.adapters;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
