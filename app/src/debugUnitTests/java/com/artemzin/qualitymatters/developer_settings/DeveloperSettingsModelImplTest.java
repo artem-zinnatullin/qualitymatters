@@ -21,17 +21,8 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
 public class DeveloperSettingsModelImplTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsModelImpl developerSettingsModel;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettings developerSettings;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private Paperwork paperwork;
 
     @Before

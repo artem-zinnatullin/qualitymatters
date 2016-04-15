@@ -28,29 +28,11 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class ItemsPresenterTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsModel itemsModel;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsPresenterConfiguration presenterConfiguration;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsPresenter itemsPresenter;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsView itemsView;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private AsyncJobsObserver asyncJobsObserver;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private AsyncJob asyncJob;
 
     @Before

@@ -20,16 +20,8 @@ import static org.mockito.Mockito.when;
 
 public class DeveloperSettingsPresenterTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsModelImpl developerSettingsModel;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsPresenter developerSettingsPresenter;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsView developerSettingsView;
 
     @Before

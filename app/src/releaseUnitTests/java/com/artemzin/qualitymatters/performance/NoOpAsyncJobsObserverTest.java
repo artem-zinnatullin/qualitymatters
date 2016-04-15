@@ -10,9 +10,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class NoOpAsyncJobsObserverTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private AsyncJobsObserver asyncJobsObserver;
 
     @Before

@@ -30,8 +30,6 @@ public class ItemsTest {
             .around(new AsyncJobsObserverRule())
             .around(new ActivityTestRule<>(MainActivity.class));
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsScreen itemsScreen;
 
     @Before

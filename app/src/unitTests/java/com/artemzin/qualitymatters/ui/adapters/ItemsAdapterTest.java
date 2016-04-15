@@ -29,17 +29,8 @@ import static org.mockito.Mockito.when;
 
 @RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class ItemsAdapterTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private LayoutInflater layoutInflater;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private QualityMattersImageLoader imageLoader;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsAdapter adapter;
 
     @Before

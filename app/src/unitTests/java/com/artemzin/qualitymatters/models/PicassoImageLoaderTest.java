@@ -19,29 +19,12 @@ import static org.mockito.Mockito.when;
 public class PicassoImageLoaderTest {
 
     private static final String FAKE_URL = "http://fakeUrl.com";
-    
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
+
     private ImageView imageView;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private Picasso picasso;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private PicassoImageLoader picassoBitmapClient;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private RequestCreator loadRequestCreator;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private RequestCreator fitRequestCreator;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private RequestCreator centerCropRequestCreator;
 
     @Before

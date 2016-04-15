@@ -30,12 +30,7 @@ import static org.mockito.Mockito.when;
 @RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class DeveloperSettingsSpinnerAdapterTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private LayoutInflater layoutInflater;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsSpinnerAdapter<SelectionOption> adapter;
 
     @Before

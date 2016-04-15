@@ -32,13 +32,7 @@ import static org.assertj.core.api.Assertions.fail;
  */
 @RunWith(QualityMattersIntegrationRobolectricTestRunner.class)
 public class QualityMattersRestApiIntegrationTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private MockWebServer mockWebServer;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private QualityMattersRestApi qualityMattersRestApi;
 
     @Before

@@ -17,8 +17,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class DeveloperSettingsTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettings developerSettings;
 
     @Before
