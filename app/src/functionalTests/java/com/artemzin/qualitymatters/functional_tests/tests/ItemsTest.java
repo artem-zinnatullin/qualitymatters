@@ -2,6 +2,7 @@ package com.artemzin.qualitymatters.functional_tests.tests;
 
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.functional_tests.TestUtils;
