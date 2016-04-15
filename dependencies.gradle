@@ -16,8 +16,7 @@ ext.versions = [
         androidDevMetricsGradlePlugin: '0.4',
 
         dagger                       : '2.4',
-        javaxInject                  : '1',
-        javaxAnnotationApi           : '1.2',
+
         rxJava                       : '1.1.3',
         rxLint                       : '1.0',
         supportLibs                  : '23.1.1',
@@ -59,8 +58,6 @@ ext.gradlePlugins = [
 ext.libraries = [
         dagger                  : "com.google.dagger:dagger:$versions.dagger",
         daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
-        javaxInject             : "javax.inject:javax.inject:$versions.javaxInject",
-        javaxAnnotationApi      : "javax.annotation:javax.annotation-api:$versions.javaxAnnotationApi",
 
         rxJava                  : "io.reactivex:rxjava:$versions.rxJava",
         rxLint                  :  "nl.littlerobots.rxlint:rxlint:$versions.rxLint",

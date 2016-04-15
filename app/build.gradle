@@ -110,8 +110,6 @@ android {
 dependencies {
     compile libraries.dagger
     apt libraries.daggerCompiler
-    compile libraries.javaxInject
-    compile libraries.javaxAnnotationApi
 
     compile libraries.rxJava
     compile libraries.rxLint
