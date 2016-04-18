@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
-import android.support.annotation.NonNull;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -14,13 +12,7 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 
 public class PresenterTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private Presenter<Object> presenter;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private Object view;
 
     @Before

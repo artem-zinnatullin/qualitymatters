@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.developer_settings;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 
 import org.junit.Before;
@@ -17,8 +15,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 @RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class DeveloperSettingsTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettings developerSettings;
 
     @Before

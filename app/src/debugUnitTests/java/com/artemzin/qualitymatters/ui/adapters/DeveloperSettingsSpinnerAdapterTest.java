@@ -2,7 +2,6 @@ package com.artemzin.qualitymatters.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.database.DataSetObserver;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,12 +29,7 @@ import static org.mockito.Mockito.when;
 @RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class DeveloperSettingsSpinnerAdapterTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private LayoutInflater layoutInflater;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsSpinnerAdapter<SelectionOption> adapter;
 
     @Before

@@ -1,6 +1,5 @@
 package com.artemzin.qualitymatters.ui.adapters;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -29,17 +28,8 @@ import static org.mockito.Mockito.when;
 
 @RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class ItemsAdapterTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private LayoutInflater layoutInflater;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private QualityMattersImageLoader imageLoader;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsAdapter adapter;
 
     @Before

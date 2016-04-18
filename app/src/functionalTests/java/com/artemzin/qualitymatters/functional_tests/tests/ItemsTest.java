@@ -1,8 +1,8 @@
 package com.artemzin.qualitymatters.functional_tests.tests;
 
-import android.support.annotation.NonNull;
 import android.support.test.rule.ActivityTestRule;
 import android.support.test.runner.AndroidJUnit4;
+import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.functional_tests.TestUtils;
@@ -30,8 +30,6 @@ public class ItemsTest {
             .around(new AsyncJobsObserverRule())
             .around(new ActivityTestRule<>(MainActivity.class));
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsScreen itemsScreen;
 
     @Before

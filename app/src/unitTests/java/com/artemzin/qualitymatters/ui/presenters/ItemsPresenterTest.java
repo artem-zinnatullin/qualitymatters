@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.api.entities.Item;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ItemsModel;
@@ -28,29 +26,11 @@ import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
 public class ItemsPresenterTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsModel itemsModel;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsPresenterConfiguration presenterConfiguration;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsPresenter itemsPresenter;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemsView itemsView;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private AsyncJobsObserver asyncJobsObserver;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private AsyncJob asyncJob;
 
     @Before

@@ -15,26 +15,15 @@ import dagger.Lazy;
 import timber.log.Timber;
 
 public class QualityMattersApp extends Application {
-
-    @SuppressWarnings("NullableProblems")
-    // Initialized in onCreate. But be careful if you have ContentProviders
-    // -> their onCreate may be called before app.onCreate()
-    // -> move initialization to attachBaseContext().
-    @NonNull
     private ApplicationComponent applicationComponent;
 
-    @SuppressWarnings("NullableProblems") // Initialize in onCreate.
     @Inject
-    @NonNull
     AnalyticsModel analyticsModel;
 
-    @SuppressWarnings("NullableProblems") // Initialize in onCreate.
     @Inject
-    @NonNull
     Lazy<DeveloperSettingsModel> developerSettingModel;
 
     @Inject
-    @NonNull
     Lazy<DevMetricsProxy> devMetricsProxy;
 
     // Prevent need in a singleton (global) reference to the application object.

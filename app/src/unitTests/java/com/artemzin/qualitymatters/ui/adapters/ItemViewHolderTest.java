@@ -1,6 +1,5 @@
 package com.artemzin.qualitymatters.ui.adapters;
 
-import android.support.annotation.NonNull;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,33 +16,12 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 public class ItemViewHolderTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private QualityMattersImageLoader imageLoader;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private View itemView;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ItemViewHolder itemViewHolder;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private ImageView imageView;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private TextView titleTextView;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private TextView shortDescriptionTextView;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private Item item;
 
     @Before
