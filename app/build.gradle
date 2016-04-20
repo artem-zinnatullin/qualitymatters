@@ -26,7 +26,7 @@ android {
         versionName versions.name
 
         // Make generated apks contain version name and code
-        setProperty("archivesBaseName", "-versions.name-versions.code")
+        setProperty("archivesBaseName", "-${versions.name}-${versions.code}")
 
         // Notice that we have custom Instrumentation test runner to change application class (to mock dependencies)!
         testInstrumentationRunner 'com.artemzin.qualitymatters.functional_tests.QualityMattersFunctionalTestsRunner'
