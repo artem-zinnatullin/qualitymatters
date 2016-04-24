@@ -9,6 +9,8 @@ import com.artemzin.qualitymatters.developer_settings.DevMetricsProxy;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModel;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 
+import javax.inject.Inject;
+
 import dagger.Lazy;
 import timber.log.Timber;
 
