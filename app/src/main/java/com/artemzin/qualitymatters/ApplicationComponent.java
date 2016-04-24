@@ -69,7 +69,5 @@ public interface ApplicationComponent {
 
     Lazy<DevMetricsProxy> devMetricsProxy();
 
-    void inject(@NonNull QualityMattersApp qualityMattersApp);
-
     void inject(@NonNull MainActivity mainActivity);
 }
