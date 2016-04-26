@@ -9,9 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import butterknife.Bind;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
+
 import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
@@ -26,12 +24,19 @@ import com.artemzin.qualitymatters.ui.adapters.VerticalSpaceItemDecoration;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenter;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenterConfiguration;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
+
+import java.util.List;
+
+import javax.inject.Inject;
+import javax.inject.Named;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
-import java.util.List;
-import javax.inject.Inject;
-import javax.inject.Named;
 import rx.schedulers.Schedulers;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
@@ -39,13 +44,13 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class ItemsFragment extends BaseFragment implements ItemsView {
-    @Bind(R.id.items_loading_ui)
+    @BindView(R.id.items_loading_ui)
     View loadingUiView;
 
-    @Bind(R.id.items_loading_error_ui)
+    @BindView(R.id.items_loading_error_ui)
     View errorUiView;
 
-    @Bind(R.id.items_content_ui)
+    @BindView(R.id.items_content_ui)
     RecyclerView contentUiRecyclerView;
 
     ItemsAdapter itemsAdapter;
@@ -59,6 +64,10 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
 
     @Inject
     QualityMattersImageLoader networkBitmapClient;
+
+    @SuppressWarnings("NullableProblems")
+    @NonNull
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -74,7 +83,7 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         contentUiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
         contentUiRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration((int) getResources().getDimension(R.dimen.list_item_vertical_space_between_items)));
         itemsAdapter = new ItemsAdapter(getActivity().getLayoutInflater(), networkBitmapClient);
@@ -128,6 +137,7 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @Override
     public void onDestroyView() {
         itemsPresenter.unbindView(this);
+        unbinder.unbind();
         super.onDestroyView();
     }
 
