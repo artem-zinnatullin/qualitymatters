@@ -25,7 +25,7 @@ android {
         versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
         versionName versions.name
 
-        // Make generated apks contain version name and code
+        // Make generated apks contain version name and code.
         archivesBaseName = "app-${versions.name}-${versions.code}"
 
         // Notice that we have custom Instrumentation test runner to change application class (to mock dependencies)!
