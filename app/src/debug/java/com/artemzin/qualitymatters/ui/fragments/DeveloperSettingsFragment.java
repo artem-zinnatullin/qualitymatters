@@ -24,18 +24,19 @@ import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
 import com.github.pedrovgs.lynx.LynxActivity;
 import com.github.pedrovgs.lynx.LynxConfig;
 import com.jakewharton.processphoenix.ProcessPhoenix;
-import okhttp3.logging.HttpLoggingInterceptor;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
 import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import butterknife.Unbinder;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class DeveloperSettingsFragment extends BaseFragment implements DeveloperSettingsView {
 
@@ -45,29 +46,33 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Inject
     LynxConfig lynxConfig;
 
-    @Bind(R.id.developer_settings_git_sha_text_view)
+    @BindView(R.id.developer_settings_git_sha_text_view)
     TextView gitShaTextView;
 
-    @Bind(R.id.developer_settings_build_date_text_view)
+    @BindView(R.id.developer_settings_build_date_text_view)
     TextView buildDateTextView;
 
-    @Bind(R.id.developer_settings_build_version_code_text_view)
+    @BindView(R.id.developer_settings_build_version_code_text_view)
     TextView buildVersionCodeTextView;
 
-    @Bind(R.id.developer_settings_build_version_name_text_view)
+    @BindView(R.id.developer_settings_build_version_name_text_view)
     TextView buildVersionNameTextView;
 
-    @Bind(R.id.developer_settings_stetho_switch)
+    @BindView(R.id.developer_settings_stetho_switch)
     Switch stethoSwitch;
 
-    @Bind(R.id.developer_settings_leak_canary_switch)
+    @BindView(R.id.developer_settings_leak_canary_switch)
     Switch leakCanarySwitch;
 
-    @Bind(R.id.developer_settings_tiny_dancer_switch)
+    @BindView(R.id.developer_settings_tiny_dancer_switch)
     Switch tinyDancerSwitch;
 
-    @Bind(R.id.developer_settings_http_logging_level_spinner)
+    @BindView(R.id.developer_settings_http_logging_level_spinner)
     Spinner httpLoggingLevelSpinner;
+
+    @SuppressWarnings("NullableProblems")
+    @NonNull
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -84,7 +89,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         httpLoggingLevelSpinner
                 .setAdapter(new DeveloperSettingsSpinnerAdapter<>(getActivity().getLayoutInflater())
@@ -222,6 +227,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Override
     public void onDestroyView() {
         presenter.unbindView(this);
+        unbinder.unbind();
         super.onDestroyView();
     }
 

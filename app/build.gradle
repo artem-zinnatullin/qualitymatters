@@ -135,6 +135,8 @@ dependencies {
     compile libraries.supportCardView
 
     compile libraries.butterKnife
+    apt libraries.butterKnifeCompiler
+    
     compile libraries.picasso
     compile libraries.picassoOkHttpDownloader
     compile libraries.timber
