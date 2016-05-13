@@ -38,6 +38,9 @@ buildscript {
 
         // Method count plugin for android projects
         classpath gradlePlugins.dexcount
+
+        // Check latest version of dependencies, task: dependencyUpdates
+        classpath gradlePlugins.versions
     }
 
     // Part of workaround for Lint + Retrolambda.
@@ -84,6 +87,8 @@ subprojects {
         checkTask.dependsOn('pmd')
         checkTask.dependsOn('findbugs')
         checkTask.dependsOn('checkstyle')
+
+        dependencyUpdates.outputDir = new File("${projectDir}/build/reports/versions")
 
         // Log instrumentation tests results.
         tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
