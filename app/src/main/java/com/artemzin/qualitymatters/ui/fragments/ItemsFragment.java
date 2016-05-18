@@ -1,7 +1,6 @@
 package com.artemzin.qualitymatters.ui.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
@@ -28,7 +26,6 @@ import com.artemzin.qualitymatters.ui.views.ItemsView;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,10 +51,6 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     RecyclerView contentUiRecyclerView;
 
     ItemsAdapter itemsAdapter;
-
-    @Inject
-    @Named(ApplicationModule.MAIN_THREAD_HANDLER)
-    Handler mainThreadHandler;
 
     @Inject
     ItemsPresenter itemsPresenter;
