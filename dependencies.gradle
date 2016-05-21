@@ -14,6 +14,7 @@ ext.versions = [
         paperworkGradlePlugin        : '1.2.7',
         jacocoGradlePlugin           : '0.7.6.201602180812',
         androidDevMetricsGradlePlugin: '0.4',
+        inferVersion                 : '0.7.0',
 
         dagger                       : '2.4',
 
@@ -53,6 +54,7 @@ ext.gradlePlugins = [
         paperwork        : "hu.supercluster:paperwork-plugin:$versions.paperworkGradlePlugin",
         jacoco           : "org.jacoco:org.jacoco.core:$versions.jacocoGradlePlugin",
         androidDevMetrics: "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.androidDevMetricsGradlePlugin",
+        infer            : "com.uber:infer-plugin:$versions.inferVersion",
 ]
 
 ext.libraries = [

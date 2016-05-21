@@ -5,6 +5,7 @@ apply plugin: 'hu.supercluster.paperwork'
 apply from: '../code_quality_tools/jacoco.gradle'
 apply plugin: 'com.frogermcs.androiddevmetrics'
 apply from: '../code_quality_tools/quality.gradle'
+apply plugin: 'com.uber.infer.android'
 
 paperwork {
     set = [
@@ -136,7 +137,7 @@ dependencies {
 
     compile libraries.butterKnife
     apt libraries.butterKnifeCompiler
-    
+
     compile libraries.picasso
     compile libraries.picassoOkHttpDownloader
     compile libraries.timber

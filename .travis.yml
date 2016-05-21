@@ -16,6 +16,7 @@ android:
 
 before_install:
   - pip install --user codecov
+  - brew install infer
 
 before_script:
   - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
@@ -25,7 +26,7 @@ before_script:
 
 script:
   - sh ci.sh
-  
+
 after_success:
   - codecov
 
