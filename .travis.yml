@@ -16,7 +16,9 @@ android:
 
 before_install:
   - pip install --user codecov
-  - brew install infer
+  - wget -O Dockerfile https://raw.githubusercontent.com/facebook/infer/master/docker/Dockerfile
+  - wget -O run.sh https://raw.githubusercontent.com/facebook/infer/master/docker/run.sh
+  - sh run.sh
 
 before_script:
   - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a

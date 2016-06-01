@@ -73,7 +73,8 @@ subprojects {
         checkTask.dependsOn('pmd')
         checkTask.dependsOn('findbugs')
         checkTask.dependsOn('checkstyle')
-        checkTask.dependsOn('infer')
+        checkTask.dependsOn('inferDebug')
+        checkTask.dependsOn('inferRelease')
 
         // Log instrumentation tests results.
         tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->

@@ -14,7 +14,7 @@ ext.versions = [
         paperworkGradlePlugin        : '1.2.7',
         jacocoGradlePlugin           : '0.7.6.201602180812',
         androidDevMetricsGradlePlugin: '0.4',
-        inferVersion                 : '0.7.0',
+        inferVersion                 : '0.7.1',
 
         dagger                       : '2.4',
 
