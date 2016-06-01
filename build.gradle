@@ -31,6 +31,9 @@ buildscript {
 
         // Performance metrics library for Android development.
         classpath gradlePlugins.androidDevMetrics
+
+        // Gradle plugin that allows easy integration with the infer static analyzer.
+        classpath gradlePlugins.infer
     }
 
     // Part of workaround for Lint + Retrolambda.
@@ -70,6 +73,8 @@ subprojects {
         checkTask.dependsOn('pmd')
         checkTask.dependsOn('findbugs')
         checkTask.dependsOn('checkstyle')
+        checkTask.dependsOn('inferDebug')
+        checkTask.dependsOn('inferRelease')
 
         // Log instrumentation tests results.
         tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
