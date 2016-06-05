@@ -15,12 +15,6 @@ import timber.log.Timber;
 public class QualityMattersApp extends Application {
     private ApplicationComponent applicationComponent;
 
-    private AnalyticsModel analyticsModel;
-
-    private Lazy<DeveloperSettingsModel> developerSettingModel;
-
-    private Lazy<DevMetricsProxy> devMetricsProxy;
-
     // Prevent need in a singleton (global) reference to the application object.
     @NonNull
     public static QualityMattersApp get(@NonNull Context context) {
@@ -32,9 +26,9 @@ public class QualityMattersApp extends Application {
         super.onCreate();
         applicationComponent = prepareApplicationComponent().build();
 
-        analyticsModel = applicationComponent.analyticsModel();
-        developerSettingModel = applicationComponent.developerSettingModel();
-        devMetricsProxy = applicationComponent.devMetricsProxy();
+        AnalyticsModel analyticsModel = applicationComponent.analyticsModel();
+        Lazy<DeveloperSettingsModel> developerSettingModel = applicationComponent.developerSettingModel();
+        Lazy<DevMetricsProxy> devMetricsProxy = applicationComponent.devMetricsProxy();
 
         analyticsModel.init();
 
