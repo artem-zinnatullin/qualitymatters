@@ -33,7 +33,7 @@ buildscript {
         // Performance metrics library for Android development.
         classpath gradlePlugins.androidDevMetrics
 
-        // Catch common Java mistakes as compile-time errors
+        // Catches common Java mistakes as compile-time errors.
         classpath gradlePlugins.errorProne
     }
 

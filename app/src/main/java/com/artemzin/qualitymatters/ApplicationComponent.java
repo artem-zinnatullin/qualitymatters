@@ -23,7 +23,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import javax.inject.Singleton;
 
 import dagger.Component;
-import dagger.Lazy;
 
 @Singleton
 @Component(modules = {
@@ -52,7 +51,7 @@ public interface ApplicationComponent {
     @NonNull
     AsyncJobsObserver asyncJobsObserver();
 
-    // Provide LeakCanary without injection to leave
+    // Provide LeakCanary without injection to leave.
     @NonNull
     LeakCanaryProxy leakCanaryProxy();
 
@@ -65,9 +64,9 @@ public interface ApplicationComponent {
     @NonNull
     AnalyticsModel analyticsModel();
 
-    Lazy<DeveloperSettingsModel> developerSettingModel();
+    DeveloperSettingsModel developerSettingModel();
 
-    Lazy<DevMetricsProxy> devMetricsProxy();
+    DevMetricsProxy devMetricsProxy();
 
     void inject(@NonNull MainActivity mainActivity);
 }

@@ -9,7 +9,6 @@ import com.artemzin.qualitymatters.developer_settings.DevMetricsProxy;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModel;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 
-import dagger.Lazy;
 import timber.log.Timber;
 
 public class QualityMattersApp extends Application {
@@ -27,15 +26,17 @@ public class QualityMattersApp extends Application {
         applicationComponent = prepareApplicationComponent().build();
 
         AnalyticsModel analyticsModel = applicationComponent.analyticsModel();
-        Lazy<DeveloperSettingsModel> developerSettingModel = applicationComponent.developerSettingModel();
-        Lazy<DevMetricsProxy> devMetricsProxy = applicationComponent.devMetricsProxy();
 
         analyticsModel.init();
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
-            developerSettingModel.get().apply();
-            devMetricsProxy.get().apply();
+
+            DeveloperSettingsModel developerSettingModel = applicationComponent.developerSettingModel();
+            developerSettingModel.apply();
+
+            DevMetricsProxy devMetricsProxy = applicationComponent.devMetricsProxy();
+            devMetricsProxy.apply();
         }
     }
 
