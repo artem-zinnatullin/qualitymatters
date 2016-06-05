@@ -17,14 +17,11 @@ import timber.log.Timber;
 public class QualityMattersApp extends Application {
     private ApplicationComponent applicationComponent;
 
-    @Inject
-    AnalyticsModel analyticsModel;
+    private AnalyticsModel analyticsModel;
 
-    @Inject
-    Lazy<DeveloperSettingsModel> developerSettingModel;
+    private Lazy<DeveloperSettingsModel> developerSettingModel;
 
-    @Inject
-    Lazy<DevMetricsProxy> devMetricsProxy;
+    private Lazy<DevMetricsProxy> devMetricsProxy;
 
     // Prevent need in a singleton (global) reference to the application object.
     @NonNull

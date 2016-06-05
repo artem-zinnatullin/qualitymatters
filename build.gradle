@@ -69,7 +69,7 @@ subprojects {
     project.plugins.apply('net.ltgt.errorprone')
 
     configurations.errorprone {
-        resolutionStrategy.force 'com.google.errorprone:error_prone_core:2.0.8'
+        resolutionStrategy.force "com.google.errorprone:error_prone_core:${versions.errorProneCoreVersion}"
     }
 
     afterEvaluate {
