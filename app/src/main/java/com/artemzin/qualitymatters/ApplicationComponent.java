@@ -5,9 +5,12 @@ import android.support.annotation.NonNull;
 import com.artemzin.qualitymatters.api.ApiModule;
 import com.artemzin.qualitymatters.api.ChangeableBaseUrl;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
+import com.artemzin.qualitymatters.developer_settings.DevMetricsProxy;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsComponent;
+import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModel;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
 import com.artemzin.qualitymatters.developer_settings.LeakCanaryProxy;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ModelsModule;
 import com.artemzin.qualitymatters.network.NetworkModule;
 import com.artemzin.qualitymatters.network.OkHttpInterceptorsModule;
@@ -48,7 +51,7 @@ public interface ApplicationComponent {
     @NonNull
     AsyncJobsObserver asyncJobsObserver();
 
-    // Provide LeakCanary without injection to leave
+    // Provide LeakCanary without injection to leave.
     @NonNull
     LeakCanaryProxy leakCanaryProxy();
 
@@ -58,7 +61,12 @@ public interface ApplicationComponent {
     @NonNull
     DeveloperSettingsComponent plusDeveloperSettingsComponent();
 
-    void inject(@NonNull QualityMattersApp qualityMattersApp);
+    @NonNull
+    AnalyticsModel analyticsModel();
+
+    DeveloperSettingsModel developerSettingModel();
+
+    DevMetricsProxy devMetricsProxy();
 
     void inject(@NonNull MainActivity mainActivity);
 }

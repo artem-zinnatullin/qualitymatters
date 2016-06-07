@@ -9,22 +9,10 @@ import com.artemzin.qualitymatters.developer_settings.DevMetricsProxy;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModel;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 
-import javax.inject.Inject;
-
-import dagger.Lazy;
 import timber.log.Timber;
 
 public class QualityMattersApp extends Application {
     private ApplicationComponent applicationComponent;
-
-    @Inject
-    AnalyticsModel analyticsModel;
-
-    @Inject
-    Lazy<DeveloperSettingsModel> developerSettingModel;
-
-    @Inject
-    Lazy<DevMetricsProxy> devMetricsProxy;
 
     // Prevent need in a singleton (global) reference to the application object.
     @NonNull
@@ -36,14 +24,19 @@ public class QualityMattersApp extends Application {
     public void onCreate() {
         super.onCreate();
         applicationComponent = prepareApplicationComponent().build();
-        applicationComponent.inject(this);
+
+        AnalyticsModel analyticsModel = applicationComponent.analyticsModel();
 
         analyticsModel.init();
 
         if (BuildConfig.DEBUG) {
             Timber.plant(new Timber.DebugTree());
-            developerSettingModel.get().apply();
-            devMetricsProxy.get().apply();
+
+            DeveloperSettingsModel developerSettingModel = applicationComponent.developerSettingModel();
+            developerSettingModel.apply();
+
+            DevMetricsProxy devMetricsProxy = applicationComponent.devMetricsProxy();
+            devMetricsProxy.apply();
         }
     }
 
