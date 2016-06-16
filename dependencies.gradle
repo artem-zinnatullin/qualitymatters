@@ -5,9 +5,9 @@ ext.versions = [
         minSdk                       : 16,
         targetSdk                    : 23,
         compileSdk                   : 23,
-        buildTools                   : '23.0.2',
+        buildTools                   : '23.0.3',
 
-        androidGradlePlugin          : '2.0.0',
+        androidGradlePlugin          : '2.1.0',
         aptGradlePlugin              : '1.8',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
@@ -21,7 +21,7 @@ ext.versions = [
 
         rxJava                       : '1.1.5',
         rxLint                       : '1.0',
-        supportLibs                  : '23.1.1',
+        supportLibs                  : '24.0.0',
         okHttp                       : '3.2.0',
         retrofit                     : '2.0.0-beta4',
         jackson                      : '2.6.3',
