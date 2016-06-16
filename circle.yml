@@ -6,7 +6,7 @@ dependencies:
   pre:
     - echo y | android update sdk --no-ui --all --filter "platform-tools,tools,android-23,extra-android-m2repository,extra-android-support,sys-img-armeabi-v7a-android-18"
     # Build tools should be installed after "tools", uh.
-    - echo y | android update sdk --no-ui --all --filter "build-tools-23.0.2"
+    - echo y | android update sdk --no-ui --all --filter "build-tools-23.0.3"
 
 test:
   override:
