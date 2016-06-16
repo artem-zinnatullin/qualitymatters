@@ -35,5 +35,10 @@
     <Match>
         <Class name="~.*\$\$ViewBinder\$InnerUnbinder*"/>
     </Match>
+
+    <Match>
+        <Class name="*"/>
+        <Bug type="SIC_INNER_SHOULD_BE_STATIC_ANON"/>
+    </Match>
     
 </FindBugsFilter>
