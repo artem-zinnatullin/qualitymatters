@@ -136,7 +136,7 @@ dependencies {
 
     compile libraries.butterKnife
     apt libraries.butterKnifeCompiler
-    
+
     compile libraries.picasso
     compile libraries.picassoOkHttpDownloader
     compile libraries.timber
@@ -179,5 +179,19 @@ configurations.all {
     resolutionStrategy {
         // Force our version of support-annotations, we have a conflict between app and androidTest dependency resolution.
         force libraries.supportAnnotations
+    }
+}
+
+// Check if the build requires dex count
+def withDexcount = project.hasProperty('withDexcount')
+if (withDexcount) {
+    apply plugin: 'com.getkeepsafe.dexcount'
+
+    dexcount {
+        format = 'list'
+        includeFieldCount = true
+        includeTotalMethodCount = true
+        verbose = false
+        maxTreeDepth = Integer.MAX_VALUE
     }
 }

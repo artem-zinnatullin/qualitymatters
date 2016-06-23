@@ -16,6 +16,7 @@ ext.versions = [
         androidDevMetricsGradlePlugin: '0.4',
         errorProneVersion            : '0.0.8',
         errorProneCoreVersion        : '2.0.9',
+        dexcountPlugin               : '0.5.4',
 
         dagger                       : '2.4',
 
@@ -56,6 +57,7 @@ ext.gradlePlugins = [
         jacoco           : "org.jacoco:org.jacoco.core:$versions.jacocoGradlePlugin",
         androidDevMetrics: "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.androidDevMetricsGradlePlugin",
         errorProne       : "net.ltgt.gradle:gradle-errorprone-plugin:$versions.errorProneVersion",
+        dexcount         : "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$versions.dexcountPlugin",
 ]
 
 ext.libraries = [
