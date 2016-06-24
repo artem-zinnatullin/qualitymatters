@@ -35,6 +35,9 @@ buildscript {
 
         // Catches common Java mistakes as compile-time errors.
         classpath gradlePlugins.errorProne
+
+        // Method count plugin for android projects
+        classpath gradlePlugins.dexcount
     }
 
     // Part of workaround for Lint + Retrolambda.
