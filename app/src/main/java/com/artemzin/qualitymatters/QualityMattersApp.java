@@ -44,7 +44,7 @@ public class QualityMattersApp extends Application {
     protected DaggerApplicationComponent.Builder prepareApplicationComponent() {
         return DaggerApplicationComponent.builder()
                 .applicationModule(new ApplicationModule(this))
-                // This url may be changed dynamically for tests! See ChangeableBaseUrl.
+                // This url may be changed dynamically for tests! See HostSelectionInterceptor.
                 .apiModule(new ApiModule("https://raw.githubusercontent.com/artem-zinnatullin/qualitymatters/master/rest_api/"));
     }
 

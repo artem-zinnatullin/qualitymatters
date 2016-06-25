@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.functional_tests.TestUtils;
 
+import java.io.IOException;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
@@ -36,7 +37,7 @@ public class MockWebServerRule implements TestRule {
                     final MockWebServer mockWebServer = new MockWebServer();
                     mockWebServer.start();
 
-                    TestUtils.app().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
+                    TestUtils.app().applicationComponent().hostSelectionInterceptor().setBaseUrl(mockWebServer.url("").toString());
 
                     if (!needsMockWebServer.setupMethod().isEmpty()) {
                         final Method setupMethod = testClassInstance.getClass().getDeclaredMethod(needsMockWebServer.setupMethod(), MockWebServer.class);
@@ -47,7 +48,11 @@ public class MockWebServerRule implements TestRule {
                     try {
                         base.evaluate();
                     } finally {
-                        mockWebServer.shutdown();
+                        try {
+                            mockWebServer.shutdown();
+                        } catch (IOException ignored) {
+                            // do nothing.
+                        }
                     }
                 } else {
                     // No need to setup a MockWebServer, just evaluate the test.

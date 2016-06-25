@@ -28,6 +28,11 @@ public class OkHttpInterceptorsModule {
         return new HttpLoggingInterceptor(message -> Timber.d(message));
     }
 
+    @Provides @Singleton @NonNull
+    public HostSelectionInterceptor provideHostSelectionInterceptor() {
+        return new HostSelectionInterceptor();
+    }
+
     @Provides @OkHttpInterceptors @Singleton @NonNull
     public List<Interceptor> provideOkHttpInterceptors(@NonNull HttpLoggingInterceptor httpLoggingInterceptor) {
         return singletonList(httpLoggingInterceptor);

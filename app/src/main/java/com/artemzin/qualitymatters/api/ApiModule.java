@@ -3,6 +3,7 @@ package com.artemzin.qualitymatters.api;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.BuildConfig;
+import com.artemzin.qualitymatters.network.ForRestApi;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import javax.inject.Singleton;
@@ -18,26 +19,25 @@ import retrofit2.converter.jackson.JacksonConverterFactory;
 public class ApiModule {
 
     @NonNull
-    private final ChangeableBaseUrl changeableBaseUrl;
+    private final String baseUrl;
 
     public ApiModule(@NonNull String baseUrl) {
-        changeableBaseUrl = new ChangeableBaseUrl(baseUrl);
+        this.baseUrl = baseUrl;
     }
 
     @Provides @NonNull @Singleton
-    public ChangeableBaseUrl provideChangeableBaseUrl() {
-        return changeableBaseUrl;
+    public QualityMattersRestApi provideQualityMattersApi(@NonNull Retrofit retrofit) {
+        return retrofit.create(QualityMattersRestApi.class);
     }
 
-    @Provides @NonNull @Singleton
-    public QualityMattersRestApi provideQualityMattersApi(@NonNull OkHttpClient okHttpClient, @NonNull ObjectMapper objectMapper, @NonNull ChangeableBaseUrl changeableBaseUrl) {
+    @Provides @NonNull
+    public Retrofit provideRetrofit(@NonNull @ForRestApi OkHttpClient okHttpClient, @NonNull ObjectMapper objectMapper) {
         return new Retrofit.Builder()
-                .baseUrl(changeableBaseUrl)
-                .client(okHttpClient)
-                .addConverterFactory(JacksonConverterFactory.create(objectMapper))
-                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
-                .validateEagerly(BuildConfig.DEBUG)  // Fail early: check Retrofit configuration at creation time in Debug build.
-                .build()
-                .create(QualityMattersRestApi.class);
+            .baseUrl(baseUrl)
+            .client(okHttpClient)
+            .addConverterFactory(JacksonConverterFactory.create(objectMapper))
+            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+            .validateEagerly(BuildConfig.DEBUG)  // Fail early: check Retrofit configuration at creation time in Debug build.
+            .build();
     }
 }
