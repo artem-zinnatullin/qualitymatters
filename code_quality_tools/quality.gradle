@@ -20,10 +20,8 @@ task findbugs(type: FindBugs) {
     reportLevel = 'low' // Report even low priority problems.
 
     reports {
-        xml {
-            enabled = true
-            withMessages = true
-        }
+        html.enabled = true
+        xml.enabled = false
     }
 
     classes = files("${project.projectDir}/build/intermediates/classes")
