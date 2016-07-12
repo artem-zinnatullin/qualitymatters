@@ -42,7 +42,7 @@ ext.versions = [
         processPhoenix               : '1.0.2',
 
         junit                        : '4.12',
-        robolectric                  : '3.0',
+        robolectric                  : '3.1',
         assertJ                      : '2.4.0',
         equalsVerifier               : '1.7.5',
         mockito                      : '1.10.19',
