@@ -12,7 +12,7 @@ import java.lang.reflect.Method;
 public class QualityMattersIntegrationRobolectricTestRunner extends RobolectricGradleTestRunner {
 
     // This value should be changed as soon as Robolectric will support newer api.
-    private static final int SDK_EMULATE_LEVEL = 21;
+    private static final int SDK_EMULATE_LEVEL = 23;
 
     public QualityMattersIntegrationRobolectricTestRunner(@NonNull Class<?> klass) throws Exception {
         super(klass);
@@ -26,10 +26,13 @@ public class QualityMattersIntegrationRobolectricTestRunner extends RobolectricG
                 defaultConfig.manifest(),
                 defaultConfig.qualifiers(),
                 defaultConfig.packageName(),
+                defaultConfig.abiSplit(),
                 defaultConfig.resourceDir(),
                 defaultConfig.assetDir(),
+                defaultConfig.buildDir(),
                 defaultConfig.shadows(),
-                QualityMattersIntegrationTestApp.class,
+                defaultConfig.instrumentedPackages(),
+                QualityMattersUnitTestApp.class, // Notice that we override real application class for Unit tests.
                 defaultConfig.libraries(),
                 defaultConfig.constants() == Void.class ? BuildConfig.class : defaultConfig.constants()
         );
