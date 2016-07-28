@@ -28,7 +28,7 @@ ext.versions = [
         retrofit                     : '2.0.0-beta4',
         jackson                      : '2.8.1',
         autoValue                    : '1.2',
-        butterKnife                  : '8.0.1',
+        butterKnife                  : '8.2.1',
         picasso                      : '2.5.2',
         picassoOkHttpDownloader      : '1.0.2',
         timber                       : '4.1.2',
