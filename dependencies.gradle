@@ -43,7 +43,7 @@ ext.versions = [
 
         junit                        : '4.12',
         robolectric                  : '3.1',
-        assertJ                      : '2.4.0',
+        assertJ                      : '2.5.0',
         equalsVerifier               : '1.7.5',
         mockito                      : '1.10.19',
         supportTestRunner            : '0.5',
