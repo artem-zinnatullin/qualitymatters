@@ -19,7 +19,7 @@ ext.versions = [
         dexcountPlugin               : '0.5.4',
         versionsGradlePlugin         : '0.13.0',
 
-        dagger                       : '2.4',
+        dagger                       : '2.6',
 
         rxJava                       : '1.1.8',
         rxLint                       : '1.0',
