@@ -21,7 +21,7 @@ ext.versions = [
 
         dagger                       : '2.4',
 
-        rxJava                       : '1.1.5',
+        rxJava                       : '1.1.8',
         rxLint                       : '1.0',
         supportLibs                  : '23.1.1',
         okHttp                       : '3.2.0',
