@@ -118,7 +118,10 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
             loadingUiView.setVisibility(GONE);
             errorUiView.setVisibility(GONE);
             contentUiRecyclerView.setVisibility(VISIBLE);
-            itemsAdapter.setData(items);
+
+            if (itemsAdapter != null) {
+                itemsAdapter.setData(items);
+            }
         });
     }
 
@@ -130,7 +133,11 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @Override
     public void onDestroyView() {
         itemsPresenter.unbindView(this);
-        unbinder.unbind();
+
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+
         super.onDestroyView();
     }
 
