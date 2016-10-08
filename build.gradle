@@ -41,6 +41,9 @@ buildscript {
 
         // Check latest version of dependencies, task: dependencyUpdates
         classpath gradlePlugins.versions
+
+        // Analyse builds to profile
+        classpath gradlePlugins.buildScan
     }
 
     // Part of workaround for Lint + Retrolambda.
@@ -100,4 +103,10 @@ subprojects {
             }
         }
     }
+}
+
+apply plugin: "com.gradle.build-scan"
+buildScan {
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
 }
