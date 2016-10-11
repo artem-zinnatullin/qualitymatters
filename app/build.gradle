@@ -123,11 +123,15 @@ dependencies {
     compile libraries.retrofitJacksonConverter
     compile libraries.retrofitRxJavaAdapter
     compile libraries.jacksonDataBind
+    compile libraries.gson
 
     // Do not compile AutoValue dependencies to the app.
     apt libraries.autoValue
+    apt libraries.autoValueGson
+
     // Make AutoValue annotation visible to the compiler.
     provided libraries.autoValue
+    provided libraries.autoValueGson
 
     compile libraries.supportAnnotations
     compile libraries.supportAppCompat

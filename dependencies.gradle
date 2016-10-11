@@ -18,7 +18,7 @@ ext.versions = [
         errorProneCoreVersion        : '2.0.9',
         dexcountPlugin               : '0.5.4',
         versionsGradlePlugin         : '0.13.0',
-        buildScan                   : '1.1.1',
+        buildScan                    : '1.1.1',
 
         dagger                       : '2.6',
 
@@ -28,7 +28,9 @@ ext.versions = [
         okHttp                       : '3.2.0',
         retrofit                     : '2.0.0-beta4',
         jackson                      : '2.8.1',
+        gson                         : '2.7',
         autoValue                    : '1.2',
+        autoValueGson                : '0.4.2',
         butterKnife                  : '8.2.1',
         picasso                      : '2.5.2',
         picassoOkHttpDownloader      : '1.0.2',
@@ -77,8 +79,10 @@ ext.libraries = [
         retrofitJacksonConverter: "com.squareup.retrofit2:converter-jackson:$versions.retrofit",
         retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
         jacksonDataBind         : "com.fasterxml.jackson.core:jackson-databind:$versions.jackson",
+        gson                    : "com.google.code.gson:gson:$versions.gson",
 
         autoValue               : "com.google.auto.value:auto-value:$versions.autoValue",
+        autoValueGson           : "com.ryanharter.auto.value:auto-value-gson:$versions.autoValueGson",
 
         supportAnnotations      : "com.android.support:support-annotations:$versions.supportLibs",
         supportAppCompat        : "com.android.support:appcompat-v7:$versions.supportLibs",
