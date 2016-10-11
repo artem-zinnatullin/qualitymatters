@@ -2,16 +2,15 @@ package com.artemzin.qualitymatters.api.entities;
 
 import android.support.annotation.NonNull;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.google.auto.value.AutoValue;
+import com.google.gson.Gson;
+import com.google.gson.TypeAdapter;
+import com.google.gson.annotations.SerializedName;
 
 // This class is immutable, it has correctly implemented hashCode and equals.
 // Thanks to AutoValue https://github.com/google/auto/tree/master/value.
 @AutoValue
-@JsonDeserialize(builder = AutoValue_Item.Builder.class)
 public abstract class Item {
-
     private static final String JSON_PROPERTY_ID = "id";
     private static final String JSON_PROPERTY_IMAGE_PREVIEW_URL = "image_preview_url";
     private static final String JSON_PROPERTY_TITLE = "title";
@@ -23,38 +22,39 @@ public abstract class Item {
     }
 
     @NonNull
-    @JsonProperty(JSON_PROPERTY_ID)
+    public static TypeAdapter<Item> typeAdapter(Gson gson) {
+        return new AutoValue_Item.GsonTypeAdapter(gson);
+    }
+
+    @NonNull
+    @SerializedName(JSON_PROPERTY_ID)
     public abstract String id();
 
     @NonNull
-    @JsonProperty(JSON_PROPERTY_IMAGE_PREVIEW_URL)
+    @SerializedName(JSON_PROPERTY_IMAGE_PREVIEW_URL)
     public abstract String imagePreviewUrl();
 
     @NonNull
-    @JsonProperty(JSON_PROPERTY_TITLE)
+    @SerializedName(JSON_PROPERTY_TITLE)
     public abstract String title();
 
     @NonNull
-    @JsonProperty(JSON_PROPERTY_SHORT_DESCRIPTION)
+    @SerializedName(JSON_PROPERTY_SHORT_DESCRIPTION)
     public abstract String shortDescription();
 
     @AutoValue.Builder
     public static abstract class Builder {
 
         @NonNull
-        @JsonProperty(JSON_PROPERTY_ID)
         public abstract Builder id(@NonNull String id);
 
         @NonNull
-        @JsonProperty(JSON_PROPERTY_IMAGE_PREVIEW_URL)
         public abstract Builder imagePreviewUrl(@NonNull String imagePreviewUrl);
 
         @NonNull
-        @JsonProperty(JSON_PROPERTY_TITLE)
         public abstract Builder title(@NonNull String title);
 
         @NonNull
-        @JsonProperty(JSON_PROPERTY_SHORT_DESCRIPTION)
         public abstract Builder shortDescription(@NonNull String shortDescription);
 
         @NonNull

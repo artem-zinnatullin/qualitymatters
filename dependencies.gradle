@@ -27,7 +27,6 @@ ext.versions = [
         supportLibs                  : '23.1.1',
         okHttp                       : '3.2.0',
         retrofit                     : '2.0.0-beta4',
-        jackson                      : '2.8.1',
         gson                         : '2.7',
         autoValue                    : '1.2',
         autoValueGson                : '0.4.2',
@@ -76,9 +75,8 @@ ext.libraries = [
         okHttp                  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
         okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
         retrofit                : "com.squareup.retrofit2:retrofit:$versions.retrofit",
-        retrofitJacksonConverter: "com.squareup.retrofit2:converter-jackson:$versions.retrofit",
+        retrofitGsonConverter   : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
         retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
-        jacksonDataBind         : "com.fasterxml.jackson.core:jackson-databind:$versions.jackson",
         gson                    : "com.google.code.gson:gson:$versions.gson",
 
         autoValue               : "com.google.auto.value:auto-value:$versions.autoValue",

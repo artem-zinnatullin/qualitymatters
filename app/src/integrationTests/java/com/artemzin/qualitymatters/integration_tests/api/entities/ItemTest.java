@@ -2,7 +2,7 @@ package com.artemzin.qualitymatters.integration_tests.api.entities;
 
 import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.entities.Item;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,9 +19,9 @@ public class ItemTest {
     // 2. Be sure that @JsonIgnore and similar annotations do not affect expected behavior (cc @karlicos).
     @Test
     public void fromJson() throws IOException {
-        ObjectMapper objectMapper = QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().objectMapper();
+        Gson gson = QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().gson();
 
-        Item item = objectMapper.readValue("{ " +
+        Item item = gson.fromJson("{ " +
                         "\"id\": \"test_id\", " +
                         "\"image_preview_url\": \"some_url\"," +
                         "\"title\": \"Test title\", " +
@@ -34,5 +34,4 @@ public class ItemTest {
         assertThat(item.title()).isEqualTo("Test title");
         assertThat(item.shortDescription()).isEqualTo("Test short description");
     }
-
 }
