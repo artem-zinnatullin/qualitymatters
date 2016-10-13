@@ -1,6 +1,5 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
 apply plugin: 'hu.supercluster.paperwork'
 apply from: '../code_quality_tools/jacoco.gradle'
 apply plugin: 'com.frogermcs.androiddevmetrics'
@@ -113,7 +112,7 @@ android {
 // Libraries declared in dependencies.gradle in the root of the project
 dependencies {
     compile libraries.dagger
-    apt libraries.daggerCompiler
+    annotationProcessor libraries.daggerCompiler
 
     compile libraries.rxJava
     compile libraries.rxLint
@@ -125,7 +124,7 @@ dependencies {
     compile libraries.jacksonDataBind
 
     // Do not compile AutoValue dependencies to the app.
-    apt libraries.autoValue
+    annotationProcessor libraries.autoValue
     // Make AutoValue annotation visible to the compiler.
     provided libraries.autoValue
 
@@ -136,7 +135,7 @@ dependencies {
     compile libraries.supportCardView
 
     compile libraries.butterKnife
-    apt libraries.butterKnifeCompiler
+    annotationProcessor libraries.butterKnifeCompiler
 
     compile libraries.picasso
     compile libraries.picassoOkHttpDownloader

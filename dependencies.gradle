@@ -7,8 +7,7 @@ ext.versions = [
         compileSdk                   : 23,
         buildTools                   : '23.0.3',
 
-        androidGradlePlugin          : '2.1.2',
-        aptGradlePlugin              : '1.8',
+        androidGradlePlugin          : '2.2.1',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
         paperworkGradlePlugin        : '1.2.7',
@@ -52,7 +51,6 @@ ext.versions = [
 
 ext.gradlePlugins = [
         android          : "com.android.tools.build:gradle:$versions.androidGradlePlugin",
-        apt              : "com.neenbedankt.gradle.plugins:android-apt:$versions.aptGradlePlugin",
         retrolambda      : "me.tatarka:gradle-retrolambda:$versions.retrolambdaGradlePlugin",
         lombok           : "me.tatarka.retrolambda.projectlombok:lombok.ast:$versions.lombokGradlePlugin",
         paperwork        : "hu.supercluster:paperwork-plugin:$versions.paperworkGradlePlugin",
