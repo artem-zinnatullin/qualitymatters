@@ -7,9 +7,10 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.models.PicassoImageLoader;
 import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
-import com.artemzin.qualitymatters.other.GsonTypeAdapterFactory;
+import com.artemzin.qualitymatters.other.EntityTypeAdapterFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapterFactory;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -38,12 +39,12 @@ public class ApplicationModule {
     }
 
     @Provides @NonNull @Singleton
-    public GsonTypeAdapterFactory provideTypeAdapterFactory() {
-        return new GsonTypeAdapterFactory();
+    public TypeAdapterFactory provideTypeAdapterFactory() {
+        return EntityTypeAdapterFactory.create();
     }
 
     @Provides @NonNull @Singleton
-    public Gson provideGson(GsonTypeAdapterFactory typeAdapterFactory) {
+    public Gson provideGson(TypeAdapterFactory typeAdapterFactory) {
         return new GsonBuilder()
                 .registerTypeAdapterFactory(typeAdapterFactory)
                 .create();
