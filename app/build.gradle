@@ -8,8 +8,8 @@ apply plugin: 'com.github.ben-manes.versions'
 
 paperwork {
     set = [
-        gitSha:    gitSha(),
-        buildDate: buildTime("dd-MM-yyyy HH:00:00 z", "UTC"),
+            gitSha   : gitSha(),
+            buildDate: buildTime("dd-MM-yyyy HH:00:00 z", "UTC"),
     ]
 }
 
@@ -119,14 +119,17 @@ dependencies {
 
     compile libraries.okHttp
     compile libraries.retrofit
-    compile libraries.retrofitJacksonConverter
+    compile libraries.retrofitGsonConverter
     compile libraries.retrofitRxJavaAdapter
-    compile libraries.jacksonDataBind
+    compile libraries.gson
 
     // Do not compile AutoValue dependencies to the app.
     annotationProcessor libraries.autoValue
+    annotationProcessor libraries.autoValueGson
+
     // Make AutoValue annotation visible to the compiler.
     provided libraries.autoValue
+    provided libraries.autoValueGson
 
     compile libraries.supportAnnotations
     compile libraries.supportAppCompat

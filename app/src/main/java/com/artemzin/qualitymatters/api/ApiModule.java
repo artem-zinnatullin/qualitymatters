@@ -3,7 +3,7 @@ package com.artemzin.qualitymatters.api;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.BuildConfig;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import javax.inject.Singleton;
 
@@ -12,7 +12,7 @@ import dagger.Provides;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
-import retrofit2.converter.jackson.JacksonConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 @Module
 public class ApiModule {
@@ -30,11 +30,11 @@ public class ApiModule {
     }
 
     @Provides @NonNull @Singleton
-    public QualityMattersRestApi provideQualityMattersApi(@NonNull OkHttpClient okHttpClient, @NonNull ObjectMapper objectMapper, @NonNull ChangeableBaseUrl changeableBaseUrl) {
+    public QualityMattersRestApi provideQualityMattersApi(@NonNull OkHttpClient okHttpClient, @NonNull Gson gson, @NonNull ChangeableBaseUrl changeableBaseUrl) {
         return new Retrofit.Builder()
                 .baseUrl(changeableBaseUrl)
                 .client(okHttpClient)
-                .addConverterFactory(JacksonConverterFactory.create(objectMapper))
+                .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .validateEagerly(BuildConfig.DEBUG)  // Fail early: check Retrofit configuration at creation time in Debug build.
                 .build()

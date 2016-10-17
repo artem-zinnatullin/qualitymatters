@@ -5,9 +5,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
 import com.artemzin.qualitymatters.models.PicassoImageLoader;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
+import com.artemzin.qualitymatters.other.EntityTypeAdapterFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapterFactory;
 import com.jakewharton.picasso.OkHttp3Downloader;
 import com.squareup.picasso.Picasso;
 
@@ -36,8 +39,15 @@ public class ApplicationModule {
     }
 
     @Provides @NonNull @Singleton
-    public ObjectMapper provideObjectMapper() {
-        return new ObjectMapper();
+    public TypeAdapterFactory provideTypeAdapterFactory() {
+        return EntityTypeAdapterFactory.create();
+    }
+
+    @Provides @NonNull @Singleton
+    public Gson provideGson(TypeAdapterFactory typeAdapterFactory) {
+        return new GsonBuilder()
+                .registerTypeAdapterFactory(typeAdapterFactory)
+                .create();
     }
 
     @Provides @NonNull @Named(MAIN_THREAD_HANDLER) @Singleton

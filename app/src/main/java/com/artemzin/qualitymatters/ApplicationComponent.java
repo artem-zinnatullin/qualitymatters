@@ -18,7 +18,7 @@ import com.artemzin.qualitymatters.performance.AsyncJobsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.activities.MainActivity;
 import com.artemzin.qualitymatters.ui.fragments.ItemsFragment;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.gson.Gson;
 
 import javax.inject.Singleton;
 
@@ -36,9 +36,9 @@ import dagger.Component;
 })
 public interface ApplicationComponent {
 
-    // Provide ObjectMapper from the real app to the tests without need in injection to the test.
+    // Provide Gson from the real app to the tests without need in injection to the test.
     @NonNull
-    ObjectMapper objectMapper();
+    Gson gson();
 
     // Provide QualityMattersRestApi from the real app to the tests without need in injection to the test.
     @NonNull
