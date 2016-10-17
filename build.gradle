@@ -15,9 +15,6 @@ buildscript {
 
         classpath gradlePlugins.android
 
-        // Compile-time annotation processing.
-        classpath gradlePlugins.apt
-
         // Backport of some Java 8 language features such as Lambdas and method references.
         classpath gradlePlugins.retrolambda
 
