@@ -16,5 +16,5 @@ test:
         parallel: true
     - circle-android wait-for-boot
     - adb shell input keyevent 82
-    - sh ci.sh
+    - bash build.sh
     - pip install --user codecov && codecov
