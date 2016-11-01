@@ -17,7 +17,7 @@ What does it have:
 ---
 >Made with ❤️ by Artem Zinnatullin [https://twitter.com/artem_zin](https://twitter.com/artem_zin).
 
-To build the project run `sh ci.sh` (yep, that easy, because it should be easy).
+To build the project run `bash build.sh` (yep, that easy, because it should be easy).
 
 Screenshots:
 
