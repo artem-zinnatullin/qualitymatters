@@ -58,8 +58,9 @@ android {
 
         release {
             signingConfig signingConfigs.qualityMatters
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            minifyEnabled true
+            proguardFiles file('../proguard').listFiles().toList().toArray()
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
             // Enables code coverage with Jacoco only for instrumentation tests.
             // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
@@ -115,6 +116,7 @@ dependencies {
     annotationProcessor libraries.daggerCompiler
 
     compile libraries.rxJava
+    releaseCompile libraries.rxJavaProguardRules
     compile libraries.rxLint
 
     compile libraries.okHttp
