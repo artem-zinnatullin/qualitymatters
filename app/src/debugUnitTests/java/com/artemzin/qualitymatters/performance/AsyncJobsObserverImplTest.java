@@ -1,7 +1,5 @@
 package com.artemzin.qualitymatters.performance;
 
-import android.support.annotation.NonNull;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,9 +11,6 @@ import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.verifyZeroInteractions;
 
 public class AsyncJobsObserverImplTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private AsyncJobsObserver asyncJobsObserver;
 
     @Before

@@ -1,7 +1,6 @@
 package com.artemzin.qualitymatters.ui.fragments;
 
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,11 +9,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ItemsModel;
+import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
 import com.artemzin.qualitymatters.performance.AnyThread;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.adapters.ItemsAdapter;
@@ -22,16 +22,15 @@ import com.artemzin.qualitymatters.ui.adapters.VerticalSpaceItemDecoration;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenter;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenterConfiguration;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import butterknife.Unbinder;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
@@ -42,26 +41,26 @@ import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
 public class ItemsFragment extends BaseFragment implements ItemsView {
-    @Bind(R.id.items_loading_ui)
+    @BindView(R.id.items_loading_ui)
     View loadingUiView;
 
-    @Bind(R.id.items_loading_error_ui)
+    @BindView(R.id.items_loading_error_ui)
     View errorUiView;
 
-    @Bind(R.id.items_content_ui)
+    @BindView(R.id.items_content_ui)
     RecyclerView contentUiRecyclerView;
 
     ItemsAdapter itemsAdapter;
 
     @Inject
-    @Named(ApplicationModule.MAIN_THREAD_HANDLER)
-    Handler mainThreadHandler;
-
-    @Inject
     ItemsPresenter itemsPresenter;
 
     @Inject
-    Picasso picasso;
+    QualityMattersImageLoader networkBitmapClient;
+
+    @SuppressWarnings("NullableProblems")
+    @NonNull
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -77,10 +76,10 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         contentUiRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), VERTICAL, false));
         contentUiRecyclerView.addItemDecoration(new VerticalSpaceItemDecoration((int) getResources().getDimension(R.dimen.list_item_vertical_space_between_items)));
-        itemsAdapter = new ItemsAdapter(getActivity().getLayoutInflater(), picasso);
+        itemsAdapter = new ItemsAdapter(getActivity().getLayoutInflater(), networkBitmapClient);
         contentUiRecyclerView.setAdapter(itemsAdapter);
         itemsPresenter.bindView(this);
         itemsPresenter.reloadData();
@@ -119,7 +118,10 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
             loadingUiView.setVisibility(GONE);
             errorUiView.setVisibility(GONE);
             contentUiRecyclerView.setVisibility(VISIBLE);
-            itemsAdapter.setData(items);
+
+            if (itemsAdapter != null) {
+                itemsAdapter.setData(items);
+            }
         });
     }
 
@@ -131,6 +133,11 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
     @Override
     public void onDestroyView() {
         itemsPresenter.unbindView(this);
+
+        if (unbinder != null) {
+            unbinder.unbind();
+        }
+
         super.onDestroyView();
     }
 
@@ -144,11 +151,14 @@ public class ItemsFragment extends BaseFragment implements ItemsView {
 
         @Provides
         @NonNull
-        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel, @NonNull AsyncJobsObserver asyncJobsObserver) {
+        public ItemsPresenter provideItemsPresenter(@NonNull ItemsModel itemsModel,
+                                                    @NonNull AsyncJobsObserver asyncJobsObserver,
+                                                    @NonNull AnalyticsModel analyticsModel) {
             return new ItemsPresenter(
                     ItemsPresenterConfiguration.builder().ioScheduler(Schedulers.io()).build(),
                     itemsModel,
-                    asyncJobsObserver
+                    asyncJobsObserver,
+                    analyticsModel
             );
         }
     }

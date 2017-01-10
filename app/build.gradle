@@ -1,20 +1,35 @@
 apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
-apply plugin: 'com.neenbedankt.android-apt'
+apply plugin: 'hu.supercluster.paperwork'
 apply from: '../code_quality_tools/jacoco.gradle'
+apply plugin: 'com.frogermcs.androiddevmetrics'
+apply from: '../code_quality_tools/quality.gradle'
+apply plugin: 'com.github.ben-manes.versions'
+
+paperwork {
+    set = [
+            gitSha   : gitSha(),
+            buildDate: buildTime("dd-MM-yyyy HH:00:00 z", "UTC"),
+    ]
+}
 
 android {
-    // See build.gradle in the root of the project
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    // Declared in dependencies.gradle in the root of the project.
+    compileSdkVersion versions.compileSdk
+    buildToolsVersion versions.buildTools
 
     defaultConfig {
         applicationId 'com.artemzin.qualitymatters'
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName '1.0'
-        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
+        minSdkVersion versions.minSdk
+        targetSdkVersion versions.targetSdk
+        versionCode versions.code // Notice that you may want to use BUILD_NUMBER from CI in real project with own CI.
+        versionName versions.name
+
+        // Make generated apks contain version name and code.
+        archivesBaseName = "app-${versions.name}-${versions.code}"
+
+        // Notice that we have custom Instrumentation test runner to change application class (to mock dependencies)!
+        testInstrumentationRunner 'com.artemzin.qualitymatters.functional_tests.QualityMattersFunctionalTestsRunner'
     }
 
     compileOptions {
@@ -34,19 +49,26 @@ android {
     buildTypes {
         debug {
             signingConfig signingConfigs.qualityMatters
+            applicationIdSuffix '.debug'
+
+            // Enables code coverage with Jacoco only for instrumentation tests.
+            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
+            testCoverageEnabled true
         }
 
         release {
             signingConfig signingConfigs.qualityMatters
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt')
+            minifyEnabled true
+            proguardFiles file('../proguard').listFiles().toList().toArray()
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+
+            // Enables code coverage with Jacoco only for instrumentation tests.
+            // Coverage for JVM tests done by code_quality_tools/jacoco.gradle.
+            testCoverageEnabled true
         }
     }
 
     sourceSets {
-        // Common code for JVM tests lives in src/jvmTestsCommon.
-        test.java.srcDir 'src/jvmTestsCommon/java'
-
         // Unit tests live in src/unitTest.
         test.java.srcDir 'src/unitTests/java'
 
@@ -88,23 +110,28 @@ android {
     }
 }
 
-// Libraries declared in build.gradle in the root of the project
+// Libraries declared in dependencies.gradle in the root of the project
 dependencies {
     compile libraries.dagger
-    apt libraries.daggerCompiler
-    compile libraries.javaxInject
-    compile libraries.javaxAnnotationApi
+    annotationProcessor libraries.daggerCompiler
 
     compile libraries.rxJava
+    releaseCompile libraries.rxJavaProguardRules
+    compile libraries.rxLint
 
     compile libraries.okHttp
-    compile libraries.okHttpLoggingInterceptor
     compile libraries.retrofit
-    compile libraries.retrofitJacksonConverter
+    compile libraries.retrofitGsonConverter
     compile libraries.retrofitRxJavaAdapter
-    compile libraries.jacksonDataBind
+    compile libraries.gson
 
-    compile libraries.autoValue
+    // Do not compile AutoValue dependencies to the app.
+    annotationProcessor libraries.autoValue
+    annotationProcessor libraries.autoValueGson
+
+    // Make AutoValue annotation visible to the compiler.
+    provided libraries.autoValue
+    provided libraries.autoValueGson
 
     compile libraries.supportAnnotations
     compile libraries.supportAppCompat
@@ -113,14 +140,25 @@ dependencies {
     compile libraries.supportCardView
 
     compile libraries.butterKnife
+    annotationProcessor libraries.butterKnifeCompiler
+
     compile libraries.picasso
+    compile libraries.picassoOkHttpDownloader
     compile libraries.timber
 
+    // Analytics. Why? To make app more real.
+    // We mock analytics for Integration tests under Robolectric and Functional (UI) tests under Instrumentation!
+    compile libraries.yandexAppMetrica
+
     // Developer tools (Developer Settings)
+    debugCompile libraries.okHttpLoggingInterceptor
     debugCompile libraries.stetho
     debugCompile libraries.stethoOkHttp
     debugCompile libraries.leakCanary
     debugCompile libraries.tinyDancer
+    debugCompile libraries.paperwork
+    debugCompile libraries.lynx
+    debugCompile libraries.processPhoenix
 
     testCompile libraries.junit
     testCompile libraries.robolectric
@@ -128,6 +166,7 @@ dependencies {
     testCompile libraries.equalsVerifier
     testCompile libraries.okHttpMockWebServer
     testCompile libraries.mockitoCore
+    testCompile libraries.devMetricsNoOp
 
     androidTestCompile libraries.supportTestRunner
     androidTestCompile libraries.supportTestRules
@@ -145,5 +184,19 @@ configurations.all {
     resolutionStrategy {
         // Force our version of support-annotations, we have a conflict between app and androidTest dependency resolution.
         force libraries.supportAnnotations
+    }
+}
+
+// Check if the build requires dex count
+def withDexcount = project.hasProperty('withDexcount')
+if (withDexcount) {
+    apply plugin: 'com.getkeepsafe.dexcount'
+
+    dexcount {
+        format = 'list'
+        includeFieldCount = true
+        includeTotalMethodCount = true
+        verbose = false
+        maxTreeDepth = Integer.MAX_VALUE
     }
 }

@@ -7,8 +7,6 @@ import com.artemzin.qualitymatters.api.entities.Item;
 
 import java.util.List;
 
-import javax.inject.Inject;
-
 import rx.Single;
 
 /**
@@ -22,7 +20,6 @@ public class ItemsModel {
     @NonNull
     private final QualityMattersRestApi qualityMattersRestApi;
 
-    @Inject
     public ItemsModel(@NonNull QualityMattersRestApi qualityMattersRestApi) {
         this.qualityMattersRestApi = qualityMattersRestApi;
     }

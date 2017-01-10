@@ -1,12 +1,8 @@
 package com.artemzin.qualitymatters.integration_tests.api;
 
-import android.support.annotation.NonNull;
-
-import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
-import com.squareup.okhttp.mockwebserver.MockResponse;
-import com.squareup.okhttp.mockwebserver.MockWebServer;
 
 import org.junit.After;
 import org.junit.Before;
@@ -16,7 +12,9 @@ import org.junit.runner.RunWith;
 import java.io.IOException;
 import java.util.List;
 
-import retrofit.HttpException;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import retrofit2.adapter.rxjava.HttpException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -30,15 +28,9 @@ import static org.assertj.core.api.Assertions.fail;
  * <li>Execution layer (ie RxJava)</li>
  * </ul>
  */
-@RunWith(QualityMattersRobolectricTestRunner.class)
+@RunWith(QualityMattersIntegrationRobolectricTestRunner.class)
 public class QualityMattersRestApiIntegrationTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private MockWebServer mockWebServer;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private QualityMattersRestApi qualityMattersRestApi;
 
     @Before
@@ -47,9 +39,9 @@ public class QualityMattersRestApiIntegrationTest {
         mockWebServer.start();
 
         // Change base url to the mocked
-        QualityMattersRobolectricTestRunner.qualityMattersApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
+        QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
 
-        qualityMattersRestApi = QualityMattersRobolectricTestRunner.qualityMattersApp().applicationComponent().qualityMattersApi();
+        qualityMattersRestApi = QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().qualityMattersApi();
     }
 
     @After

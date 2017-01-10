@@ -1,18 +1,20 @@
 package com.artemzin.qualitymatters.developer_settings;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.QualityMattersApp;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.other.ViewModifier;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.github.pedrovgs.lynx.LynxConfig;
 
 import javax.inject.Named;
 import javax.inject.Singleton;
 
 import dagger.Module;
 import dagger.Provides;
+import hu.supercluster.paperwork.Paperwork;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -31,39 +33,60 @@ public class DeveloperSettingsModule {
 
     @Provides
     @NonNull
-    public DeveloperSettingModel provideDeveloperSettingsModel(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl) {
+    public DeveloperSettingsModel provideDeveloperSettingsModel(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl) {
         return developerSettingsModelImpl;
     }
 
     @Provides
     @NonNull
     @Singleton
-    public DeveloperSettings provideDeveloperSettings(@NonNull QualityMattersApp qualityMattersApp) {
-        return new DeveloperSettings(qualityMattersApp.getSharedPreferences("developer_settings", MODE_PRIVATE));
+    public DeveloperSettings provideDeveloperSettings(@NonNull Application application) {
+        return new DeveloperSettings(application.getSharedPreferences("developer_settings", MODE_PRIVATE));
     }
 
     @Provides
     @NonNull
     @Singleton
-    public LeakCanaryProxy provideLeakCanaryProxy(@NonNull QualityMattersApp qualityMattersApp) {
-        return new LeakCanaryProxyImpl(qualityMattersApp);
+    public LeakCanaryProxy provideLeakCanaryProxy(@NonNull Application application) {
+        return new LeakCanaryProxyImpl(application);
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public Paperwork providePaperwork(@NonNull Application application) {
+        return new Paperwork(application);
     }
 
     // We will use this concrete type for debug code, but main code will see only DeveloperSettingsModel interface.
     @Provides
     @NonNull
     @Singleton
-    public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
+    public DeveloperSettingsModelImpl provideDeveloperSettingsModelImpl(@NonNull Application application,
                                                                         @NonNull DeveloperSettings developerSettings,
-                                                                        @NonNull OkHttpClient okHttpClient,
                                                                         @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
-                                                                        @NonNull LeakCanaryProxy leakCanaryProxy) {
-        return new DeveloperSettingsModelImpl(qualityMattersApp, developerSettings, okHttpClient, httpLoggingInterceptor, leakCanaryProxy);
+                                                                        @NonNull LeakCanaryProxy leakCanaryProxy,
+                                                                        @NonNull Paperwork paperwork) {
+        return new DeveloperSettingsModelImpl(application, developerSettings, httpLoggingInterceptor, leakCanaryProxy, paperwork);
     }
 
     @Provides
     @NonNull
-    public DeveloperSettingsPresenter provideDeveloperSettingsPresenter(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl) {
-        return new DeveloperSettingsPresenter(developerSettingsModelImpl);
+    public DeveloperSettingsPresenter provideDeveloperSettingsPresenter(@NonNull DeveloperSettingsModelImpl developerSettingsModelImpl,
+                                                                        @NonNull AnalyticsModel analyticsModel) {
+        return new DeveloperSettingsPresenter(developerSettingsModelImpl, analyticsModel);
+    }
+
+    @NonNull
+    @Provides
+    public LynxConfig provideLynxConfig() {
+        return new LynxConfig();
+    }
+
+    @NonNull
+    @Provides
+    @Singleton
+    public DevMetricsProxy provideDevMetricsProxy(@NonNull Application application) {
+        return new DevMetricsProxyImpl(application);
     }
 }

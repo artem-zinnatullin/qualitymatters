@@ -1,23 +1,20 @@
 package com.artemzin.qualitymatters.developer_settings;
 
-import android.support.annotation.NonNull;
-
-import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.RuntimeEnvironment;
 
+import okhttp3.logging.HttpLoggingInterceptor;
+
 import static android.content.Context.MODE_PRIVATE;
 import static org.assertj.core.api.Assertions.assertThat;
 
-@RunWith(QualityMattersRobolectricTestRunner.class)
+@RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class DeveloperSettingsTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettings developerSettings;
 
     @Before

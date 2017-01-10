@@ -1,14 +1,18 @@
 package com.artemzin.qualitymatters.ui.fragments;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Spinner;
 import android.widget.Switch;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.artemzin.qualitymatters.QualityMattersApp;
@@ -17,34 +21,58 @@ import com.artemzin.qualitymatters.performance.AnyThread;
 import com.artemzin.qualitymatters.ui.adapters.DeveloperSettingsSpinnerAdapter;
 import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import com.github.pedrovgs.lynx.LynxActivity;
+import com.github.pedrovgs.lynx.LynxConfig;
+import com.jakewharton.processphoenix.ProcessPhoenix;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
 
-import butterknife.Bind;
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
 import butterknife.OnItemSelected;
+import butterknife.Unbinder;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public class DeveloperSettingsFragment extends BaseFragment implements DeveloperSettingsView {
 
     @Inject
     DeveloperSettingsPresenter presenter;
 
-    @Bind(R.id.developer_settings_stetho_switch)
+    @Inject
+    LynxConfig lynxConfig;
+
+    @BindView(R.id.developer_settings_git_sha_text_view)
+    TextView gitShaTextView;
+
+    @BindView(R.id.developer_settings_build_date_text_view)
+    TextView buildDateTextView;
+
+    @BindView(R.id.developer_settings_build_version_code_text_view)
+    TextView buildVersionCodeTextView;
+
+    @BindView(R.id.developer_settings_build_version_name_text_view)
+    TextView buildVersionNameTextView;
+
+    @BindView(R.id.developer_settings_stetho_switch)
     Switch stethoSwitch;
 
-    @Bind(R.id.developer_settings_leak_canary_switch)
+    @BindView(R.id.developer_settings_leak_canary_switch)
     Switch leakCanarySwitch;
 
-    @Bind(R.id.developer_settings_tiny_dancer_switch)
+    @BindView(R.id.developer_settings_tiny_dancer_switch)
     Switch tinyDancerSwitch;
 
-    @Bind(R.id.developer_settings_http_logging_level_spinner)
+    @BindView(R.id.developer_settings_http_logging_level_spinner)
     Spinner httpLoggingLevelSpinner;
+
+    @SuppressWarnings("NullableProblems")
+    @NonNull
+    private Unbinder unbinder;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -61,7 +89,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
 
         httpLoggingLevelSpinner
                 .setAdapter(new DeveloperSettingsSpinnerAdapter<>(getActivity().getLayoutInflater())
@@ -83,6 +111,48 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @OnItemSelected(R.id.developer_settings_http_logging_level_spinner)
     void onHttpLoggingLevelChanged(int position) {
         presenter.changeHttpLoggingLevel(((HttpLoggingLevel) httpLoggingLevelSpinner.getItemAtPosition(position)).loggingLevel);
+    }
+
+    @OnClick(R.id.developer_settings_restart_app_button)
+    void onRestartAppClick() {
+        final FragmentActivity activity = getActivity();
+        ProcessPhoenix.triggerRebirth(activity, new Intent(activity, activity.getClass()));
+    }
+
+    @Override
+    @AnyThread
+    public void changeGitSha(@NonNull String gitSha) {
+        runOnUiThreadIfFragmentAlive(() -> {
+            assert gitShaTextView != null;
+            gitShaTextView.setText(gitSha);
+        });
+    }
+
+    @Override
+    @AnyThread
+    public void changeBuildDate(@NonNull String date) {
+        runOnUiThreadIfFragmentAlive(() -> {
+            assert buildDateTextView != null;
+            buildDateTextView.setText(date);
+        });
+    }
+
+    @Override
+    @AnyThread
+    public void changeBuildVersionCode(@NonNull String versionCode) {
+        runOnUiThreadIfFragmentAlive(() -> {
+            assert buildVersionCodeTextView != null;
+            buildVersionCodeTextView.setText(versionCode);
+        });
+    }
+
+    @Override
+    @AnyThread
+    public void changeBuildVersionName(@NonNull String versionName) {
+        runOnUiThreadIfFragmentAlive(() -> {
+            assert buildVersionNameTextView != null;
+            buildVersionNameTextView.setText(versionName);
+        });
     }
 
     @Override
@@ -148,9 +218,16 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         runOnUiThreadIfFragmentAlive(() -> Toast.makeText(getContext(), "To apply new settings app needs to be restarted", Toast.LENGTH_LONG).show());
     }
 
+    @OnClick(R.id.b_show_log)
+    void showLog() {
+        Context context = getActivity();
+        context.startActivity(LynxActivity.getIntent(context, lynxConfig));
+    }
+
     @Override
     public void onDestroyView() {
         presenter.unbindView(this);
+        unbinder.unbind();
         super.onDestroyView();
     }
 
@@ -159,7 +236,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         @NonNull
         public final HttpLoggingInterceptor.Level loggingLevel;
 
-        public HttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
+        HttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
             this.loggingLevel = loggingLevel;
         }
 

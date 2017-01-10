@@ -1,23 +1,46 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
+apply from: 'dependencies.gradle'
 
 buildscript {
+    // Gradle will not find vars defined in an external file when referring to them
+    // in the buildscript block, unless you link it from the buildscript block, too.
+    apply from: 'dependencies.gradle'
+
     repositories {
         jcenter()
+        maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        // See dependencies.gradle for declaration of plugins.
 
-        // APT compile-time annotation processing
-        classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
+        classpath gradlePlugins.android
 
         // Backport of some Java 8 language features such as Lambdas and method references.
-        classpath 'me.tatarka:gradle-retrolambda:3.2.4'
+        classpath gradlePlugins.retrolambda
 
-        // Workaround for Lint + Retrolambda.
-        classpath 'me.tatarka.retrolambda.projectlombok:lombok.ast:0.2.3.a2'
+        // Needed for Lint + Retrolambda.
+        classpath gradlePlugins.lombok
 
-        // NOTE: Do not place your application dependencies here; they belong
-        // in the individual module build.gradle files
+        // Generates build info without breaking incremental builds.
+        classpath gradlePlugins.paperwork
+
+        // Code coverage.
+        classpath gradlePlugins.jacoco
+
+        // Performance metrics library for Android development.
+        classpath gradlePlugins.androidDevMetrics
+
+        // Catches common Java mistakes as compile-time errors.
+        classpath gradlePlugins.errorProne
+
+        // Method count plugin for android projects
+        classpath gradlePlugins.dexcount
+
+        // Check latest version of dependencies, task: dependencyUpdates
+        classpath gradlePlugins.versions
+
+        // Analyse builds to profile
+        classpath gradlePlugins.buildScan
     }
 
     // Part of workaround for Lint + Retrolambda.
@@ -40,68 +63,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext {
-    minSdkVersion = 16
-    targetSdkVersion = 23
-    compileSdkVersion = 23
-    buildToolsVersion = '23.0.2'
-
-    preDexLibs = !project.hasProperty('disablePreDex')
-
-    supportLibsVersion = '23.1.1'
-    daggerVersion = '2.0.2'
-    okHttpVersion = '2.6.0'
-    retrofitVersion = '2.0.0-beta2'
-    espressoVersion = '2.2.1'
-    stethoVersion = '1.2.0'
-}
-
-ext.libraries = [
-        dagger                  : 'com.google.dagger:dagger:' + daggerVersion,
-        daggerCompiler          : 'com.google.dagger:dagger-compiler:' + daggerVersion,
-        javaxInject             : 'javax.inject:javax.inject:1',
-        javaxAnnotationApi      : 'javax.annotation:javax.annotation-api:1.2',
-
-        rxJava                  : 'io.reactivex:rxjava:1.1.0',
-
-        okHttp                  : 'com.squareup.okhttp:okhttp:' + okHttpVersion,
-        okHttpLoggingInterceptor: 'com.squareup.okhttp:logging-interceptor:' + okHttpVersion,
-        retrofit                : 'com.squareup.retrofit:retrofit:' + retrofitVersion,
-        retrofitJacksonConverter: 'com.squareup.retrofit:converter-jackson:' + retrofitVersion,
-        retrofitRxJavaAdapter   : 'com.squareup.retrofit:adapter-rxjava:' + retrofitVersion,
-        jacksonDataBind         : 'com.fasterxml.jackson.core:jackson-databind:2.6.3',
-
-        autoValue               : 'com.google.auto.value:auto-value:1.1',
-
-        supportAnnotations      : 'com.android.support:support-annotations:' + supportLibsVersion,
-        supportAppCompat        : 'com.android.support:appcompat-v7:' + supportLibsVersion,
-        supportDesign           : 'com.android.support:design:' + supportLibsVersion,
-        supportRecyclerView     : 'com.android.support:recyclerview-v7:' + supportLibsVersion,
-        supportCardView         : 'com.android.support:cardview-v7:' + supportLibsVersion,
-
-        butterKnife             : 'com.jakewharton:butterknife:7.0.1',
-        picasso                 : 'com.squareup.picasso:picasso:2.5.2',
-        timber                  : 'com.jakewharton.timber:timber:4.1.0',
-
-        // Developer Tools
-        stetho                  : 'com.facebook.stetho:stetho:' + stethoVersion,
-        stethoOkHttp            : 'com.facebook.stetho:stetho-okhttp:' + stethoVersion,
-        leakCanary              : 'com.squareup.leakcanary:leakcanary-android:1.3.1',
-        tinyDancer              : 'com.github.brianPlummer:tinydancer:0.0.7',
-
-        // Test dependencies
-        junit                   : 'junit:junit:4.12',
-        robolectric             : 'org.robolectric:robolectric:3.0',
-        assertJ                 : 'org.assertj:assertj-core:1.7.1',
-        equalsVerifier          : 'nl.jqno.equalsverifier:equalsverifier:1.7.5',
-        okHttpMockWebServer     : 'com.squareup.okhttp:mockwebserver:' + okHttpVersion,
-        mockitoCore             : 'org.mockito:mockito-core:1.10.19',
-        supportTestRunner       : 'com.android.support.test:runner:0.4.1',
-        supportTestRules        : 'com.android.support.test:rules:0.4.1',
-        espressoCore            : 'com.android.support.test.espresso:espresso-core:' + espressoVersion,
-        espressoContrib         : 'com.android.support.test.espresso:espresso-contrib:' + espressoVersion,
-]
-
+ext.preDexLibs = !project.hasProperty('disablePreDex')
 subprojects {
     project.plugins.whenPluginAdded { plugin ->
         if ('com.android.build.gradle.AppPlugin'.equals(plugin.class.name) || 'com.android.build.gradle.LibraryPlugin'.equals(plugin.class.name)) {
@@ -110,47 +72,10 @@ subprojects {
         }
     }
 
-    plugins.apply('pmd')
+    project.plugins.apply('net.ltgt.errorprone')
 
-    pmd {
-        toolVersion = '5.4.0'
-    }
-
-    task pmd(type: Pmd) {
-        ignoreFailures = false // Fail early.
-        ruleSets = ['java-basic', 'java-braces', 'java-strings', 'java-design', 'java-unusedcode']
-
-        source = fileTree('src/main/java')
-    }
-
-    plugins.apply('findbugs')
-
-    task findbugs(type: FindBugs) {
-        ignoreFailures = false // Fail early.
-        effort = 'max'
-        reportLevel = 'low' // Report even low priority problems.
-
-        classes = files("${project.projectDir}/build/intermediates/classes")
-        source = fileTree('src/main/java')
-
-        // If somebody has an idea how to make this work with support libraries -> open a PR please.
-        classpath = files()
-
-        excludeFilter = rootProject.file('code_quality_tools/findbugs-filter.xml')
-    }
-
-    plugins.apply('checkstyle')
-
-    task checkstyle(type: Checkstyle) {
-        configFile rootProject.file('code_quality_tools/checkstyle.xml')
-
-        ignoreFailures false // Fail early.
-        showViolations true
-
-        source 'src'
-        include '**/*.java'
-
-        classpath = files()
+    configurations.errorprone {
+        resolutionStrategy.force "com.google.errorprone:error_prone_core:${versions.errorProneCoreVersion}"
     }
 
     afterEvaluate {
@@ -163,6 +88,8 @@ subprojects {
         checkTask.dependsOn('findbugs')
         checkTask.dependsOn('checkstyle')
 
+        dependencyUpdates.outputDir = new File("${projectDir}/build/reports/versions")
+
         // Log instrumentation tests results.
         tasks.withType(com.android.build.gradle.internal.tasks.AndroidTestTask) { task ->
             task.doFirst {
@@ -173,4 +100,10 @@ subprojects {
             }
         }
     }
+}
+
+apply plugin: 'com.gradle.build-scan'
+buildScan {
+    licenseAgreementUrl = 'https://gradle.com/terms-of-service'
+    licenseAgree = 'yes'
 }

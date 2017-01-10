@@ -9,10 +9,13 @@ android:
     - platform-tools
     - tools
     - android-23
-    - build-tools-23.0.2
+    - build-tools-23.0.3
     - extra-android-m2repository
     - extra-android-support
     - sys-img-armeabi-v7a-android-18
+
+before_install:
+  - pip install --user codecov
 
 before_script:
   - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
@@ -21,10 +24,13 @@ before_script:
   - adb shell input keyevent 82
 
 script:
-  - sh ci.sh
+  - bash build.sh
+  
+after_success:
+  - codecov
 
 notifications:
-  email: false
+  email: true
 
 cache:
   directories:

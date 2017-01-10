@@ -2,13 +2,12 @@ package com.artemzin.qualitymatters.ui.presenters;
 
 import android.support.annotation.NonNull;
 
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ItemsModel;
 import com.artemzin.qualitymatters.other.FinishAsyncJobSubscription;
 import com.artemzin.qualitymatters.performance.AsyncJob;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
-
-import javax.inject.Inject;
 
 import rx.Subscription;
 
@@ -23,13 +22,17 @@ public class ItemsPresenter extends Presenter<ItemsView> {
     @NonNull
     private final AsyncJobsObserver asyncJobsObserver;
 
-    @Inject
+    @NonNull
+    private final AnalyticsModel analyticsModel;
+
     public ItemsPresenter(@NonNull ItemsPresenterConfiguration presenterConfiguration,
                           @NonNull ItemsModel itemsModel,
-                          @NonNull AsyncJobsObserver asyncJobsObserver) {
+                          @NonNull AsyncJobsObserver asyncJobsObserver,
+                          @NonNull AnalyticsModel analyticsModel) {
         this.presenterConfiguration = presenterConfiguration;
         this.itemsModel = itemsModel;
         this.asyncJobsObserver = asyncJobsObserver;
+        this.analyticsModel = analyticsModel;
     }
 
     public void reloadData() {
@@ -59,6 +62,8 @@ public class ItemsPresenter extends Presenter<ItemsView> {
                             asyncJobsObserver.asyncJobFinished(asyncJob);
                         },
                         error -> {
+                            analyticsModel.sendError("ItemsPresenter.reloadData failed", error);
+
                             // Tip: in Kotlin you can use ? to operate with nullable values.
                             final ItemsView view = view();
 

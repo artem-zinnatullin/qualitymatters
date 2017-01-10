@@ -2,13 +2,11 @@
 // https://github.com/mgouline/android-samples/blob/master/jacoco/app/build.gradle
 // and https://github.com/pushtorefresh/storio/blob/master/gradle/jacoco-android.gradle
 
+// Requires Jacoco plugin in build classpath.
 apply plugin: 'jacoco'
 
-jacoco {
-    // See https://github.com/jacoco/jacoco/releases
-    toolVersion = '0.7.5.201505241946'
-}
-
+// Enables code coverage for JVM tests.
+// Android Gradle Plugin out of the box supports only code coverage for instrumentation tests.
 project.afterEvaluate {
     // Grab all build types and product flavors
     def buildTypes = android.buildTypes.collect { type -> type.name }
@@ -43,6 +41,7 @@ project.afterEvaluate {
                                    '**/BuildConfig.*',
                                    '**/Manifest*.*',
                                    '**/*$Lambda$*.*', // Jacoco can not handle several "$" in class name.
+                                   '**/*$inlined$*.*', // Kotlin specific, Jacoco can not handle several "$" in class name.
                                    '**/*Module.*', // Modules for Dagger.
                                    '**/*Dagger*.*', // Dagger auto-generated code.
                                    '**/*MembersInjector*.*', // Dagger auto-generated code.
@@ -54,6 +53,7 @@ project.afterEvaluate {
                         "src/$productFlavorName/java",
                         "src/$buildTypeName/java"
                 ]
+
                 additionalSourceDirs = files(coverageSourceDirs)
                 sourceDirectories = files(coverageSourceDirs)
                 executionData = files("${project.buildDir}/jacoco/${testTaskName}.exec")

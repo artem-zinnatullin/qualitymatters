@@ -1,13 +1,13 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
-import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModelImpl;
+import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import org.junit.Before;
 import org.junit.Test;
+
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import static org.mockito.Matchers.anyBoolean;
 import static org.mockito.Matchers.anyString;
@@ -18,23 +18,47 @@ import static org.mockito.Mockito.when;
 
 public class DeveloperSettingsPresenterTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsModelImpl developerSettingsModel;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsPresenter developerSettingsPresenter;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsView developerSettingsView;
 
     @Before
     public void beforeEachTest() {
         developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
-        developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+        developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel, mock(AnalyticsModel.class));
         developerSettingsView = mock(DeveloperSettingsView.class);
+    }
+
+    @Test
+    public void bindView_shouldSendGitShaToTheView() {
+        when(developerSettingsModel.getGitSha()).thenReturn("test git sha");
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        verify(developerSettingsView).changeGitSha("test git sha");
+    }
+
+    @Test
+    public void bindView_shouldSendBuildDateToTheView() {
+        when(developerSettingsModel.getBuildDate()).thenReturn("test build date");
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        verify(developerSettingsView).changeBuildDate("test build date");
+    }
+
+    @Test
+    public void bindView_shouldSendBuildVersionCodeToTheView() {
+        when(developerSettingsModel.getBuildVersionCode()).thenReturn("test build version code");
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        verify(developerSettingsView).changeBuildVersionCode("test build version code");
+    }
+
+    @Test
+    public void bindView_shouldSendBuildVersionNameToTheView() {
+        when(developerSettingsModel.getBuildVersionName()).thenReturn("test build version name");
+
+        developerSettingsPresenter.bindView(developerSettingsView);
+        verify(developerSettingsView).changeBuildVersionName("test build version name");
     }
 
     @Test
@@ -102,7 +126,7 @@ public class DeveloperSettingsPresenterTest {
 
             developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
             developerSettingsView = mock(DeveloperSettingsView.class);
-            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel, mock(AnalyticsModel.class));
         }
     }
 
@@ -266,7 +290,7 @@ public class DeveloperSettingsPresenterTest {
 
             developerSettingsModel = mock(DeveloperSettingsModelImpl.class);
             developerSettingsView = mock(DeveloperSettingsView.class);
-            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel);
+            developerSettingsPresenter = new DeveloperSettingsPresenter(developerSettingsModel, mock(AnalyticsModel.class));
         }
     }
 }

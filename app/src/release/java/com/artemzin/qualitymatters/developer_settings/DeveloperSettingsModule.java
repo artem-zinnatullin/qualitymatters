@@ -24,7 +24,7 @@ public class DeveloperSettingsModule {
 
     @Provides
     @NonNull
-    public DeveloperSettingModel provideDeveloperSettingModel() {
+    public DeveloperSettingsModel provideDeveloperSettingsModel() {
         return () -> {
             // no-op!
         };
@@ -35,5 +35,12 @@ public class DeveloperSettingsModule {
     @Singleton
     public LeakCanaryProxy provideLeakCanaryProxy() {
         return new NoOpLeakCanaryProxy();
+    }
+
+    @Provides
+    @NonNull
+    @Singleton
+    public DevMetricsProxy provideDevMetricsProxy() {
+        return new NoOpDevMetricsProxy();
     }
 }

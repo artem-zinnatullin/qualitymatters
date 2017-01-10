@@ -25,47 +25,114 @@
 
         <TextView
             style="@style/DeveloperSettingsCategoryTitle"
+            android:text="Build info"
+            tools:ignore="HardcodedText" />
+
+        <View style="@style/DeveloperSettingsCategoryDivider" />
+
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
+
+            <TextView
+                style="@style/DeveloperSettingsItemTitle"
+                android:text="Git sha"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/developer_settings_git_sha_text_view"
+                style="@style/DeveloperSettingsItemControl"
+                android:textIsSelectable="true"
+                tools:text="86bec6a6595bf7d" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
+
+            <TextView
+                style="@style/DeveloperSettingsItemTitle"
+                android:text="Build date"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/developer_settings_build_date_text_view"
+                style="@style/DeveloperSettingsItemControl"
+                android:textIsSelectable="true"
+                tools:text="2020-09-22 16:35" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
+
+            <TextView
+                style="@style/DeveloperSettingsItemTitle"
+                android:text="Build version code"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/developer_settings_build_version_code_text_view"
+                style="@style/DeveloperSettingsItemControl"
+                android:textIsSelectable="true"
+                tools:text="38" />
+
+        </LinearLayout>
+
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
+
+            <TextView
+                style="@style/DeveloperSettingsItemTitle"
+                android:text="Build version name"
+                tools:ignore="HardcodedText" />
+
+            <TextView
+                android:id="@+id/developer_settings_build_version_name_text_view"
+                style="@style/DeveloperSettingsItemControl"
+                android:textIsSelectable="true"
+                tools:text="v1.0.1" />
+
+        </LinearLayout>
+
+        <TextView
+            style="@style/DeveloperSettingsCategoryTitle"
             android:text="Inspection tools"
             tools:ignore="HardcodedText" />
 
         <View style="@style/DeveloperSettingsCategoryDivider" />
 
-        <LinearLayout style="@style/DeveloperSettingsToolContainer">
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
 
             <TextView
-                style="@style/DeveloperSettingsToolTitle"
+                style="@style/DeveloperSettingsItemTitle"
                 android:text="Stetho"
                 tools:ignore="HardcodedText" />
 
             <Switch
                 android:id="@+id/developer_settings_stetho_switch"
-                style="@style/DeveloperSettingsToolSwitch" />
+                style="@style/DeveloperSettingsItemControl" />
 
         </LinearLayout>
 
-        <LinearLayout style="@style/DeveloperSettingsToolContainer">
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
 
             <TextView
-                style="@style/DeveloperSettingsToolTitle"
+                style="@style/DeveloperSettingsItemTitle"
                 android:text="LeakCanary"
                 tools:ignore="HardcodedText" />
 
             <Switch
                 android:id="@+id/developer_settings_leak_canary_switch"
-                style="@style/DeveloperSettingsToolSwitch" />
+                style="@style/DeveloperSettingsItemControl" />
 
         </LinearLayout>
 
-        <LinearLayout style="@style/DeveloperSettingsToolContainer">
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
 
             <TextView
-                style="@style/DeveloperSettingsToolTitle"
+                style="@style/DeveloperSettingsItemTitle"
                 android:text="TinyDancer"
                 tools:ignore="HardcodedText" />
 
             <Switch
                 android:id="@+id/developer_settings_tiny_dancer_switch"
-                style="@style/DeveloperSettingsToolSwitch" />
+                style="@style/DeveloperSettingsItemControl" />
 
         </LinearLayout>
 
@@ -76,19 +143,47 @@
 
         <View style="@style/DeveloperSettingsCategoryDivider" />
 
-        <LinearLayout style="@style/DeveloperSettingsToolContainer">
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
 
             <TextView
-                style="@style/DeveloperSettingsToolTitle"
+                style="@style/DeveloperSettingsItemTitle"
                 android:text="Http logging level"
                 tools:ignore="HardcodedText" />
 
             <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/developer_settings_http_logging_level_spinner"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"/>
+                android:layout_height="wrap_content" />
 
         </LinearLayout>
+
+        <LinearLayout style="@style/DeveloperSettingsItemContainer">
+
+            <TextView
+                style="@style/DeveloperSettingsItemTitle"
+                android:text="LogCat"
+                tools:ignore="HardcodedText" />
+
+            <Button
+                style="@style/DeveloperSettingsButton"
+                android:id="@+id/b_show_log"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Show"
+                tools:ignore="HardcodedText"
+                />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/developer_settings_restart_app_button"
+            style="@style/DeveloperSettingsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:text="Restart app"
+            tools:ignore="HardcodedText"
+          />
 
     </LinearLayout>
 

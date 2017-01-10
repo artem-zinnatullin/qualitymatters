@@ -2,13 +2,12 @@ package com.artemzin.qualitymatters.ui.adapters;
 
 import android.annotation.SuppressLint;
 import android.database.DataSetObserver;
-import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.ui.adapters.DeveloperSettingsSpinnerAdapter.SelectionOption;
 
@@ -27,15 +26,10 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyZeroInteractions;
 import static org.mockito.Mockito.when;
 
-@RunWith(QualityMattersRobolectricTestRunner.class)
+@RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class DeveloperSettingsSpinnerAdapterTest {
 
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private LayoutInflater layoutInflater;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private DeveloperSettingsSpinnerAdapter<SelectionOption> adapter;
 
     @Before

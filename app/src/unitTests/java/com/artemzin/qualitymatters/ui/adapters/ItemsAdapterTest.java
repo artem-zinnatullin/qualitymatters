@@ -1,6 +1,5 @@
 package com.artemzin.qualitymatters.ui.adapters;
 
-import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,10 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.artemzin.qualitymatters.QualityMattersRobolectricTestRunner;
+import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
-import com.squareup.picasso.Picasso;
+import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -27,26 +26,17 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
-@RunWith(QualityMattersRobolectricTestRunner.class)
+@RunWith(QualityMattersRobolectricUnitTestRunner.class)
 public class ItemsAdapterTest {
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
     private LayoutInflater layoutInflater;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
-    private Picasso picasso;
-
-    @SuppressWarnings("NullableProblems") // Initialized in @Before.
-    @NonNull
+    private QualityMattersImageLoader imageLoader;
     private ItemsAdapter adapter;
 
     @Before
     public void beforeEachTest() {
         layoutInflater = mock(LayoutInflater.class);
-        picasso = mock(Picasso.class);
-        adapter = new ItemsAdapter(layoutInflater, picasso);
+        imageLoader = mock(QualityMattersImageLoader.class);
+        adapter = new ItemsAdapter(layoutInflater, imageLoader);
     }
 
     @Test

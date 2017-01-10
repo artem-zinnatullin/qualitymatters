@@ -1,38 +1,38 @@
 package com.artemzin.qualitymatters.developer_settings;
 
+import android.app.Application;
 import android.support.annotation.NonNull;
 import android.util.DisplayMetrics;
 
-import com.artemzin.qualitymatters.QualityMattersApp;
+import com.artemzin.qualitymatters.BuildConfig;
 import com.codemonkeylabs.fpslibrary.TinyDancer;
 import com.facebook.stetho.Stetho;
-import com.facebook.stetho.okhttp.StethoInterceptor;
-import com.squareup.okhttp.OkHttpClient;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import hu.supercluster.paperwork.Paperwork;
+import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
 
 import static android.view.Gravity.START;
 import static android.view.Gravity.TOP;
 
-public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
+public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
 
     @NonNull
-    private final QualityMattersApp qualityMattersApp;
+    private final Application application;
 
     @NonNull
     private final DeveloperSettings developerSettings;
-
-    @NonNull
-    private final OkHttpClient okHttpClient;
 
     @NonNull
     private final HttpLoggingInterceptor httpLoggingInterceptor;
 
     @NonNull
     private final LeakCanaryProxy leakCanaryProxy;
+
+    @NonNull
+    private final Paperwork paperwork;
 
     @NonNull
     private AtomicBoolean stethoAlreadyEnabled = new AtomicBoolean();
@@ -43,16 +43,36 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
     @NonNull
     private AtomicBoolean tinyDancerDisplayed = new AtomicBoolean();
 
-    public DeveloperSettingsModelImpl(@NonNull QualityMattersApp qualityMattersApp,
+    public DeveloperSettingsModelImpl(@NonNull Application application,
                                       @NonNull DeveloperSettings developerSettings,
-                                      @NonNull OkHttpClient okHttpClient,
                                       @NonNull HttpLoggingInterceptor httpLoggingInterceptor,
-                                      @NonNull LeakCanaryProxy leakCanaryProxy) {
-        this.qualityMattersApp = qualityMattersApp;
+                                      @NonNull LeakCanaryProxy leakCanaryProxy,
+                                      @NonNull Paperwork paperwork) {
+        this.application = application;
         this.developerSettings = developerSettings;
-        this.okHttpClient = okHttpClient;
         this.httpLoggingInterceptor = httpLoggingInterceptor;
         this.leakCanaryProxy = leakCanaryProxy;
+        this.paperwork = paperwork;
+    }
+
+    @NonNull
+    public String getGitSha() {
+        return paperwork.get("gitSha");
+    }
+
+    @NonNull
+    public String getBuildDate() {
+        return paperwork.get("buildDate");
+    }
+
+    @NonNull
+    public String getBuildVersionCode() {
+        return String.valueOf(BuildConfig.VERSION_CODE);
+    }
+
+    @NonNull
+    public String getBuildVersionName() {
+        return BuildConfig.VERSION_NAME;
     }
 
     public boolean isStethoEnabled() {
@@ -97,8 +117,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
         // Stetho can not be enabled twice.
         if (stethoAlreadyEnabled.compareAndSet(false, true)) {
             if (isStethoEnabled()) {
-                Stetho.initializeWithDefaults(qualityMattersApp);
-                okHttpClient.interceptors().add(new StethoInterceptor());
+                Stetho.initializeWithDefaults(application);
             }
         }
 
@@ -110,7 +129,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
         }
 
         if (isTinyDancerEnabled() && tinyDancerDisplayed.compareAndSet(false, true)) {
-            final DisplayMetrics displayMetrics = qualityMattersApp.getResources().getDisplayMetrics();
+            final DisplayMetrics displayMetrics = application.getResources().getDisplayMetrics();
 
             TinyDancer.create()
                     .redFlagPercentage(0.2f)
@@ -118,10 +137,10 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingModel {
                     .startingGravity(TOP | START)
                     .startingXPosition(displayMetrics.widthPixels / 10)
                     .startingYPosition(displayMetrics.heightPixels / 4)
-                    .show(qualityMattersApp);
+                    .show(application);
         } else if (tinyDancerDisplayed.compareAndSet(true, false)) {
             try {
-                TinyDancer.hide(qualityMattersApp);
+                TinyDancer.hide(application);
             } catch (Exception e) {
                 // In some cases TinyDancer can not be hidden without exception: for example when you start it first time on Android 6.
                 Timber.e(e, "Can not hide TinyDancer");

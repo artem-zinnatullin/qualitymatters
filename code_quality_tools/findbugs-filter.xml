@@ -18,13 +18,22 @@
     <!-- Do not check for non-initialized fields in tests because usually we initialize them in @Before -->
     <Match>
         <Class name="~.*Test"/>
-        <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR" type="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
+        <Bug pattern="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"
+             type="UWF_FIELD_NOT_INITIALIZED_IN_CONSTRUCTOR"/>
     </Match>
 
     <!-- Ignore UPM in lambdas from Retrolambda, FindBugs does not correctly understand them -->
     <Match>
-        <Bug code="UPM" />
+        <Bug code="UPM"/>
         <Class name="~.*\$\$Lambda\$.*"/>
     </Match>
 
+    <!-- Ignore Butterknife auto-generated classes -->
+    <Match>
+        <Class name="~.*\$\$ViewBinder*"/>
+    </Match>
+    <Match>
+        <Class name="~.*\$\$ViewBinder\$InnerUnbinder*"/>
+    </Match>
+    
 </FindBugsFilter>

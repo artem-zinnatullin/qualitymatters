@@ -6,7 +6,7 @@ import com.artemzin.qualitymatters.api.entities.Item;
 
 import java.util.List;
 
-import retrofit.http.GET;
+import retrofit2.http.GET;
 import rx.Single;
 
 public interface QualityMattersRestApi {

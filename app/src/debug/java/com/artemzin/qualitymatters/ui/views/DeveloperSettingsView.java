@@ -3,9 +3,21 @@ package com.artemzin.qualitymatters.ui.views;
 import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.performance.AnyThread;
-import com.squareup.okhttp.logging.HttpLoggingInterceptor;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 public interface DeveloperSettingsView {
+
+    @AnyThread
+    void changeGitSha(@NonNull String gitSha);
+
+    @AnyThread
+    void changeBuildDate(@NonNull String date);
+
+    @AnyThread
+    void changeBuildVersionCode(@NonNull String versionCode);
+
+    @AnyThread
+    void changeBuildVersionName(@NonNull String versionName);
 
     @AnyThread
     void changeStethoState(boolean enabled);
