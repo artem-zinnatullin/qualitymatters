@@ -1,0 +1,8 @@
+# Ignore everything
+*
+
+# except this file
+!.gitignore
+
+# and code style settings
+!codeStyleSettings.xml

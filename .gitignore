@@ -24,7 +24,6 @@ local.properties
 .project
 
 # Idea IDE files
-*.idea/
 *.iml
 
 *.DS_STORE
