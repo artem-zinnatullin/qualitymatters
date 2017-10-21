@@ -3,11 +3,11 @@ ext.versions = [
         name                         : '1.0',
 
         minSdk                       : 16,
-        targetSdk                    : 23,
-        compileSdk                   : 23,
-        buildTools                   : '23.0.3',
+        targetSdk                    : 25,
+        compileSdk                   : 25,
+        buildTools                   : '25.0.3',
 
-        androidGradlePlugin          : '2.2.1',
+        androidGradlePlugin          : '2.3.3',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
         paperworkGradlePlugin        : '1.2.7',
@@ -21,9 +21,8 @@ ext.versions = [
 
         dagger                       : '2.6',
 
-        rxJava                       : '1.1.8',
-        rxJavaProguardRules          : '1.1.8.0',
-        rxLint                       : '1.0',
+        rxJava                       : '2.1.5',
+        rxLint                       : '1.6',
         supportLibs                  : '23.1.1',
         okHttp                       : '3.2.0',
         retrofit                     : '2.0.0-beta4',
@@ -68,8 +67,7 @@ ext.libraries = [
         dagger                  : "com.google.dagger:dagger:$versions.dagger",
         daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
 
-        rxJava                  : "io.reactivex:rxjava:$versions.rxJava",
-        rxJavaProguardRules     : "com.artemzin.rxjava:proguard-rules:$versions.rxJavaProguardRules",
+        rxJava                  : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
         rxLint                  : "nl.littlerobots.rxlint:rxlint:$versions.rxLint",
 
         okHttp                  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
