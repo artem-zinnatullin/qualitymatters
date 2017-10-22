@@ -7,7 +7,7 @@ ext.versions = [
         compileSdk                   : 23,
         buildTools                   : '26.0.2',
 
-        androidGradlePlugin          : '2.2.1',
+        androidGradlePlugin          : '2.3.3',
         retrolambdaGradlePlugin      : '3.2.5',
         lombokGradlePlugin           : '0.2.3.a2',
         paperworkGradlePlugin        : '1.2.7',
@@ -17,7 +17,7 @@ ext.versions = [
         errorProneCoreVersion        : '2.0.9',
         dexcountPlugin               : '0.6.1',
         versionsGradlePlugin         : '0.13.0',
-        buildScan                    : '1.3',
+        buildScan                    : '1.10',
 
         dagger                       : '2.6',
 
