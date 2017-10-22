@@ -98,6 +98,12 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
         presenter.bindView(this);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        presenter.syncDeveloperSettings();
+    }
+
     @OnCheckedChanged(R.id.developer_settings_stetho_switch)
     void onStethoSwitchCheckedChanged(boolean checked) {
         presenter.changeStethoState(checked);
