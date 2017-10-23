@@ -1,30 +1,27 @@
 # Disabling sudo moves build to the Container Based Infrastructure on Travis CI
 sudo: false
 
-language: android
+language: java
 jdk: oraclejdk8
-
-android:
-  components:
-    - platform-tools
-    - tools
-    - android-23
-    - build-tools-23.0.3
-    - extra-android-m2repository
-    - extra-android-support
-    - sys-img-armeabi-v7a-android-18
 
 before_install:
   - pip install --user codecov
-
-before_script:
-  - echo no | android create avd --force -n test -t android-18 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
-  - android-wait-for-emulator
-  - adb shell input keyevent 82
+  - export ANDROID_HOME="$HOME"/android-sdk
+  - mkdir -p "$ANDROID_HOME"
+  - export ANDROID_SDK_FILE_NAME=sdk-tools-darwin-3859397.zip
+  - curl --fail https://dl.google.com/android/repository/$ANDROID_SDK_FILE_NAME --silent --location --output $ANDROID_SDK_FILE_NAME
+  - unzip -qq $ANDROID_SDK_FILE_NAME -d "$ANDROID_HOME"
+  - rm $ANDROID_SDK_FILE_NAME
+  - export ANDROID_SDK_INSTALL_COMPONENT="echo \"y\" | \"$ANDROID_HOME\"/tools/bin/sdkmanager > /dev/null"
+  - eval $ANDROID_SDK_INSTALL_COMPONENT '"tools"'
+  - eval $ANDROID_SDK_INSTALL_COMPONENT '"platform-tools"'
+  - eval $ANDROID_SDK_INSTALL_COMPONENT '"build-tools;26.0.2"'
+  - eval $ANDROID_SDK_INSTALL_COMPONENT '"platforms;android-23"'
+  - eval $ANDROID_SDK_INSTALL_COMPONENT '"extras;android;m2repository"'
+  - eval $ANDROID_SDK_INSTALL_COMPONENT '"extras;google;m2repository"'
 
 script:
-  - bash build.sh
+  - ./build.sh
   
 after_success:
   - codecov

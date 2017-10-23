@@ -5,19 +5,19 @@ ext.versions = [
         minSdk                       : 16,
         targetSdk                    : 23,
         compileSdk                   : 23,
-        buildTools                   : '23.0.3',
+        buildTools                   : '26.0.2',
 
-        androidGradlePlugin          : '2.2.1',
-        retrolambdaGradlePlugin      : '3.2.5',
+        androidGradlePlugin          : '2.3.3',
+        retrolambdaGradlePlugin      : '3.7.0',
         lombokGradlePlugin           : '0.2.3.a2',
         paperworkGradlePlugin        : '1.2.7',
         jacocoGradlePlugin           : '0.7.6.201602180812',
         androidDevMetricsGradlePlugin: '0.4',
-        errorProneVersion            : '0.0.8',
+        errorProneGradlePlugin       : '0.0.13',
         errorProneCoreVersion        : '2.0.9',
         dexcountPlugin               : '0.6.1',
         versionsGradlePlugin         : '0.13.0',
-        buildScan                    : '1.3',
+        buildScan                    : '1.10',
 
         dagger                       : '2.6',
 
@@ -58,7 +58,7 @@ ext.gradlePlugins = [
         paperwork        : "hu.supercluster:paperwork-plugin:$versions.paperworkGradlePlugin",
         jacoco           : "org.jacoco:org.jacoco.core:$versions.jacocoGradlePlugin",
         androidDevMetrics: "com.frogermcs.androiddevmetrics:androiddevmetrics-plugin:$versions.androidDevMetricsGradlePlugin",
-        errorProne       : "net.ltgt.gradle:gradle-errorprone-plugin:$versions.errorProneVersion",
+        errorProne       : "net.ltgt.gradle:gradle-errorprone-plugin:$versions.errorProneGradlePlugin",
         dexcount         : "com.getkeepsafe.dexcount:dexcount-gradle-plugin:$versions.dexcountPlugin",
         versions         : "com.github.ben-manes:gradle-versions-plugin:$versions.versionsGradlePlugin",
         buildScan        : "com.gradle:build-scan-plugin:$versions.buildScan"
