@@ -26,19 +26,18 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
         syncDeveloperSettings();
     }
 
+    @SuppressWarnings("ConstantConditions")
     public void syncDeveloperSettings() {
         DeveloperSettingsView view = view();
 
-        if (view != null) {
-            view.changeGitSha(developerSettingsModel.getGitSha());
-            view.changeBuildDate(developerSettingsModel.getBuildDate());
-            view.changeBuildVersionCode(developerSettingsModel.getBuildVersionCode());
-            view.changeBuildVersionName(developerSettingsModel.getBuildVersionName());
-            view.changeStethoState(developerSettingsModel.isStethoEnabled());
-            view.changeLeakCanaryState(developerSettingsModel.isLeakCanaryEnabled());
-            view.changeTinyDancerState(developerSettingsModel.isTinyDancerEnabled());
-            view.changeHttpLoggingLevel(developerSettingsModel.getHttpLoggingLevel());
-        }
+        view.changeGitSha(developerSettingsModel.getGitSha());
+        view.changeBuildDate(developerSettingsModel.getBuildDate());
+        view.changeBuildVersionCode(developerSettingsModel.getBuildVersionCode());
+        view.changeBuildVersionName(developerSettingsModel.getBuildVersionName());
+        view.changeStethoState(developerSettingsModel.isStethoEnabled());
+        view.changeLeakCanaryState(developerSettingsModel.isLeakCanaryEnabled());
+        view.changeTinyDancerState(developerSettingsModel.isTinyDancerEnabled());
+        view.changeHttpLoggingLevel(developerSettingsModel.getHttpLoggingLevel());
     }
 
     public void changeStethoState(boolean enabled) {
