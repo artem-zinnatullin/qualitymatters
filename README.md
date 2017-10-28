@@ -70,10 +70,10 @@ Also, you might notice that app has custom [`functional test runner`](/app/src/f
 Developer Settings presented only in `debug` build type, libraries and resources used for Developer Settings compiled only into `debug` build and main source set knows only little abstractions over Developer Settings just to initialize real implementation in the `debug` build code. In release build type `DeveloperSettingsModule` (Dagger) just returns `no-op` implementation of `DeveloperSettingsModel`.
 
 **Why only debug builds?**
-The Answer is simple — dex limit. LeakCanary brings about 3k of methods, Stetho brings about 2k and so on. The more tools you add to Developer Settings — the bigger apk you receive. Situation is even worse if your main code is near to 65k methods. In our production app we had to turn on `multidex` for `debug` builds.
+The Answer is simple — dex limit. LeakCanary brings about 3k methods, Stetho brings about 2k and so on. The more tools you add to Developer Settings — the bigger the apk you receive. Situation is even worse if your main code is near to 65k methods. In our production app we had to turn on `multidex` for `debug` builds.
 
 ### Packages structure
 
 Many people ask why app has component-based structure of the packages: `presenters`, `models`, etc. instead of feature-based structure: `itemslist`, `developersettings`, etc.
 
-With component-based structure of packages new persons on the project (like those who read the code of this app) can easily find what `presenters` does the app have, what `views`, `models` and so on. If you read the code and you want to quickly move to some class related to current one you can [simply press `t` right on the GitHub and search](https://github.com/blog/793-introducing-the-file-finder) for the required file!
+With component-based structure of packages new persons on the project (like those who read the code of this app) can easily find what `presenters` does the app have, what `views`, `models` and so on. If you read the code and you want to quickly move to some class related to the current one you can [simply press `t` right on the GitHub and search](https://github.com/blog/793-introducing-the-file-finder) for the required file!
