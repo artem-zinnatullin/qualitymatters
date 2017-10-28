@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'me.tatarka.retrolambda'
 apply plugin: 'hu.supercluster.paperwork'
 apply from: '../code_quality_tools/jacoco.gradle'
 apply plugin: 'com.frogermcs.androiddevmetrics'
@@ -112,72 +111,72 @@ android {
 
 // Libraries declared in dependencies.gradle in the root of the project
 dependencies {
-    compile libraries.dagger
+    implementation libraries.dagger
     annotationProcessor libraries.daggerCompiler
 
-    compile libraries.rxJava
+    implementation libraries.rxJava
     releaseCompile libraries.rxJavaProguardRules
-    compile libraries.rxLint
+    implementation libraries.rxLint
 
-    compile libraries.okHttp
-    compile libraries.retrofit
-    compile libraries.retrofitGsonConverter
-    compile libraries.retrofitRxJavaAdapter
-    compile libraries.gson
+    implementation libraries.okHttp
+    implementation libraries.retrofit
+    implementation libraries.retrofitGsonConverter
+    implementation libraries.retrofitRxJavaAdapter
+    implementation libraries.gson
 
     // Do not compile AutoValue dependencies to the app.
     annotationProcessor libraries.autoValue
     annotationProcessor libraries.autoValueGson
 
     // Make AutoValue annotation visible to the compiler.
-    provided libraries.autoValue
-    provided libraries.autoValueGson
+    compileOnly libraries.autoValue
+    compileOnly libraries.autoValueGson
 
-    compile libraries.supportAnnotations
-    compile libraries.supportAppCompat
-    compile libraries.supportDesign
-    compile libraries.supportRecyclerView
-    compile libraries.supportCardView
+    implementation libraries.supportAnnotations
+    implementation libraries.supportAppCompat
+    implementation libraries.supportDesign
+    implementation libraries.supportRecyclerView
+    implementation libraries.supportCardView
 
-    compile libraries.butterKnife
+    implementation libraries.butterKnife
     annotationProcessor libraries.butterKnifeCompiler
 
-    compile libraries.picasso
-    compile libraries.picassoOkHttpDownloader
-    compile libraries.timber
+    implementation libraries.picasso
+    implementation libraries.picassoOkHttpDownloader
+    implementation libraries.timber
 
     // Analytics. Why? To make app more real.
     // We mock analytics for Integration tests under Robolectric and Functional (UI) tests under Instrumentation!
-    compile libraries.yandexAppMetrica
+    implementation libraries.yandexAppMetrica
 
     // Developer tools (Developer Settings)
-    debugCompile libraries.okHttpLoggingInterceptor
-    debugCompile libraries.stetho
-    debugCompile libraries.stethoOkHttp
-    debugCompile libraries.leakCanary
-    debugCompile libraries.tinyDancer
-    debugCompile libraries.paperwork
-    debugCompile libraries.lynx
-    debugCompile libraries.processPhoenix
+    debugImplementation libraries.okHttpLoggingInterceptor
+    debugImplementation libraries.stetho
+    debugImplementation libraries.stethoOkHttp
+    debugImplementation libraries.leakCanary
+    debugImplementation libraries.tinyDancer
+    debugImplementation libraries.paperwork
+    debugImplementation libraries.lynx
+    debugImplementation libraries.processPhoenix
 
-    testCompile libraries.junit
-    testCompile libraries.robolectric
-    testCompile libraries.assertJ
-    testCompile libraries.equalsVerifier
-    testCompile libraries.okHttpMockWebServer
-    testCompile libraries.mockitoCore
-    testCompile libraries.devMetricsNoOp
+    testImplementation libraries.junit
+    testImplementation libraries.robolectric
+    testImplementation libraries.assertJ
+    testImplementation libraries.equalsVerifier
+    testImplementation libraries.okHttpMockWebServer
+    testImplementation libraries.mockitoCore
+    testImplementation libraries.devMetricsNoOp
 
-    androidTestCompile libraries.supportTestRunner
-    androidTestCompile libraries.supportTestRules
-    androidTestCompile libraries.espressoCore
-    androidTestCompile(libraries.espressoContrib) {
+    androidTestImplementation libraries.supportTestRunner
+    androidTestImplementation libraries.supportTestRules
+    androidTestImplementation libraries.espressoCore
+    androidTestImplementation(libraries.espressoContrib) {
         // Causes IncompatibleClassChangeError. As always…
         exclude module: 'support-annotations'
         exclude module: 'recyclerview-v7'
         exclude module: 'support-v4'
     }
-    androidTestCompile libraries.okHttpMockWebServer
+    androidTestImplementation libraries.okHttpMockWebServer
 }
 
 configurations.all {

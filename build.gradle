@@ -15,9 +15,6 @@ buildscript {
 
         classpath gradlePlugins.android
 
-        // Backport of some Java 8 language features such as Lambdas and method references.
-        classpath gradlePlugins.retrolambda
-
         // Needed for Lint + Retrolambda.
         classpath gradlePlugins.lombok
 
