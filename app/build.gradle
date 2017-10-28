@@ -115,7 +115,7 @@ dependencies {
     annotationProcessor libraries.daggerCompiler
 
     implementation libraries.rxJava
-    releaseCompile libraries.rxJavaProguardRules
+    releaseImplementation libraries.rxJavaProguardRules
     implementation libraries.rxLint
 
     implementation libraries.okHttp
