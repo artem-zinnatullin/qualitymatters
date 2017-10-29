@@ -23,6 +23,12 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
     @Override
     public void bindView(@NonNull DeveloperSettingsView view) {
         super.bindView(view);
+        syncDeveloperSettings();
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public void syncDeveloperSettings() {
+        DeveloperSettingsView view = view();
 
         view.changeGitSha(developerSettingsModel.getGitSha());
         view.changeBuildDate(developerSettingsModel.getBuildDate());
