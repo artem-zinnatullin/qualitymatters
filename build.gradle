@@ -8,18 +8,13 @@ buildscript {
 
     repositories {
         jcenter()
+        google()
         maven { url 'https://plugins.gradle.org/m2/' }
     }
     dependencies {
         // See dependencies.gradle for declaration of plugins.
 
         classpath gradlePlugins.android
-
-        // Backport of some Java 8 language features such as Lambdas and method references.
-        classpath gradlePlugins.retrolambda
-
-        // Needed for Lint + Retrolambda.
-        classpath gradlePlugins.lombok
 
         // Generates build info without breaking incremental builds.
         classpath gradlePlugins.paperwork
@@ -42,14 +37,12 @@ buildscript {
         // Analyse builds to profile
         classpath gradlePlugins.buildScan
     }
-
-    // Part of workaround for Lint + Retrolambda.
-    configurations.classpath.exclude group: 'com.android.tools.external.lombok'
 }
 
 allprojects {
     repositories {
         jcenter()
+        maven { url "https://jitpack.io"}
     }
 
     // Workaround to prevent Gradle from stealing focus from other apps during tests run/etc.
