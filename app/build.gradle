@@ -138,9 +138,12 @@ dependencies {
     implementation libraries.supportRecyclerView
     implementation libraries.supportCardView
 
-    implementation (libraries.butterKnife) {
-        exclude module: 'support-compat'
-    }
+
+    implementation (
+            libraries.butterKnife,
+            libraries.butterKnifeAnnotations
+    )
+
     annotationProcessor libraries.butterKnifeCompiler
 
     implementation libraries.picasso
