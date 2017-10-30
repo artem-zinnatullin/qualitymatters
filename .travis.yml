@@ -20,6 +20,9 @@ before_install:
   - eval $ANDROID_SDK_INSTALL_COMPONENT '"extras;android;m2repository"'
   - eval $ANDROID_SDK_INSTALL_COMPONENT '"extras;google;m2repository"'
 
+install:
+  - echo 'Just overriding standard Travis install procedure to avoid unnecessary work.'
+
 script:
   - ./build.sh
   
