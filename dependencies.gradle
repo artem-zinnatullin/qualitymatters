@@ -31,7 +31,7 @@ ext.versions = [
         butterKnife                  : '83c0e1df66',
         picasso                      : '2.5.2',
         picassoOkHttpDownloader      : '1.0.2',
-        timber                       : '44711644a3',
+        timber                       : '4.6.0',
 
         espresso                     : '2.2.1',
         stetho                       : '1.3.1',
