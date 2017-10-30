@@ -31,7 +31,7 @@ ext.versions = [
         butterKnife                  : '83c0e1df66',
         picasso                      : '2.5.2',
         picassoOkHttpDownloader      : '1.0.2',
-        timber                       : '44711644a3',
+        timber                       : '4.6.0',
 
         espresso                     : '2.2.1',
         stetho                       : '1.3.1',
@@ -89,7 +89,7 @@ ext.libraries = [
         butterKnifeAnnotations  : "com.github.JakeWharton.butterknife:butterknife-annotations:$versions.butterKnife",
         picasso                 : "com.squareup.picasso:picasso:$versions.picasso",
         picassoOkHttpDownloader : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.picassoOkHttpDownloader",
-        timber                  : "com.github.JakeWharton:timber:$versions.timber",
+        timber                  : "com.jakewharton.timber:timber:$versions.timber",
 
         // Analytics https://tech.yandex.com/metrica-mobile-sdk/
         yandexAppMetrica        : "com.yandex.android:mobmetricalib:$versions.yandexAppMetrica",
