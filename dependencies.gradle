@@ -89,7 +89,7 @@ ext.libraries = [
         butterKnifeAnnotations  : "com.github.JakeWharton.butterknife:butterknife-annotations:$versions.butterKnife",
         picasso                 : "com.squareup.picasso:picasso:$versions.picasso",
         picassoOkHttpDownloader : "com.jakewharton.picasso:picasso2-okhttp3-downloader:$versions.picassoOkHttpDownloader",
-        timber                  : "com.github.JakeWharton:timber:$versions.timber",
+        timber                  : "com.jakewharton.timber:timber:$versions.timber",
 
         // Analytics https://tech.yandex.com/metrica-mobile-sdk/
         yandexAppMetrica        : "com.yandex.android:mobmetricalib:$versions.yandexAppMetrica",
