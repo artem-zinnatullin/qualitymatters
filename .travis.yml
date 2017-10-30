@@ -21,7 +21,7 @@ before_install:
   - eval $ANDROID_SDK_INSTALL_COMPONENT '"extras;google;m2repository"'
 
 install:
-  - echo "Override default Travis install step to avoid unnecessary './gradlew assemble'."
+  - echo "Overriding default Travis install step to avoid unnecessary './gradlew assemble'."
 
 script:
   - ./build.sh
