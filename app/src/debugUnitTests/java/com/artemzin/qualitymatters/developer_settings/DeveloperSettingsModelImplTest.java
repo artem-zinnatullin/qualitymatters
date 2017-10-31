@@ -150,6 +150,54 @@ public class DeveloperSettingsModelImplTest {
         }
     }
 
+    @Test
+    public void hasStethoStateChanged_shouldReturnFalse() {
+        when(developerSettings.isStethoEnabled()).thenReturn(false);
+        assertThat(developerSettingsModel.hasStethoStateChanged(false)).isFalse();
+    }
+
+    @Test
+    public void hasLeakCanaryStateChanged_shouldReturnFalse() {
+        when(developerSettings.isLeakCanaryEnabled()).thenReturn(true);
+        assertThat(developerSettingsModel.hasLeakCanaryStateChanged(true)).isFalse();
+    }
+
+    @Test
+    public void hasTinyDancerStateChanged_shouldReturnFalse() {
+        when(developerSettings.isTinyDancerEnabled()).thenReturn(true);
+        assertThat(developerSettingsModel.hasTinyDancerStateChanged(true)).isFalse();
+    }
+
+    @Test
+    public void hasHttpLoggingLevelChanged_shouldReturnFalse() {
+        when(developerSettings.getHttpLoggingLevel()).thenReturn(HttpLoggingInterceptor.Level.BASIC);
+        assertThat(developerSettingsModel.hasHttpLoggingLevelChanged(HttpLoggingInterceptor.Level.BASIC)).isFalse();
+    }
+
+    @Test
+    public void hasStethoStateChanged_shouldReturnTrue() {
+        when(developerSettings.isStethoEnabled()).thenReturn(true);
+        assertThat(developerSettingsModel.hasStethoStateChanged(false)).isTrue();
+    }
+
+    @Test
+    public void hasLeakCanaryStateChanged_shouldReturnTrue() {
+        when(developerSettings.isLeakCanaryEnabled()).thenReturn(true);
+        assertThat(developerSettingsModel.hasLeakCanaryStateChanged(false)).isTrue();
+    }
+
+    @Test
+    public void hasTinyDancerStateChanged_shouldReturnTrue() {
+        when(developerSettings.isTinyDancerEnabled()).thenReturn(true);
+        assertThat(developerSettingsModel.hasTinyDancerStateChanged(false)).isTrue();
+    }
+
+    @Test
+    public void hasHttpLoggingLevelChanged_shouldReturnTrue() {
+        when(developerSettings.getHttpLoggingLevel()).thenReturn(HttpLoggingInterceptor.Level.BASIC);
+        assertThat(developerSettingsModel.hasHttpLoggingLevelChanged(HttpLoggingInterceptor.Level.HEADERS)).isTrue();
+    }
+
     // To test apply() method we will need a lof of abstractions over the libraries used
     // for Developer Settings, because most of them initialized statically and hardly mockable/verifiable :(
     // So, sorry, no tests for apply(). But, feel free to PR!

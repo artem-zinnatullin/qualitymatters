@@ -41,7 +41,7 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
     }
 
     public void changeStethoState(boolean enabled) {
-        if (developerSettingsModel.isStethoEnabled() == enabled) {
+        if (!developerSettingsModel.hasStethoStateChanged(enabled)) {
             return; // no-op
         }
 
@@ -63,7 +63,7 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
     }
 
     public void changeLeakCanaryState(boolean enabled) {
-        if (developerSettingsModel.isLeakCanaryEnabled() == enabled) {
+        if (!developerSettingsModel.hasLeakCanaryStateChanged(enabled)) {
             return; // no-op
         }
 
@@ -80,7 +80,7 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
     }
 
     public void changeTinyDancerState(boolean enabled) {
-        if (developerSettingsModel.isTinyDancerEnabled() == enabled) {
+        if (!developerSettingsModel.hasTinyDancerStateChanged(enabled)) {
             return; // no-op
         }
 
@@ -96,7 +96,7 @@ public class DeveloperSettingsPresenter extends Presenter<DeveloperSettingsView>
     }
 
     public void changeHttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
-        if (developerSettingsModel.getHttpLoggingLevel() == loggingLevel) {
+        if (!developerSettingsModel.hasHttpLoggingLevelChanged(loggingLevel)) {
             return; // no-op
         }
 
