@@ -142,7 +142,7 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
             try {
                 TinyDancer.hide(application);
             } catch (Exception e) {
-                // In some cases TinyDancer can not be hidden without exception: for example when you start it first time on Android 6.
+                // In some cases TinyDancer cannot be hidden without an exception: for example, when you start it for the first time on Android 6.
                 Timber.e(e, "Can not hide TinyDancer");
             }
         }
