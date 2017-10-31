@@ -79,6 +79,10 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
         return developerSettings.isStethoEnabled();
     }
 
+    public boolean hasStethoStateChanged(boolean enabled) {
+        return isStethoEnabled() != enabled;
+    }
+
     public void changeStethoState(boolean enabled) {
         developerSettings.saveIsStethoEnabled(enabled);
         apply();
@@ -86,6 +90,10 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
 
     public boolean isLeakCanaryEnabled() {
         return developerSettings.isLeakCanaryEnabled();
+    }
+
+    public boolean hasLeakCanaryStateChanged(boolean enabled) {
+        return isLeakCanaryEnabled() != enabled;
     }
 
     public void changeLeakCanaryState(boolean enabled) {
@@ -97,6 +105,10 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
         return developerSettings.isTinyDancerEnabled();
     }
 
+    public boolean hasTinyDancerStateChanged(boolean enabled) {
+        return isTinyDancerEnabled() != enabled;
+    }
+
     public void changeTinyDancerState(boolean enabled) {
         developerSettings.saveIsTinyDancerEnabled(enabled);
         apply();
@@ -105,6 +117,10 @@ public class DeveloperSettingsModelImpl implements DeveloperSettingsModel {
     @NonNull
     public HttpLoggingInterceptor.Level getHttpLoggingLevel() {
         return developerSettings.getHttpLoggingLevel();
+    }
+
+    public boolean hasHttpLoggingLevelChanged(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
+        return getHttpLoggingLevel() != loggingLevel;
     }
 
     public void changeHttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
