@@ -23,7 +23,7 @@ ext.versions = [
         rxJavaProguardRules          : '1.1.8.0',
         rxLint                       : '1.6',
         supportLibs                  : '23.1.1',
-        okHttp                       : '3.2.0',
+        okHttp                       : '3.9.0',
         retrofit                     : '2.0.0-beta4',
         gson                         : '2.7',
         autoValue                    : '1.2',

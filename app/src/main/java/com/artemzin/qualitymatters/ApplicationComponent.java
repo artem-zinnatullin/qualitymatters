@@ -1,9 +1,7 @@
 package com.artemzin.qualitymatters;
 
 import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.api.ApiModule;
-import com.artemzin.qualitymatters.api.ChangeableBaseUrl;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.developer_settings.DevMetricsProxy;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsComponent;
@@ -12,6 +10,7 @@ import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
 import com.artemzin.qualitymatters.developer_settings.LeakCanaryProxy;
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ModelsModule;
+import com.artemzin.qualitymatters.network.HostSelectionInterceptor;
 import com.artemzin.qualitymatters.network.NetworkModule;
 import com.artemzin.qualitymatters.network.OkHttpInterceptorsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsModule;
@@ -19,10 +18,9 @@ import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.activities.MainActivity;
 import com.artemzin.qualitymatters.ui.fragments.ItemsFragment;
 import com.google.gson.Gson;
+import dagger.Component;
 
 import javax.inject.Singleton;
-
-import dagger.Component;
 
 @Singleton
 @Component(modules = {
@@ -44,9 +42,6 @@ public interface ApplicationComponent {
     @NonNull
     QualityMattersRestApi qualityMattersApi();
 
-    @NonNull
-    ChangeableBaseUrl changeableBaseUrl();
-
     // Provide AsyncJobObserver from the real app to the tests without need in injection to the test.
     @NonNull
     AsyncJobsObserver asyncJobsObserver();
@@ -67,6 +62,8 @@ public interface ApplicationComponent {
     DeveloperSettingsModel developerSettingModel();
 
     DevMetricsProxy devMetricsProxy();
+
+    HostSelectionInterceptor hostSelectionInterceptor();
 
     void inject(@NonNull MainActivity mainActivity);
 }

@@ -1,15 +1,13 @@
 package com.artemzin.qualitymatters.network;
 
 import android.support.annotation.NonNull;
-
-import java.util.List;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
+
+import javax.inject.Singleton;
+import java.util.List;
 
 @Module
 public class NetworkModule {
