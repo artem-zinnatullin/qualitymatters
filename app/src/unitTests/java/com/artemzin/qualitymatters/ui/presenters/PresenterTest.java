@@ -1,15 +1,12 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
+import io.reactivex.disposables.Disposable;
 import org.junit.Before;
 import org.junit.Test;
 
-import rx.Subscription;
-
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class PresenterTest {
     private Presenter<Object> presenter;
@@ -48,19 +45,19 @@ public class PresenterTest {
     public void unsubscribeOnUnbindView_shouldWorkAccordingItsContract() {
         presenter.bindView(view);
 
-        Subscription subscription1 = mock(Subscription.class);
-        Subscription subscription2 = mock(Subscription.class);
-        Subscription subscription3 = mock(Subscription.class);
+        Disposable subscription1 = mock(Disposable.class);
+        Disposable subscription2 = mock(Disposable.class);
+        Disposable subscription3 = mock(Disposable.class);
 
         presenter.unsubscribeOnUnbindView(subscription1, subscription2, subscription3);
-        verify(subscription1, never()).unsubscribe();
-        verify(subscription2, never()).unsubscribe();
-        verify(subscription3, never()).unsubscribe();
+        verify(subscription1, never()).dispose();
+        verify(subscription2, never()).dispose();
+        verify(subscription3, never()).dispose();
 
         presenter.unbindView(view);
-        verify(subscription1).unsubscribe();
-        verify(subscription2).unsubscribe();
-        verify(subscription3).unsubscribe();
+        verify(subscription1).dispose();
+        verify(subscription2).dispose();
+        verify(subscription3).dispose();
     }
 
     @Test

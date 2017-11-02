@@ -1,48 +1,45 @@
 package com.artemzin.qualitymatters.other;
 
+import io.reactivex.functions.Action;
 import org.junit.Before;
 import org.junit.Test;
 
-import rx.functions.Action0;
-
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
+import static org.mockito.Mockito.*;
 
 public class DisposableSubscriptionTest {
 
-    private Action0 disposeAction;
+    private Action disposeAction;
     private DisposableSubscription disposableSubscription;
 
     @Before
     public void beforeEachTest() {
-        disposeAction = mock(Action0.class);
+        disposeAction = mock(Action.class);
         disposableSubscription = new DisposableSubscription(disposeAction);
     }
 
     @Test
-    public void unsubscribed_shouldReturnFalseByDefault() {
-        assertThat(disposableSubscription.isUnsubscribed()).isFalse();
+    public void disposed_shouldReturnFalseByDefault() {
+        assertThat(disposableSubscription.isDisposed()).isFalse();
         verifyZeroInteractions(disposeAction);
     }
 
     @Test
-    public void unsubscribe_shouldChangeValueOfIsUsubscribed() {
-        disposableSubscription.unsubscribe();
-        assertThat(disposableSubscription.isUnsubscribed()).isTrue();
+    public void dispose_shouldChangeValueOfIsDisposed() {
+        disposableSubscription.dispose();
+        assertThat(disposableSubscription.isDisposed()).isTrue();
     }
 
     @Test
-    public void unsubscribe_shouldCallDisposableAction() {
-        disposableSubscription.unsubscribe();
-        verify(disposeAction).call();
+    public void dispose_shouldCallDisposableAction() throws Exception {
+        disposableSubscription.dispose();
+        verify(disposeAction).run();
     }
 
     @Test
-    public void unsubscribeTwice_shouldCallDisposableActionOnce() {
-        disposableSubscription.unsubscribe();
-        disposableSubscription.unsubscribe();
-        verify(disposeAction).call();
+    public void disposeTwice_shouldCallDisposableActionOnce() throws Exception {
+        disposableSubscription.dispose();
+        disposableSubscription.dispose();
+        verify(disposeAction, times(1)).run();
     }
 }

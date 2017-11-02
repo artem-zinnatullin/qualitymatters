@@ -3,18 +3,16 @@ package com.artemzin.qualitymatters.integration_tests.api;
 import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
-
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import retrofit2.HttpException;
 
 import java.io.IOException;
 import java.util.List;
-
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import retrofit2.adapter.rxjava.HttpException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -58,7 +56,7 @@ public class QualityMattersRestApiIntegrationTest {
                 + "]"));
 
         // Get items from the API
-        List<Item> items = qualityMattersRestApi.items().toBlocking().value();
+        List<Item> items = qualityMattersRestApi.items().blockingGet();
 
         assertThat(items).hasSize(3);
 
@@ -88,7 +86,7 @@ public class QualityMattersRestApiIntegrationTest {
             mockWebServer.enqueue(new MockResponse().setStatus("HTTP/1.1 " + errorCode + " Not today"));
 
             try {
-                qualityMattersRestApi.items().toBlocking().value();
+                qualityMattersRestApi.items().blockingGet();
                 fail("HttpException should be thrown for error code: " + errorCode);
             } catch (RuntimeException expected) {
                 HttpException httpException = (HttpException) expected.getCause();

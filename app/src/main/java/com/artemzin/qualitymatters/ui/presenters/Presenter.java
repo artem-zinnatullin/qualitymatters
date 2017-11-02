@@ -3,9 +3,8 @@ package com.artemzin.qualitymatters.ui.presenters;
 import android.support.annotation.CallSuper;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-
-import rx.Subscription;
-import rx.subscriptions.CompositeSubscription;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.disposables.Disposable;
 
 /**
  * Base presenter implementation.
@@ -15,7 +14,7 @@ import rx.subscriptions.CompositeSubscription;
 public class Presenter<V> {
 
     @NonNull
-    private final CompositeSubscription subscriptionsToUnsubscribeOnUnbindView = new CompositeSubscription();
+    private final CompositeDisposable disposablesToDisposeOnUnbindView = new CompositeDisposable();
 
     @Nullable
     private volatile V view;
@@ -36,11 +35,11 @@ public class Presenter<V> {
         return view;
     }
 
-    protected final void unsubscribeOnUnbindView(@NonNull Subscription subscription, @NonNull Subscription... subscriptions) {
-        subscriptionsToUnsubscribeOnUnbindView.add(subscription);
+    protected final void unsubscribeOnUnbindView(@NonNull Disposable disposable, @NonNull Disposable... disposables) {
+        disposablesToDisposeOnUnbindView.add(disposable);
 
-        for (Subscription s : subscriptions) {
-            subscriptionsToUnsubscribeOnUnbindView.add(s);
+        for (Disposable d : disposables) {
+            disposablesToDisposeOnUnbindView.add(d);
         }
     }
 
@@ -56,6 +55,6 @@ public class Presenter<V> {
         }
 
         // Unsubscribe all subscriptions that need to be unsubscribed in this lifecycle state.
-        subscriptionsToUnsubscribeOnUnbindView.clear();
+        disposablesToDisposeOnUnbindView.clear();
     }
 }

@@ -19,7 +19,7 @@ public class FinishAsyncJobSubscriptionTest {
         DisposableSubscription disposableSubscription = new FinishAsyncJobSubscription(asyncJobsObserver, asyncJob);
         verifyZeroInteractions(asyncJobsObserver, asyncJob);
 
-        disposableSubscription.unsubscribe();
+        disposableSubscription.dispose();
         verify(asyncJobsObserver).asyncJobFinished(asyncJob);
     }
 }

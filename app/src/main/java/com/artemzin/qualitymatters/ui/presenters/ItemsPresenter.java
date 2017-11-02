@@ -9,7 +9,7 @@ import com.artemzin.qualitymatters.performance.AsyncJob;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
 
-import rx.Subscription;
+import io.reactivex.disposables.Disposable;
 
 public class ItemsPresenter extends Presenter<ItemsView> {
 
@@ -47,7 +47,7 @@ public class ItemsPresenter extends Presenter<ItemsView> {
 
         final AsyncJob asyncJob = asyncJobsObserver.asyncJobStarted("Reload data in ItemsPresenter");
 
-        final Subscription subscription = itemsModel
+        final Disposable disposable = itemsModel
                 .getItems()
                 .subscribeOn(presenterConfiguration.ioScheduler())
                 .subscribe(
@@ -76,6 +76,6 @@ public class ItemsPresenter extends Presenter<ItemsView> {
                 );
 
         // Prevent memory leak.
-        unsubscribeOnUnbindView(subscription, new FinishAsyncJobSubscription(asyncJobsObserver, asyncJob));
+        unsubscribeOnUnbindView(disposable, new FinishAsyncJobSubscription(asyncJobsObserver, asyncJob));
     }
 }

@@ -6,24 +6,18 @@ import com.artemzin.qualitymatters.models.ItemsModel;
 import com.artemzin.qualitymatters.performance.AsyncJob;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
-
+import io.reactivex.Single;
+import io.reactivex.schedulers.Schedulers;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
 
-import rx.Single;
-import rx.schedulers.Schedulers;
-
 import static java.util.Arrays.asList;
 import static java.util.Collections.emptyList;
 import static org.mockito.Matchers.any;
 import static org.mockito.Matchers.anyListOf;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.never;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.verifyZeroInteractions;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class ItemsPresenterTest {
     private ItemsModel itemsModel;
@@ -37,7 +31,7 @@ public class ItemsPresenterTest {
     public void beforeEachTest() {
         itemsModel = mock(ItemsModel.class);
         presenterConfiguration = ItemsPresenterConfiguration.builder()
-                .ioScheduler(Schedulers.immediate()) // We don't need async behavior in tests.
+                .ioScheduler(Schedulers.trampoline()) // We don't need async behavior in tests.
                 .build();
 
         asyncJobsObserver = mock(AsyncJobsObserver.class);

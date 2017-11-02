@@ -19,12 +19,11 @@ ext.versions = [
 
         dagger                       : '2.6',
 
-        rxJava                       : '1.1.8',
-        rxJavaProguardRules          : '1.1.8.0',
+        rxJava                       : '2.1.6',
         rxLint                       : '1.6',
         supportLibs                  : '23.1.1',
         okHttp                       : '3.2.0',
-        retrofit                     : '2.0.0-beta4',
+        retrofit                     : '2.3.0',
         gson                         : '2.7',
         autoValue                    : '1.2',
         autoValueGson                : '0.4.2',
@@ -64,15 +63,14 @@ ext.libraries = [
         dagger                  : "com.google.dagger:dagger:$versions.dagger",
         daggerCompiler          : "com.google.dagger:dagger-compiler:$versions.dagger",
 
-        rxJava                  : "io.reactivex:rxjava:$versions.rxJava",
-        rxJavaProguardRules     : "com.artemzin.rxjava:proguard-rules:$versions.rxJavaProguardRules",
+        rxJava                  : "io.reactivex.rxjava2:rxjava:$versions.rxJava",
         rxLint                  : "nl.littlerobots.rxlint:rxlint:$versions.rxLint",
 
         okHttp                  : "com.squareup.okhttp3:okhttp:$versions.okHttp",
         okHttpLoggingInterceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okHttp",
         retrofit                : "com.squareup.retrofit2:retrofit:$versions.retrofit",
         retrofitGsonConverter   : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
-        retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava:$versions.retrofit",
+        retrofitRxJavaAdapter   : "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit",
         gson                    : "com.google.code.gson:gson:$versions.gson",
 
         autoValue               : "com.google.auto.value:auto-value:$versions.autoValue",
