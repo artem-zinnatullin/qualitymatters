@@ -115,7 +115,7 @@ dependencies {
     annotationProcessor libraries.daggerCompiler
 
     implementation libraries.rxJava
-//    implementation libraries.rxLint
+    implementation libraries.rxLint
 
     implementation libraries.okHttp
     implementation libraries.retrofit

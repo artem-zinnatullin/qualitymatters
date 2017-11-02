@@ -88,8 +88,7 @@ public class QualityMattersRestApiIntegrationTest {
             try {
                 qualityMattersRestApi.items().blockingGet();
                 fail("HttpException should be thrown for error code: " + errorCode);
-            } catch (RuntimeException expected) {
-                HttpException httpException = (HttpException) expected.getCause();
+            } catch (HttpException httpException ) {
                 assertThat(httpException.code()).isEqualTo(errorCode);
                 assertThat(httpException.message()).isEqualTo("Not today");
             }
