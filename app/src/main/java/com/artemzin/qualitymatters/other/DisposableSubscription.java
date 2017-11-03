@@ -3,6 +3,7 @@ package com.artemzin.qualitymatters.other;
 import android.support.annotation.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Action;
+import io.reactivex.plugins.RxJavaPlugins;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -24,7 +25,7 @@ public class DisposableSubscription implements Disposable {
             try {
                 disposeAction.run();
             } catch (Exception e) {
-                throw new RuntimeException(e); // RxJava2 Action throws an exception. Pass it on
+                RxJavaPlugins.onError(e);
             }
         }
     }

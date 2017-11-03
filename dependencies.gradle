@@ -22,7 +22,7 @@ ext.versions = [
         rxJava                       : '2.1.6',
         rxLint                       : '1.6',
         supportLibs                  : '23.1.1',
-        okHttp                       : '3.8.0',
+        okHttp                       : '3.9.0',
         retrofit                     : '2.3.0',
         gson                         : '2.7',
         autoValue                    : '1.2',
