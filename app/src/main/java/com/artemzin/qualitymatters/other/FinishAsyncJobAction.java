@@ -10,7 +10,6 @@ public class FinishAsyncJobAction implements Action {
     private final AsyncJobsObserver asyncJobsObserver;
     private final AsyncJob asyncJob;
 
-
     public FinishAsyncJobAction(@NonNull AsyncJobsObserver asyncJobsObserver, @NonNull AsyncJob asyncJob) {
         this.asyncJobsObserver = asyncJobsObserver;
         this.asyncJob = asyncJob;
@@ -18,10 +17,6 @@ public class FinishAsyncJobAction implements Action {
 
     @Override
     public void run() throws Exception {
-        try {
-            asyncJobsObserver.asyncJobFinished(asyncJob);
-        } catch (IllegalArgumentException possible) {
-            // Do nothing, async job was probably already finished normally.
-        }
+        asyncJobsObserver.asyncJobFinished(asyncJob);
     }
 }
