@@ -89,4 +89,18 @@ public class ItemsPresenterTest {
         verify(asyncJobsObserver).asyncJobStarted("Reload data in ItemsPresenter");
         verify(asyncJobsObserver).asyncJobFinished(asyncJob);
     }
+
+    @Test
+    public void reloadData_shouldFinishJobIfDisposedBeforeSingleEmits() throws Exception {
+        when(itemsModel.getItems()).thenReturn(Single.never());
+
+        itemsPresenter.bindView(itemsView);
+        verifyZeroInteractions(itemsView, asyncJobsObserver);
+
+        itemsPresenter.reloadData();
+        itemsPresenter.unbindView(itemsView);
+        verify(itemsView, never()).showContentUi(anyListOf(Item.class));
+        verify(itemsView, never()).showErrorUi(any(Throwable.class));
+        verify(asyncJobsObserver).asyncJobFinished(asyncJob);
+    }
 }

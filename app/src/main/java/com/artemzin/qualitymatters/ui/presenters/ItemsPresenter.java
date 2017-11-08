@@ -1,14 +1,11 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
 import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.models.AnalyticsModel;
 import com.artemzin.qualitymatters.models.ItemsModel;
-import com.artemzin.qualitymatters.other.FinishAsyncJobAction;
 import com.artemzin.qualitymatters.performance.AsyncJob;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
-
 import io.reactivex.disposables.Disposable;
 import io.reactivex.disposables.Disposables;
 
@@ -76,9 +73,11 @@ public class ItemsPresenter extends Presenter<ItemsView> {
                         }
                 );
 
+
         // Prevent memory leak.
         Disposable finishAsyncJobDisposable
-                = Disposables.fromAction(new FinishAsyncJobAction(asyncJobsObserver, asyncJob));
+                = Disposables.fromAction(() -> asyncJobsObserver.asyncJobFinished(asyncJob));
+
         unsubscribeOnUnbindView(disposable, finishAsyncJobDisposable);
     }
 }
