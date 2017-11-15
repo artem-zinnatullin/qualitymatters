@@ -3,8 +3,10 @@ package com.artemzin.qualitymatters.ui.fragments;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
+import android.widget.Switch;
+import android.widget.TextView;
 import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 
@@ -38,5 +40,15 @@ public abstract class BaseFragment extends Fragment {
     public void onDestroy() {
         QualityMattersApp.get(getContext()).applicationComponent().leakCanaryProxy().watch(this);
         super.onDestroy();
+    }
+
+    protected <V extends TextView> void setTextTo(@Nullable V targetTextView, @NonNull String textToSet) {
+        assert targetTextView != null;
+        targetTextView.setText(textToSet);
+    }
+
+    protected <V extends Switch> void setEnabledTo(@Nullable V targetSwitch, boolean state) {
+        assert targetSwitch != null;
+        targetSwitch.setChecked(state);
     }
 }
