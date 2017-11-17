@@ -1,18 +1,16 @@
 package com.artemzin.qualitymatters.network;
 
 import android.support.annotation.NonNull;
-
 import com.facebook.stetho.okhttp3.StethoInterceptor;
-
-import java.util.List;
-
-import javax.inject.Singleton;
-
 import dagger.Module;
 import dagger.Provides;
 import okhttp3.Interceptor;
 import okhttp3.logging.HttpLoggingInterceptor;
 import timber.log.Timber;
+
+import javax.inject.Singleton;
+import java.util.Arrays;
+import java.util.List;
 
 import static java.util.Collections.singletonList;
 
@@ -28,9 +26,15 @@ public class OkHttpInterceptorsModule {
         return new HttpLoggingInterceptor(message -> Timber.d(message));
     }
 
+    @Provides @Singleton @NonNull
+    public HostSelectionInterceptor provideHostSelectionInterceptor() {
+        return new HostSelectionInterceptor();
+    }
+
     @Provides @OkHttpInterceptors @Singleton @NonNull
-    public List<Interceptor> provideOkHttpInterceptors(@NonNull HttpLoggingInterceptor httpLoggingInterceptor) {
-        return singletonList(httpLoggingInterceptor);
+    public List<Interceptor> provideOkHttpInterceptors(@NonNull HttpLoggingInterceptor httpLoggingInterceptor,
+                                                       @NonNull HostSelectionInterceptor hostSelectionInterceptor) {
+        return Arrays.asList(httpLoggingInterceptor, hostSelectionInterceptor);
     }
 
     @Provides @OkHttpNetworkInterceptors @Singleton @NonNull

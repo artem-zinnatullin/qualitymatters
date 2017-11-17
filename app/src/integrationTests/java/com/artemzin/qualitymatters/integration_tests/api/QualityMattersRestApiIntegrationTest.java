@@ -3,18 +3,17 @@ package com.artemzin.qualitymatters.integration_tests.api;
 import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
-
+import okhttp3.HttpUrl;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import retrofit2.adapter.rxjava.HttpException;
 
 import java.io.IOException;
 import java.util.List;
-
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import retrofit2.adapter.rxjava.HttpException;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.fail;
@@ -39,7 +38,7 @@ public class QualityMattersRestApiIntegrationTest {
         mockWebServer.start();
 
         // Change base url to the mocked
-        QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
+        QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().hostSelectionInterceptor().setHost(HttpUrl.parse(mockWebServer.url("").toString()));
 
         qualityMattersRestApi = QualityMattersIntegrationRobolectricTestRunner.qualityMattersApp().applicationComponent().qualityMattersApi();
     }

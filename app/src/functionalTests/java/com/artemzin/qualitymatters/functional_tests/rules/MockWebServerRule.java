@@ -1,16 +1,13 @@
 package com.artemzin.qualitymatters.functional_tests.rules;
 
 import android.support.annotation.NonNull;
-
 import com.artemzin.qualitymatters.functional_tests.TestUtils;
-
+import okhttp3.mockwebserver.MockWebServer;
 import org.junit.rules.TestRule;
 import org.junit.runner.Description;
 import org.junit.runners.model.Statement;
 
 import java.lang.reflect.Method;
-
-import okhttp3.mockwebserver.MockWebServer;
 
 /**
  * JUnit test rule for mocking web server!
@@ -36,7 +33,7 @@ public class MockWebServerRule implements TestRule {
                     final MockWebServer mockWebServer = new MockWebServer();
                     mockWebServer.start();
 
-                    TestUtils.app().applicationComponent().changeableBaseUrl().setBaseUrl(mockWebServer.url("").toString());
+                    TestUtils.app().applicationComponent().hostSelectionInterceptor().setHost(mockWebServer.url("").toString());
 
                     if (!needsMockWebServer.setupMethod().isEmpty()) {
                         final Method setupMethod = testClassInstance.getClass().getDeclaredMethod(needsMockWebServer.setupMethod(), MockWebServer.class);
