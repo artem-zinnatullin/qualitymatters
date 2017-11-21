@@ -13,7 +13,6 @@ import com.artemzin.qualitymatters.QualityMattersApp;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class BaseFragment extends Fragment {
 
     @Inject
