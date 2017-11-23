@@ -14,7 +14,12 @@ import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnCheckedChanged;
+import butterknife.OnClick;
+import butterknife.OnItemSelected;
+import butterknife.Unbinder;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.performance.AnyThread;
@@ -24,19 +29,11 @@ import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
 import com.github.pedrovgs.lynx.LynxActivity;
 import com.github.pedrovgs.lynx.LynxConfig;
 import com.jakewharton.processphoenix.ProcessPhoenix;
-
-import java.util.ArrayList;
-import java.util.List;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnCheckedChanged;
-import butterknife.OnClick;
-import butterknife.OnItemSelected;
-import butterknife.Unbinder;
-import okhttp3.logging.HttpLoggingInterceptor;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DeveloperSettingsFragment extends BaseFragment implements DeveloperSettingsView {
 
@@ -93,7 +90,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
 
         httpLoggingLevelSpinner
                 .setAdapter(new DeveloperSettingsSpinnerAdapter<>(getActivity().getLayoutInflater())
-                .setSelectionOptions(HttpLoggingLevel.allValues()));
+                        .setSelectionOptions(HttpLoggingLevel.allValues()));
 
         presenter.bindView(this);
     }
@@ -128,64 +125,43 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     @Override
     @AnyThread
     public void changeGitSha(@NonNull String gitSha) {
-        runOnUiThreadIfFragmentAlive(() -> {
-            assert gitShaTextView != null;
-            gitShaTextView.setText(gitSha);
-        });
+        runOnUiThreadIfFragmentAlive(() -> setTextTo(gitShaTextView, gitSha));
     }
 
     @Override
     @AnyThread
     public void changeBuildDate(@NonNull String date) {
-        runOnUiThreadIfFragmentAlive(() -> {
-            assert buildDateTextView != null;
-            buildDateTextView.setText(date);
-        });
+        runOnUiThreadIfFragmentAlive(() -> setTextTo(buildDateTextView, date));
     }
 
     @Override
     @AnyThread
     public void changeBuildVersionCode(@NonNull String versionCode) {
-        runOnUiThreadIfFragmentAlive(() -> {
-            assert buildVersionCodeTextView != null;
-            buildVersionCodeTextView.setText(versionCode);
-        });
+        runOnUiThreadIfFragmentAlive(() -> setTextTo(buildVersionCodeTextView, versionCode));
     }
 
     @Override
     @AnyThread
     public void changeBuildVersionName(@NonNull String versionName) {
-        runOnUiThreadIfFragmentAlive(() -> {
-            assert buildVersionNameTextView != null;
-            buildVersionNameTextView.setText(versionName);
-        });
+        runOnUiThreadIfFragmentAlive(() -> setTextTo(buildVersionNameTextView, versionName));
     }
 
     @Override
     @AnyThread
     public void changeStethoState(boolean enabled) {
-        runOnUiThreadIfFragmentAlive(() -> {
-            assert stethoSwitch != null;
-            stethoSwitch.setChecked(enabled);
-        });
+        runOnUiThreadIfFragmentAlive(() -> setEnabledTo(stethoSwitch, enabled));
     }
 
     @Override
     @AnyThread
     public void changeLeakCanaryState(boolean enabled) {
-        runOnUiThreadIfFragmentAlive(() -> {
-            assert leakCanarySwitch != null;
-            leakCanarySwitch.setChecked(enabled);
-        });
+        runOnUiThreadIfFragmentAlive(() -> setEnabledTo(leakCanarySwitch, enabled));
     }
 
     @Override
     @AnyThread
     public void changeTinyDancerState(boolean enabled) {
-        runOnUiThreadIfFragmentAlive(() -> {
-            assert tinyDancerSwitch != null;
-            tinyDancerSwitch.setChecked(enabled);
-        });
+        runOnUiThreadIfFragmentAlive(() -> setEnabledTo(tinyDancerSwitch, enabled));
     }
 
     @Override
@@ -240,7 +216,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     private static class HttpLoggingLevel implements DeveloperSettingsSpinnerAdapter.SelectionOption {
 
         @NonNull
-        public final HttpLoggingInterceptor.Level loggingLevel;
+        final HttpLoggingInterceptor.Level loggingLevel;
 
         HttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
             this.loggingLevel = loggingLevel;
@@ -261,5 +237,15 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
             }
             return values;
         }
+    }
+
+    private <V extends TextView> void setTextTo(@Nullable V targetTextView, @NonNull String textToSet) {
+        assert targetTextView != null;
+        targetTextView.setText(textToSet);
+    }
+
+    private <V extends Switch> void setEnabledTo(@Nullable V targetSwitch, boolean state) {
+        assert targetSwitch != null;
+        targetSwitch.setChecked(state);
     }
 }

@@ -4,14 +4,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-
 import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
-@SuppressWarnings("PMD.AbstractClassWithoutAnyMethod")
 public abstract class BaseFragment extends Fragment {
 
     @Inject
