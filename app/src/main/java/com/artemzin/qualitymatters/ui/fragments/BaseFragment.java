@@ -40,14 +40,4 @@ public abstract class BaseFragment extends Fragment {
         QualityMattersApp.get(getContext()).applicationComponent().leakCanaryProxy().watch(this);
         super.onDestroy();
     }
-
-    protected <V extends TextView> void setTextTo(@Nullable V targetTextView, @NonNull String textToSet) {
-        assert targetTextView != null;
-        targetTextView.setText(textToSet);
-    }
-
-    protected <V extends Switch> void setEnabledTo(@Nullable V targetSwitch, boolean state) {
-        assert targetSwitch != null;
-        targetSwitch.setChecked(state);
-    }
 }

@@ -216,7 +216,7 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
     private static class HttpLoggingLevel implements DeveloperSettingsSpinnerAdapter.SelectionOption {
 
         @NonNull
-        public final HttpLoggingInterceptor.Level loggingLevel;
+        final HttpLoggingInterceptor.Level loggingLevel;
 
         HttpLoggingLevel(@NonNull HttpLoggingInterceptor.Level loggingLevel) {
             this.loggingLevel = loggingLevel;
@@ -237,5 +237,15 @@ public class DeveloperSettingsFragment extends BaseFragment implements Developer
             }
             return values;
         }
+    }
+
+    private <V extends TextView> void setTextTo(@Nullable V targetTextView, @NonNull String textToSet) {
+        assert targetTextView != null;
+        targetTextView.setText(textToSet);
+    }
+
+    private <V extends Switch> void setEnabledTo(@Nullable V targetSwitch, boolean state) {
+        assert targetSwitch != null;
+        targetSwitch.setChecked(state);
     }
 }
