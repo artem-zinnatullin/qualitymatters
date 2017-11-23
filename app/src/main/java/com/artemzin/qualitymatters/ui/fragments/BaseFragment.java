@@ -3,10 +3,7 @@ package com.artemzin.qualitymatters.ui.fragments;
 import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.widget.Switch;
-import android.widget.TextView;
 import com.artemzin.qualitymatters.ApplicationModule;
 import com.artemzin.qualitymatters.QualityMattersApp;
 
