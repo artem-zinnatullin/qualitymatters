@@ -1,10 +1,9 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
 import android.support.annotation.NonNull;
-
 import com.google.auto.value.AutoValue;
+import io.reactivex.Scheduler;
 
-import rx.Scheduler;
 
 // Such approach allows us configure presenter in runtime without hardcoded values.
 // Also, it allows us easily change some parts of the presenter configuration for tests.

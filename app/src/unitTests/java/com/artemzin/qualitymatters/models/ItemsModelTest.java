@@ -2,13 +2,11 @@ package com.artemzin.qualitymatters.models;
 
 import com.artemzin.qualitymatters.api.QualityMattersRestApi;
 import com.artemzin.qualitymatters.api.entities.Item;
-
+import io.reactivex.Single;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.List;
-
-import rx.Single;
 
 import static java.util.Arrays.asList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -31,7 +29,7 @@ public class ItemsModelTest {
         List<Item> items = asList(mock(Item.class), mock(Item.class));
         when(qualityMattersRestApi.items()).thenReturn(Single.just(items));
 
-        assertThat(itemsModel.getItems().toBlocking().value()).containsExactlyElementsOf(items);
+        assertThat(itemsModel.getItems().blockingGet()).containsExactlyElementsOf(items);
     }
 
     @Test
@@ -40,7 +38,7 @@ public class ItemsModelTest {
         when(qualityMattersRestApi.items()).thenReturn(Single.error(error));
 
         try {
-            itemsModel.getItems().toBlocking().value();
+            itemsModel.getItems().blockingGet();
             failBecauseExceptionWasNotThrown(RuntimeException.class);
         } catch (Exception expected) {
             assertThat(expected).isSameAs(error);

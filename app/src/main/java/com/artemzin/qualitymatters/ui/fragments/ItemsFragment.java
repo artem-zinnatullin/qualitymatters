@@ -8,7 +8,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+import butterknife.Unbinder;
 import com.artemzin.qualitymatters.QualityMattersApp;
 import com.artemzin.qualitymatters.R;
 import com.artemzin.qualitymatters.api.entities.Item;
@@ -22,19 +25,13 @@ import com.artemzin.qualitymatters.ui.adapters.VerticalSpaceItemDecoration;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenter;
 import com.artemzin.qualitymatters.ui.presenters.ItemsPresenterConfiguration;
 import com.artemzin.qualitymatters.ui.views.ItemsView;
-
-import java.util.List;
-
-import javax.inject.Inject;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.OnClick;
-import butterknife.Unbinder;
 import dagger.Module;
 import dagger.Provides;
 import dagger.Subcomponent;
-import rx.schedulers.Schedulers;
+import io.reactivex.schedulers.Schedulers;
+
+import javax.inject.Inject;
+import java.util.List;
 
 import static android.support.v7.widget.LinearLayoutManager.VERTICAL;
 import static android.view.View.GONE;
