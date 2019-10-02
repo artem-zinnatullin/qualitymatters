@@ -10,14 +10,12 @@ import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsComponent
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModel;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
 import com.artemzin.qualitymatters.developer_settings.LeakCanaryProxy;
-import com.artemzin.qualitymatters.models.AnalyticsModel;
-import com.artemzin.qualitymatters.models.ModelsModule;
+import com.artemzin.qualitymatters.analytics.AnalyticsModel;
 import com.artemzin.qualitymatters.network.NetworkModule;
 import com.artemzin.qualitymatters.network.OkHttpInterceptorsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsModule;
 import com.artemzin.qualitymatters.performance.AsyncJobsObserver;
-import com.artemzin.qualitymatters.ui.activities.MainActivity;
-import com.artemzin.qualitymatters.ui.fragments.ItemsFragment;
+import com.artemzin.qualitymatters.items.ui.ItemsFragment;
 import com.google.gson.Gson;
 
 import javax.inject.Singleton;

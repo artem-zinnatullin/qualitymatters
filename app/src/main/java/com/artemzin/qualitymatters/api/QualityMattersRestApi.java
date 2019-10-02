@@ -2,7 +2,7 @@ package com.artemzin.qualitymatters.api;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.api.entities.Item;
+import com.artemzin.qualitymatters.items.entities.Item;
 
 import java.util.List;
 

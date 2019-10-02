@@ -1,7 +1,7 @@
 package com.artemzin.qualitymatters.integration_tests.api.entities;
 
 import com.artemzin.qualitymatters.QualityMattersIntegrationRobolectricTestRunner;
-import com.artemzin.qualitymatters.api.entities.Item;
+import com.artemzin.qualitymatters.items.entities.Item;
 import com.google.gson.Gson;
 
 import org.junit.Test;

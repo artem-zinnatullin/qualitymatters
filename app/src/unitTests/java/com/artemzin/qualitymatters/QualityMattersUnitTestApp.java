@@ -5,8 +5,7 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.developer_settings.DevMetricsProxy;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModule;
-import com.artemzin.qualitymatters.models.AnalyticsModel;
-import com.artemzin.qualitymatters.models.ModelsModule;
+import com.artemzin.qualitymatters.analytics.AnalyticsModel;
 
 import static org.mockito.Mockito.mock;
 
