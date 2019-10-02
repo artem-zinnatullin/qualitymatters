@@ -7,7 +7,7 @@ import android.support.annotation.NonNull;
 import com.artemzin.qualitymatters.api.ApiModule;
 import com.artemzin.qualitymatters.developer_settings.DevMetricsProxy;
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModel;
-import com.artemzin.qualitymatters.models.AnalyticsModel;
+import com.artemzin.qualitymatters.analytics.AnalyticsModel;
 
 import timber.log.Timber;
 

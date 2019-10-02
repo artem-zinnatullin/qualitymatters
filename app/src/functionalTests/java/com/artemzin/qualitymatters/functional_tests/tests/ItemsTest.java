@@ -10,7 +10,7 @@ import com.artemzin.qualitymatters.functional_tests.rules.AsyncJobsObserverRule;
 import com.artemzin.qualitymatters.functional_tests.rules.MockWebServerRule;
 import com.artemzin.qualitymatters.functional_tests.rules.NeedsMockWebServer;
 import com.artemzin.qualitymatters.functional_tests.screens.ItemsScreen;
-import com.artemzin.qualitymatters.ui.activities.MainActivity;
+import com.artemzin.qualitymatters.MainActivity;
 
 import org.junit.Before;
 import org.junit.Rule;

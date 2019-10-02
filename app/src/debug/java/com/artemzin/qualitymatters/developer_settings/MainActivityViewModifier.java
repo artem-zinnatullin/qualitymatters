@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 
 import com.artemzin.qualitymatters.R;
-import com.artemzin.qualitymatters.ui.other.ViewModifier;
+import com.artemzin.qualitymatters.base.ui.ViewModifier;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 

@@ -9,7 +9,8 @@ import android.widget.TextView;
 
 import com.artemzin.qualitymatters.QualityMattersRobolectricUnitTestRunner;
 import com.artemzin.qualitymatters.R;
-import com.artemzin.qualitymatters.ui.adapters.DeveloperSettingsSpinnerAdapter.SelectionOption;
+import com.artemzin.qualitymatters.developer_settings.ui.DeveloperSettingsSpinnerAdapter;
+import com.artemzin.qualitymatters.developer_settings.ui.DeveloperSettingsSpinnerAdapter.SelectionOption;
 
 import org.junit.Before;
 import org.junit.Test;

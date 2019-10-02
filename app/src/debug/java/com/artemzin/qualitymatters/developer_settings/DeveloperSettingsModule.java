@@ -3,9 +3,9 @@ package com.artemzin.qualitymatters.developer_settings;
 import android.app.Application;
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.models.AnalyticsModel;
-import com.artemzin.qualitymatters.ui.other.ViewModifier;
-import com.artemzin.qualitymatters.ui.presenters.DeveloperSettingsPresenter;
+import com.artemzin.qualitymatters.analytics.AnalyticsModel;
+import com.artemzin.qualitymatters.base.ui.ViewModifier;
+import com.artemzin.qualitymatters.developer_settings.ui.DeveloperSettingsPresenter;
 import com.github.pedrovgs.lynx.LynxConfig;
 
 import javax.inject.Named;

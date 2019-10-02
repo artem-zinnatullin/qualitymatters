@@ -1,8 +1,9 @@
 package com.artemzin.qualitymatters.ui.presenters;
 
 import com.artemzin.qualitymatters.developer_settings.DeveloperSettingsModelImpl;
-import com.artemzin.qualitymatters.models.AnalyticsModel;
-import com.artemzin.qualitymatters.ui.views.DeveloperSettingsView;
+import com.artemzin.qualitymatters.analytics.AnalyticsModel;
+import com.artemzin.qualitymatters.developer_settings.ui.DeveloperSettingsPresenter;
+import com.artemzin.qualitymatters.developer_settings.ui.DeveloperSettingsView;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -5,8 +5,8 @@ import android.support.annotation.NonNull;
 
 import com.artemzin.qualitymatters.DaggerApplicationComponent;
 import com.artemzin.qualitymatters.QualityMattersApp;
-import com.artemzin.qualitymatters.models.AnalyticsModel;
-import com.artemzin.qualitymatters.models.ModelsModule;
+import com.artemzin.qualitymatters.analytics.AnalyticsModel;
+import com.artemzin.qualitymatters.ModelsModule;
 
 import timber.log.Timber;
 

@@ -2,8 +2,8 @@ package com.artemzin.qualitymatters.developer_settings;
 
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.ui.other.NoOpViewModifier;
-import com.artemzin.qualitymatters.ui.other.ViewModifier;
+import com.artemzin.qualitymatters.base.ui.NoOpViewModifier;
+import com.artemzin.qualitymatters.base.ui.ViewModifier;
 
 import javax.inject.Named;
 import javax.inject.Singleton;

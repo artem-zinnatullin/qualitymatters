@@ -5,8 +5,8 @@ import android.os.Handler;
 import android.os.Looper;
 import android.support.annotation.NonNull;
 
-import com.artemzin.qualitymatters.models.PicassoImageLoader;
-import com.artemzin.qualitymatters.models.QualityMattersImageLoader;
+import com.artemzin.qualitymatters.images.PicassoImageLoader;
+import com.artemzin.qualitymatters.images.QualityMattersImageLoader;
 import com.artemzin.qualitymatters.other.EntityTypeAdapterFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
